@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
@@ -131,7 +131,7 @@
                     </div>
                     <p class="text-slate-600 text-sm mb-4">Bağlanma kaygısı veya kaçınması, OKB semptomlarını doğrudan değil, <span class="font-semibold text-slate-800">IU ve Ruminasyon</span> üzerinden mi artırıyor?</p>
                     <div class="bg-slate-50 p-3 rounded text-xs text-slate-500 font-mono">
-                        Bağlanma (ECR-R) → IU (IUS-12) → Ruminasyon → OKB Şiddeti
+                        Bağlanma (ECR-R) → IU (IUS-12) → Ruminasyon → OKB �?iddeti
                     </div>
                     <div class="mt-4 flex gap-2">
                         <span class="text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded">Marsh (2024)</span>
@@ -174,12 +174,12 @@
                 <!-- Hypothesis D -->
                 <div class="bg-white rounded-xl border-l-4 border-teal-500 p-6 shadow-sm card-hover">
                     <div class="flex justify-between items-start mb-4">
-                        <h3 class="font-bold text-lg text-teal-900">Fikir D: Şefkat Temelli Köprü</h3>
+                        <h3 class="font-bold text-lg text-teal-900">Fikir D: �?efkat Temelli Köprü</h3>
                         <span class="bg-teal-50 text-teal-700 text-xs px-2 py-1 rounded-full font-bold">Yeni Nesil</span>
                     </div>
                     <p class="text-slate-600 text-sm mb-4">Bağlanma güvensizliği, "şefkat korkusu" (kendine veya başkasına) yaratarak mı OKB şiddetini etkiliyor?</p>
                     <div class="bg-slate-50 p-3 rounded text-xs text-slate-500 font-mono">
-                        Güvensiz Bağlanma → Şefkat Korkusu → OKB
+                        Güvensiz Bağlanma → �?efkat Korkusu → OKB
                     </div>
                     <div class="mt-4 flex gap-2">
                         <span class="text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded">McNeil (2025)</span>
@@ -205,6 +205,9 @@
                         <option value="ACT">ACT / Süreç</option>
                     </select>
                     <input type="text" id="libSearch" placeholder="Yazar, yıl veya başlık ara..." class="bg-slate-50 border border-slate-300 rounded-lg px-4 py-2 text-sm w-full md:w-64 focus:ring-teal-500 focus:border-teal-500 outline-none">
+                    <button id="exportSourcesBtn" class="bg-teal-600 hover:bg-teal-700 text-white rounded-lg px-4 py-2 text-sm font-medium transition w-full md:w-auto">Dışa Aktar</button>
+                    <button id="importSourcesBtn" class="bg-slate-700 hover:bg-slate-800 text-white rounded-lg px-4 py-2 text-sm font-medium transition w-full md:w-auto">İçe Aktar</button>
+                    <input id="importSourcesInput" type="file" accept=".json,.csv" class="hidden">
                 </div>
             </div>
 
@@ -233,8 +236,8 @@
     </main>
 
     <script>
-        // --- DATA: TEZ İÇİN SEÇİLMİŞ 19 KAYNAK ---
-        const thesisSources = [
+        // --- DATA: TEZ İÇİN SEÇİLMİ�? 19 KAYNAK ---
+        let thesisSources = [
             // 1) IU & OKB
             { title: "Intolerance of uncertainty as a transdiagnostic cognitive vulnerability for obsessive-compulsive disorder and anxiety: A qualitative review", author: "Knowles et al. (2024)", category: "IU & OKB", url: "https://pubmed.ncbi.nlm.nih.gov/39431164/" },
             { title: "A meta-analysis of the relation of intolerance of uncertainty to symptoms of generalized anxiety disorder, major depressive disorder, and obsessive-compulsive disorder", author: "Gentes & Ruscio (2011)", category: "IU & OKB", url: "https://pubmed.ncbi.nlm.nih.gov/21664339/" },
@@ -259,7 +262,7 @@
             { title: "Predictors of parental accommodation in pediatric obsessive-compulsive disorder: Findings from the Pediatric OCD Treatment Study (POTS) trial", author: "Peris et al. (2012)", category: "Aile", url: "https://pubmed.ncbi.nlm.nih.gov/21703499/" },
             { title: "Obsessive beliefs, metacognitive beliefs and rumination in mothers of adolescents with obsessive-compulsive symptoms", author: "Misir et al. (2025)", category: "Aile", url: "https://doi.org/10.1002/cpp.3225" },
 
-            // 5) ACT / Surec
+            // 5) ACT / Süreç
             { title: "A randomized clinical trial of acceptance and commitment therapy versus progressive relaxation training for obsessive-compulsive disorder", author: "Twohig et al. (2010)", category: "ACT", url: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2936302/" },
             { title: "A systematic review and meta-analysis on the efficacy of acceptance and commitment therapy for obsessive-compulsive disorder", author: "Soondrum & Caltabiano (2022)", category: "ACT", url: "https://www.mdpi.com/2076-3425/12/5/656" },
             { title: "Cognitive fusion, experiential avoidance, and obsessive-compulsive symptoms in obsessive-compulsive disorder", author: "Hu et al. (2021)", category: "ACT", url: "https://doi.org/10.3389/fpsyg.2021.655154" }
@@ -267,7 +270,10 @@
         const dom = {
             libraryTableBody: document.getElementById('libraryTableBody'),
             libSearch: document.getElementById('libSearch'),
-            catFilter: document.getElementById('catFilter')
+            catFilter: document.getElementById('catFilter'),
+            exportSourcesBtn: document.getElementById('exportSourcesBtn'),
+            importSourcesBtn: document.getElementById('importSourcesBtn'),
+            importSourcesInput: document.getElementById('importSourcesInput')
         };
         const sections = Array.from(document.querySelectorAll('main > section'));
         const navItems = Array.from(document.querySelectorAll('.nav-item'));
@@ -304,6 +310,147 @@
                 .replaceAll("'", '&#39;');
         }
 
+
+        function extractYearFromAuthor(author) {
+            const match = String(author || '').match(/\b(19|20)\d{2}\b/);
+            return match ? match[0] : '';
+        }
+
+        function removeDuplicateSources(sources) {
+            const seen = new Set();
+            return sources.filter(item => {
+                const titleKey = String(item.title || '').trim().toLowerCase();
+                const urlKey = resolveArticleUrl(item).trim().toLowerCase();
+                const yearKey = extractYearFromAuthor(item.author);
+                const key = `${titleKey}|${urlKey}|${yearKey}`;
+                if (seen.has(key)) {
+                    return false;
+                }
+                seen.add(key);
+                return true;
+            });
+        }
+
+        function downloadTextFile(filename, content, mimeType) {
+            const blob = new Blob([content], { type: mimeType });
+            const url = URL.createObjectURL(blob);
+            const anchor = document.createElement('a');
+            anchor.href = url;
+            anchor.download = filename;
+            document.body.appendChild(anchor);
+            anchor.click();
+            anchor.remove();
+            URL.revokeObjectURL(url);
+        }
+
+        function exportSources() {
+            const exportData = thesisSources.map(item => ({
+                name: item.title,
+                year: extractYearFromAuthor(item.author),
+                link: resolveArticleUrl(item)
+            }));
+            downloadTextFile('makaleler.json', JSON.stringify(exportData, null, 2), 'application/json;charset=utf-8');
+        }
+
+        function parseCsvLine(line) {
+            const cells = [];
+            let current = '';
+            let inQuotes = false;
+            for (let i = 0; i < line.length; i += 1) {
+                const ch = line[i];
+                const next = line[i + 1];
+                if (ch === '"' && inQuotes && next === '"') {
+                    current += '"';
+                    i += 1;
+                    continue;
+                }
+                if (ch === '"') {
+                    inQuotes = !inQuotes;
+                    continue;
+                }
+                if (ch === ',' && !inQuotes) {
+                    cells.push(current.trim());
+                    current = '';
+                    continue;
+                }
+                current += ch;
+            }
+            cells.push(current.trim());
+            return cells;
+        }
+
+        function mapImportRow(row) {
+            const title = String(row.name || row.title || '').trim();
+            const year = String(row.year || '').trim();
+            const url = String(row.link || row.url || '').trim();
+            const category = String(row.category || 'Diğer').trim() || 'Diğer';
+            const author = String(row.author || `Import (${year || 'Yıl yok'})`).trim();
+
+            if (!title || !url) {
+                return null;
+            }
+
+            return { title, author, category, url };
+        }
+
+        function importFromJson(rawText) {
+            const parsed = JSON.parse(rawText);
+            const rows = Array.isArray(parsed) ? parsed : [parsed];
+            const mapped = rows.map(mapImportRow).filter(Boolean);
+            if (!mapped.length) {
+                throw new Error('Geçerli kayıt bulunamadı. JSON içinde en az name/title ve link/url olmalı.');
+            }
+            thesisSources = removeDuplicateSources(mapped);
+        }
+
+        function importFromCsv(rawText) {
+            const lines = rawText.split(/\r?\n/).map(line => line.trim()).filter(Boolean);
+            if (lines.length < 2) {
+                throw new Error('CSV dosyasında başlık satırı ve en az bir veri satırı olmalı.');
+            }
+
+            const headers = parseCsvLine(lines[0]).map(h => h.toLowerCase());
+            const mapped = lines.slice(1).map(line => {
+                const values = parseCsvLine(line);
+                const row = {};
+                headers.forEach((header, index) => {
+                    row[header] = values[index] || '';
+                });
+                return mapImportRow(row);
+            }).filter(Boolean);
+
+            if (!mapped.length) {
+                throw new Error('Geçerli kayıt bulunamadı. CSV kolonları en az name/title ve link/url içermeli.');
+            }
+
+            thesisSources = removeDuplicateSources(mapped);
+        }
+
+        function handleImportFileChange(event) {
+            const file = event.target.files && event.target.files[0];
+            if (!file) {
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = () => {
+                try {
+                    const rawText = String(reader.result || '');
+                    if (file.name.toLowerCase().endsWith('.csv')) {
+                        importFromCsv(rawText);
+                    } else {
+                        importFromJson(rawText);
+                    }
+                    renderLibrary();
+                    alert('İçe aktarma tamamlandı.');
+                } catch (error) {
+                    alert(`İçe aktarma hatası: ${error.message}`);
+                } finally {
+                    event.target.value = '';
+                }
+            };
+            reader.readAsText(file, 'utf-8');
+        }
         // --- NAVIGATION LOGIC ---
         function switchTab(tabId) {
             sections.forEach(sec => sec.classList.add('hidden-section'));
@@ -369,7 +516,7 @@
                 data: {
                     labels: ['Belirsizliğe Tahammülsüzlük (IU)', 'Ruminasyon', 'Bağlanma Kaygısı', 'Aile Uyumlaması', 'Bilişsel Füzyon'],
                     datasets: [{
-                        label: 'OKB Şiddetiyle İlişki Gücü (Temsili)',
+                        label: 'OKB �?iddetiyle İlişki Gücü (Temsili)',
                         data: [90, 85, 75, 70, 80],
                         backgroundColor: 'rgba(20, 184, 166, 0.2)', // Teal-500
                         borderColor: '#0d9488', // Teal-600
@@ -430,13 +577,20 @@
         // --- INIT EVENTS ---
         dom.libSearch.addEventListener('input', renderLibrary);
         dom.catFilter.addEventListener('change', renderLibrary);
+        dom.exportSourcesBtn.addEventListener('click', exportSources);
+        dom.importSourcesBtn.addEventListener('click', () => dom.importSourcesInput.click());
+        dom.importSourcesInput.addEventListener('change', handleImportFileChange);
 
         window.addEventListener('DOMContentLoaded', () => {
+            thesisSources = removeDuplicateSources(thesisSources);
             renderLibrary();
             initCharts();
         });
     </script>
 </body>
 </html>
+
+
+
 
 
