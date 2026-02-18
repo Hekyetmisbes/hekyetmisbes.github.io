@@ -236,54 +236,86 @@
         // --- DATA: TEZ İÇİN SEÇİLMİŞ 19 KAYNAK ---
         const thesisSources = [
             // 1) IU & OKB
-            { title: "Intolerance of Uncertainty as a Cognitive Vulnerability for Anxiety and OCD", author: "Knowles et al. (2023)", category: "IU & OKB", url: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10156906/" },
-            { title: "A meta-analysis of the relation of intolerance of uncertainty to symptoms of GAD, Major Depressive, and OCD", author: "Gentes & Ruscio (2011)", category: "IU & OKB", url: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3100227/" },
-            { title: "Intolerance of Uncertainty: A Common Factor in the Treatment of Emotional Disorders", author: "Boswell et al. (2013)", category: "IU & OKB", url: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3712532/" },
-            { title: "Intolerance of uncertainty and obsessive-compulsive symptoms during the COVID-19 pandemic", author: "Wheaton et al. (2020)", category: "IU & OKB", url: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7486950/" },
+            { title: "Intolerance of uncertainty as a transdiagnostic cognitive vulnerability for obsessive-compulsive disorder and anxiety: A qualitative review", author: "Knowles et al. (2024)", category: "IU & OKB", url: "https://pubmed.ncbi.nlm.nih.gov/39431164/" },
+            { title: "A meta-analysis of the relation of intolerance of uncertainty to symptoms of generalized anxiety disorder, major depressive disorder, and obsessive-compulsive disorder", author: "Gentes & Ruscio (2011)", category: "IU & OKB", url: "https://pubmed.ncbi.nlm.nih.gov/21664339/" },
+            { title: "Intolerance of uncertainty: A common factor in the treatment of emotional disorders", author: "Boswell et al. (2013)", category: "IU & OKB", url: "https://pubmed.ncbi.nlm.nih.gov/23381685/" },
+            { title: "Intolerance of uncertainty and obsessive-compulsive symptom expression", author: "Wheaton et al. (2020)", category: "IU & OKB", url: "https://doi.org/10.1016/j.janxdis.2020.102250" },
 
             // 2) Ruminasyon & OKB
-            { title: "Mediating Role of Rumination and Negative Affect in the Association Between Mind-Wandering and OCD Symptoms", author: "Wang et al. (2021)", category: "Ruminasyon", url: "https://www.frontiersin.org/articles/10.3389/fpsyt.2021.579663/full" },
-            { title: "The relationship between sleep disturbance and OCD symptoms: mediation of repetitive negative thinking", author: "Zhao et al. (2023)", category: "Ruminasyon", url: "https://www.frontiersin.org/articles/10.3389/fpsyt.2023.1116272/full" },
-            { title: "Repetitive negative thinking in OCD: Development of interpretation bias modification training", author: "Hermida-Barros et al. (2025)", category: "Ruminasyon", url: "https://doi.org/10.1016/j.jvb.2024.103980" }, // Genel DOI araması
+            { title: "Mediating role of rumination and negative affect in the association between mind-wandering and obsessive-compulsive symptoms", author: "Wang et al. (2021)", category: "Ruminasyon", url: "https://doi.org/10.3389/fpsyt.2021.579663" },
+            { title: "The relationship between sleep disturbance and obsessive-compulsive symptoms: mediation of repetitive negative thinking and experiential avoidance", author: "Zhao et al. (2023)", category: "Ruminasyon", url: "https://doi.org/10.3389/fpsyt.2023.1116272" },
+            { title: "Repetitive negative thinking in obsessive-compulsive disorder: Evaluation of novel scenarios for cognitive bias modification training", author: "Hermida-Barros et al. (2025)", category: "Ruminasyon", url: "https://doi.org/10.1016/j.jbtep.2025.102037" },
 
             // 3) Bağlanma & OKB
-            { title: "Attachment in OCD: A meta-analysis", author: "van Leeuwen et al. (2020)", category: "Bağlanma", url: "https://lirias.kuleuven.be/retrieve/572566" },
-            { title: "Adult attachment and OCD symptoms: the mediating role of intolerance of uncertainty", author: "Marsh, Rock & Clark (2024)", category: "Bağlanma", url: "https://www.tandfonline.com/doi/full/10.1080/00223980.2023.2298064" },
-            { title: "Attachment insecurity modulates neural responses to psychological distress in OCD", author: "van Leeuwen et al. (2025)", category: "Bağlanma", url: "https://doi.org/10.1016/j.jpsychires.2024.11.025" },
-            { title: "Attachment insecurity, fear of compassion, and OCD severity", author: "McNeil et al. (2025)", category: "Bağlanma", url: "https://www.ncbi.nlm.nih.gov/pmc/" }, // Genel PMC linki placeholder
-            { title: "Attachment-based intervention on pediatric OCD", author: "Rezvan et al. (2013)", category: "Bağlanma", url: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3939988/" },
+            { title: "Attachment in obsessive-compulsive disorder: A meta-analysis", author: "van Leeuwen et al. (2020)", category: "Bağlanma", url: "https://doi.org/10.1080/10615806.2019.1648787" },
+            { title: "Adult attachment and obsessive-compulsive symptoms: The mediating role of beliefs about losing control and intolerance of uncertainty", author: "Marsh et al. (2024)", category: "Bağlanma", url: "https://doi.org/10.1080/13284207.2024.2336962" },
+            { title: "Attachment insecurity modulates neural responses to psychological distress in patients with obsessive-compulsive disorder and healthy individuals", author: "van Leeuwen et al. (2025)", category: "Bağlanma", url: "https://doi.org/10.1016/j.jad.2025.02.055" },
+            { title: "Attachment insecurity, fear of compassion and obsessive-compulsive symptoms: A preliminary investigation", author: "McNeill et al. (2025)", category: "Bağlanma", url: "https://doi.org/10.1016/j.jbtep.2025.102046" },
+            { title: "The efficacy of attachment-based family therapy with cognitive behavioral approach in reducing symptoms and parent-child conflicts in children with obsessive-compulsive disorder", author: "Nazarzadeh et al. (2013)", category: "Bağlanma", url: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3939988/" },
 
             // 4) Aile Dinamikleri (Family Accommodation)
-            { title: "Family accommodation in obsessive-compulsive and anxiety disorders: a review", author: "Lebowitz et al. (2015)", category: "Aile", url: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5140698/" },
-            { title: "Family accommodation in adult OCD: clinical perspectives", author: "Albert et al. (2017)", category: "Aile", url: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5449103/" },
-            { title: "Predictors of parental accommodation in pediatric OCD", author: "Rosa-Alcázar et al. (2021)", category: "Aile", url: "https://www.frontiersin.org/articles/10.3389/fpsyg.2020.609439/full" },
-            { title: "Obsessive Beliefs, Metacognitive Beliefs, and Rumination in Parents", author: "Mısır et al. (2025)", category: "Aile", url: "https://www.ncbi.nlm.nih.gov/pmc/" }, // Placeholder
+            { title: "Family accommodation in obsessive-compulsive and anxiety disorders: A five-year update", author: "Lebowitz et al. (2016)", category: "Aile", url: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4895189/" },
+            { title: "Family accommodation in obsessive-compulsive disorder: Clinical perspectives", author: "Albert et al. (2017)", category: "Aile", url: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5449103/" },
+            { title: "Predictors of parental accommodation in pediatric obsessive-compulsive disorder: Findings from the Pediatric OCD Treatment Study (POTS) trial", author: "Peris et al. (2012)", category: "Aile", url: "https://pubmed.ncbi.nlm.nih.gov/21703499/" },
+            { title: "Obsessive beliefs, metacognitive beliefs and rumination in mothers of adolescents with obsessive-compulsive symptoms", author: "Misir et al. (2025)", category: "Aile", url: "https://doi.org/10.1002/cpp.3225" },
 
-            // 5) ACT / Süreç
-            { title: "A randomized clinical trial of ACT vs progressive relaxation training for OCD", author: "Twohig et al. (2010)", category: "ACT", url: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2936302/" },
-            { title: "Systematic review and meta-analysis of ACT in OCD", author: "Soondrum & Caltabiano (2022)", category: "ACT", url: "https://www.mdpi.com/2076-3425/12/5/621" },
-            { title: "Cognitive fusion, experiential avoidance, and OC symptoms in OCD", author: "Frontiers (2021)", category: "ACT", url: "https://www.frontiersin.org/articles/10.3389/fpsyg.2021.656041/full" }
+            // 5) ACT / Surec
+            { title: "A randomized clinical trial of acceptance and commitment therapy versus progressive relaxation training for obsessive-compulsive disorder", author: "Twohig et al. (2010)", category: "ACT", url: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2936302/" },
+            { title: "A systematic review and meta-analysis on the efficacy of acceptance and commitment therapy for obsessive-compulsive disorder", author: "Soondrum & Caltabiano (2022)", category: "ACT", url: "https://www.mdpi.com/2076-3425/12/5/656" },
+            { title: "Cognitive fusion, experiential avoidance, and obsessive-compulsive symptoms in obsessive-compulsive disorder", author: "Hu et al. (2021)", category: "ACT", url: "https://doi.org/10.3389/fpsyg.2021.655154" }
         ];
+        const dom = {
+            libraryTableBody: document.getElementById('libraryTableBody'),
+            libSearch: document.getElementById('libSearch'),
+            catFilter: document.getElementById('catFilter')
+        };
+        const sections = Array.from(document.querySelectorAll('main > section'));
+        const navItems = Array.from(document.querySelectorAll('.nav-item'));
+
+        const categoryClassMap = Object.freeze({
+            "IU & OKB": "bg-indigo-100 text-indigo-700",
+            "Ruminasyon": "bg-blue-100 text-blue-700",
+            "Bağlanma": "bg-teal-100 text-teal-700",
+            "Aile": "bg-rose-100 text-rose-700",
+            "ACT": "bg-amber-100 text-amber-700"
+        });
+
+        function buildPubMedSearchUrl(title) {
+            return `https://pubmed.ncbi.nlm.nih.gov/?term=${encodeURIComponent(title)}`;
+        }
+
+        function resolveArticleUrl(item) {
+            const rawUrl = (item.url || '').trim();
+            if (!rawUrl || /^https?:\/\/www\.ncbi\.nlm\.nih\.gov\/pmc\/?$/i.test(rawUrl)) {
+                return buildPubMedSearchUrl(item.title);
+            }
+            if (/^10\.\d{4,9}\//i.test(rawUrl)) {
+                return `https://doi.org/${rawUrl}`;
+            }
+            return /^https?:\/\//i.test(rawUrl) ? rawUrl : `https://${rawUrl}`;
+        }
+
+        function escapeHtml(value) {
+            return value
+                .replaceAll('&', '&amp;')
+                .replaceAll('<', '&lt;')
+                .replaceAll('>', '&gt;')
+                .replaceAll('"', '&quot;')
+                .replaceAll("'", '&#39;');
+        }
 
         // --- NAVIGATION LOGIC ---
         function switchTab(tabId) {
-            document.querySelectorAll('main > section').forEach(sec => sec.classList.add('hidden-section'));
+            sections.forEach(sec => sec.classList.add('hidden-section'));
             document.getElementById(tabId).classList.remove('hidden-section');
-            document.querySelectorAll('.nav-item').forEach(btn => btn.classList.remove('active'));
+            navItems.forEach(btn => btn.classList.remove('active'));
             document.getElementById(`nav-${tabId}`).classList.add('active');
-            
-            if(tabId === 'overview') {
-                // Resize charts if needed
-            }
         }
 
         // --- LIBRARY LOGIC ---
         function renderLibrary() {
-            const container = document.getElementById('libraryTableBody');
-            const searchVal = document.getElementById('libSearch').value.toLowerCase();
-            const catVal = document.getElementById('catFilter').value;
-
-            container.innerHTML = '';
+            const searchVal = dom.libSearch.value.trim().toLowerCase();
+            const catVal = dom.catFilter.value;
 
             const filtered = thesisSources.filter(item => {
                 const matchesSearch = item.title.toLowerCase().includes(searchVal) || item.author.toLowerCase().includes(searchVal);
@@ -292,41 +324,40 @@
             });
 
             if (filtered.length === 0) {
-                container.innerHTML = '<tr><td colspan="4" class="px-6 py-8 text-center text-slate-400">Aradığınız kriterlere uygun makale bulunamadı.</td></tr>';
+                dom.libraryTableBody.innerHTML = '<tr><td colspan="4" class="px-6 py-8 text-center text-slate-400">Aradığınız kriterlere uygun makale bulunamadı.</td></tr>';
                 return;
             }
 
-            filtered.forEach(item => {
-                // Category styling
-                let catClass = "bg-slate-100 text-slate-600";
-                if(item.category.includes("IU")) catClass = "bg-indigo-100 text-indigo-700";
-                else if(item.category === "Ruminasyon") catClass = "bg-blue-100 text-blue-700";
-                else if(item.category === "Bağlanma") catClass = "bg-teal-100 text-teal-700";
-                else if(item.category === "Aile") catClass = "bg-rose-100 text-rose-700";
-                else if(item.category === "ACT") catClass = "bg-amber-100 text-amber-700";
+            dom.libraryTableBody.innerHTML = filtered.map(item => {
+                const catClass = categoryClassMap[item.category] || "bg-slate-100 text-slate-600";
+                const articleUrl = resolveArticleUrl(item);
+                const title = escapeHtml(item.title);
+                const author = escapeHtml(item.author);
+                const category = escapeHtml(item.category);
 
-                const tr = document.createElement('tr');
-                tr.className = "hover:bg-slate-50 transition-colors border-b border-slate-100 last:border-b-0";
-                tr.innerHTML = `
-                    <td class="px-6 py-4">
-                        <div class="text-sm font-medium text-slate-800">${item.title}</div>
-                    </td>
-                    <td class="px-6 py-4 text-sm text-slate-500 font-mono">${item.author}</td>
-                    <td class="px-6 py-4">
-                        <span class="px-2 py-1 rounded-md text-[10px] font-bold uppercase tracking-wide ${catClass}">
-                            ${item.category}
-                        </span>
-                    </td>
-                    <td class="px-6 py-4 text-right">
-                        <a href="${item.url}" target="_blank" class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-teal-50 text-teal-600 hover:bg-teal-100 hover:text-teal-800 transition">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                            </svg>
-                        </a>
-                    </td>
+                return `
+                    <tr class="hover:bg-slate-50 transition-colors border-b border-slate-100 last:border-b-0">
+                        <td class="px-6 py-4">
+                            <a href="${articleUrl}" target="_blank" rel="noopener noreferrer" class="text-sm font-medium text-slate-800 hover:text-teal-700 hover:underline">
+                                ${title}
+                            </a>
+                        </td>
+                        <td class="px-6 py-4 text-sm text-slate-500 font-mono">${author}</td>
+                        <td class="px-6 py-4">
+                            <span class="px-2 py-1 rounded-md text-[10px] font-bold uppercase tracking-wide ${catClass}">
+                                ${category}
+                            </span>
+                        </td>
+                        <td class="px-6 py-4 text-right">
+                            <a href="${articleUrl}" target="_blank" rel="noopener noreferrer" aria-label="${title} bağlantısını aç" class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-teal-50 text-teal-600 hover:bg-teal-100 hover:text-teal-800 transition">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                </svg>
+                            </a>
+                        </td>
+                    </tr>
                 `;
-                container.appendChild(tr);
-            });
+            }).join('');
         }
 
         // --- CHARTS LOGIC ---
@@ -397,13 +428,15 @@
         }
 
         // --- INIT EVENTS ---
-        document.getElementById('libSearch').addEventListener('input', renderLibrary);
-        document.getElementById('catFilter').addEventListener('change', renderLibrary);
+        dom.libSearch.addEventListener('input', renderLibrary);
+        dom.catFilter.addEventListener('change', renderLibrary);
 
-        window.onload = () => {
+        window.addEventListener('DOMContentLoaded', () => {
             renderLibrary();
             initCharts();
-        };
+        });
     </script>
 </body>
 </html>
+
+
