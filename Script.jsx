@@ -1,18 +1,4 @@
-﻿<!DOCTYPE html>
-<html lang="tr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Harun Emrecan Karabag | Portfolio</title>
-    <meta name="description" content="Harun Emrecan Karabag - Computer Engineer and Game Developer Portfolio" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  </head>
-  <body class="bg-slate-950">
-    <div id="root"></div>
-    <script type="text/babel" data-presets="react">const { useState, useEffect } = React;
+﻿const { useState, useEffect } = React;
 
 const IconText = ({ label, className = '', size = 20 }) => (
   <span
@@ -469,10 +455,10 @@ const Portfolio = () => {
           </div>
 
           <div className="flex justify-center gap-6 mb-12">
-            <a href="#" className="p-3 bg-slate-900 rounded-full text-slate-400 hover:text-white hover:bg-slate-800 transition-all hover:-translate-y-1">
+            <a href="https://github.com/Hekyetmisbes" className="p-3 bg-slate-900 rounded-full text-slate-400 hover:text-white hover:bg-slate-800 transition-all hover:-translate-y-1">
               <Github size={24} />
             </a>
-            <a href="#" className="p-3 bg-slate-900 rounded-full text-slate-400 hover:text-blue-400 hover:bg-slate-800 transition-all hover:-translate-y-1">
+            <a href="https://www.linkedin.com/in/harunemrecankarabag/" className="p-3 bg-slate-900 rounded-full text-slate-400 hover:text-blue-400 hover:bg-slate-800 transition-all hover:-translate-y-1">
               <Linkedin size={24} />
             </a>
           </div>
@@ -528,7 +514,3 @@ const Portfolio = () => {
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(<Portfolio />);
 
-
-    </script>
-  </body>
-</html>
