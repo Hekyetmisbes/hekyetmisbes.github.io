@@ -1,30 +1,131 @@
 ﻿const { useState, useEffect } = React;
 
-const IconText = ({ label, className = '', size = 20 }) => (
-  <span
+const SvgIcon = ({ className = '', size = 20, viewBox = "0 0 24 24", children }) => (
+  <svg
     aria-hidden="true"
-    className={`inline-flex items-center justify-center ${className}`}
-    style={{ fontSize: `${size}px`, lineHeight: 1 }}
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox={viewBox}
+    width={size}
+    height={size}
+    className={`inline-block align-middle ${className}`}
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
   >
-    {label}
-  </span>
+    {children}
+  </svg>
 );
 
-const Gamepad2 = (props) => <IconText label="🎮" {...props} />;
-const Code2 = (props) => <IconText label="</>" {...props} />;
-const Cpu = (props) => <IconText label="⚙" {...props} />;
-const Trophy = (props) => <IconText label="🏆" {...props} />;
-const Briefcase = (props) => <IconText label="💼" {...props} />;
-const GraduationCap = (props) => <IconText label="🎓" {...props} />;
-const Github = (props) => <IconText label="GH" {...props} />;
-const Linkedin = (props) => <IconText label="in" {...props} />;
-const Mail = (props) => <IconText label="✉" {...props} />;
-const MapPin = (props) => <IconText label="📍" {...props} />;
-const Phone = (props) => <IconText label="☎" {...props} />;
-const ExternalLink = (props) => <IconText label="↗" {...props} />;
-const Play = (props) => <IconText label="▶" {...props} />;
-const Terminal = (props) => <IconText label=">_" {...props} />;
-const ChevronDown = (props) => <IconText label="⌄" {...props} />;
+const Gamepad2 = ({ className = '', size = 20 }) => (
+  <SvgIcon className={className} size={size}>
+    <rect x="3" y="8" width="18" height="10" rx="4" />
+    <path d="M8 13h4" />
+    <path d="M10 11v4" />
+    <circle cx="16" cy="12" r="1" fill="currentColor" stroke="none" />
+    <circle cx="18" cy="14" r="1" fill="currentColor" stroke="none" />
+  </SvgIcon>
+);
+
+const Code2 = ({ className = '', size = 20 }) => (
+  <SvgIcon className={className} size={size}>
+    <path d="m8 17-5-5 5-5" />
+    <path d="m16 7 5 5-5 5" />
+    <path d="m14 4-4 16" />
+  </SvgIcon>
+);
+
+const Cpu = ({ className = '', size = 20 }) => (
+  <SvgIcon className={className} size={size}>
+    <rect x="7" y="7" width="10" height="10" rx="2" />
+    <path d="M10 3v4M14 3v4M10 17v4M14 17v4M3 10h4M3 14h4M17 10h4M17 14h4" />
+  </SvgIcon>
+);
+
+const Trophy = ({ className = '', size = 20 }) => (
+  <SvgIcon className={className} size={size}>
+    <path d="M8 4h8v4a4 4 0 0 1-8 0V4Z" />
+    <path d="M10 16h4M9 20h6" />
+    <path d="M8 6H5a2 2 0 0 0 0 4h3M16 6h3a2 2 0 0 1 0 4h-3" />
+  </SvgIcon>
+);
+
+const Briefcase = ({ className = '', size = 20 }) => (
+  <SvgIcon className={className} size={size}>
+    <rect x="3" y="7" width="18" height="12" rx="2" />
+    <path d="M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2M3 12h18" />
+  </SvgIcon>
+);
+
+const GraduationCap = ({ className = '', size = 20 }) => (
+  <SvgIcon className={className} size={size}>
+    <path d="m2 9 10-5 10 5-10 5Z" />
+    <path d="M6 11v4c0 1.5 3 3 6 3s6-1.5 6-3v-4" />
+    <path d="M22 9v6" />
+  </SvgIcon>
+);
+
+const Github = ({ className = '', size = 20 }) => (
+  <SvgIcon className={className} size={size}>
+    <path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-2c-2.8.6-3.4-1.2-3.4-1.2-.5-1.1-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.6 1 1.6 1 .9 1.5 2.4 1.1 2.9.8.1-.7.4-1.1.7-1.4-2.2-.3-4.5-1.1-4.5-4.9 0-1.1.4-2 1-2.8-.1-.2-.4-1.3.1-2.7 0 0 .8-.3 2.8 1a9.4 9.4 0 0 1 5 0c2-1.3 2.8-1 2.8-1 .5 1.4.2 2.5.1 2.7.6.8 1 1.7 1 2.8 0 3.8-2.3 4.6-4.5 4.9.4.3.8 1 .8 2.1v3c0 .3.2.6.7.5A10 10 0 0 0 12 2Z" fill="currentColor" stroke="none" />
+  </SvgIcon>
+);
+
+const Linkedin = ({ className = '', size = 20 }) => (
+  <SvgIcon className={className} size={size}>
+    <rect x="4" y="4" width="16" height="16" rx="2" />
+    <path d="M8 11v5M8 8h.01M12 16v-3a2 2 0 0 1 4 0v3M12 11v5" />
+  </SvgIcon>
+);
+
+const Mail = ({ className = '', size = 20 }) => (
+  <SvgIcon className={className} size={size}>
+    <rect x="3" y="5" width="18" height="14" rx="2" />
+    <path d="m4 7 8 6 8-6" />
+  </SvgIcon>
+);
+
+const MapPin = ({ className = '', size = 20 }) => (
+  <SvgIcon className={className} size={size}>
+    <path d="M12 22s7-4.5 7-11a7 7 0 1 0-14 0c0 6.5 7 11 7 11Z" />
+    <circle cx="12" cy="11" r="2.5" />
+  </SvgIcon>
+);
+
+const Phone = ({ className = '', size = 20 }) => (
+  <SvgIcon className={className} size={size}>
+    <path d="M22 16.5v2a2 2 0 0 1-2.2 2 19.7 19.7 0 0 1-8.6-3.1 19.3 19.3 0 0 1-6-6A19.7 19.7 0 0 1 2.1 2.8 2 2 0 0 1 4.1 1h2a2 2 0 0 1 2 1.7c.1.8.4 1.6.7 2.3a2 2 0 0 1-.5 2.1L7 8.4a16 16 0 0 0 6.6 6.6l1.3-1.3a2 2 0 0 1 2.1-.5c.7.3 1.5.6 2.3.7a2 2 0 0 1 1.7 2Z" />
+  </SvgIcon>
+);
+
+const ExternalLink = ({ className = '', size = 20 }) => (
+  <SvgIcon className={className} size={size}>
+    <path d="M14 5h5v5" />
+    <path d="M10 14 19 5" />
+    <path d="M19 14v4a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h4" />
+  </SvgIcon>
+);
+
+const Play = ({ className = '', size = 20 }) => (
+  <SvgIcon className={className} size={size}>
+    <polygon points="8,6 18,12 8,18" fill="currentColor" stroke="none" />
+  </SvgIcon>
+);
+
+const Terminal = ({ className = '', size = 20 }) => (
+  <SvgIcon className={className} size={size}>
+    <path d="m6 8 4 4-4 4" />
+    <path d="M12 16h6" />
+    <rect x="3" y="4" width="18" height="16" rx="2" />
+  </SvgIcon>
+);
+
+const ChevronDown = ({ className = '', size = 20 }) => (
+  <SvgIcon className={className} size={size}>
+    <path d="m6 9 6 6 6-6" />
+  </SvgIcon>
+);
 
 /* FONT PREVIEW NOTE:
   This design works best with a monospaced font for headers (like 'Courier Prime' or 'Fira Code') 
@@ -36,6 +137,9 @@ const Portfolio = () => {
   const [scrolled, setScrolled] = useState(false);
   const [typedText, setTypedText] = useState('');
   const fullText = "Computer Engineer | Game Developer";
+  const githubProfileUrl = "https://github.com/Hekyetmisbes";
+  const linkedinProfileUrl = "https://www.linkedin.com/in/harunemrecankarabag/";
+  const cvUrl = "assets/Harun-Emrecan-Karabag-CV.pdf";
 
   // Typing effect for Hero
   useEffect(() => {
@@ -108,7 +212,7 @@ const Portfolio = () => {
       engine: "Unity",
       status: "In Development",
       desc: "Kurye rolünü üstlendiğiniz ve şehirdeki farklı noktalara sipariş teslim ettiğiniz Unity 3D oyunu.",
-      links: [{ label: "GitHub", url: "#" }]
+      links: [{ label: "GitHub", url: githubProfileUrl }]
     },
     {
       title: "Movidle Game",
@@ -116,7 +220,7 @@ const Portfolio = () => {
       engine: "React / JS",
       status: "Released",
       desc: "IMDB Top 250'den rastgele seçilen filmleri tahmin etme oyunu. Renk kodlu geri bildirim mekanizması.",
-      links: [{ label: "GitHub", url: "#" }]
+      links: [{ label: "GitHub", url: githubProfileUrl }]
     },
     {
       title: "Flag Quiz",
@@ -124,7 +228,7 @@ const Portfolio = () => {
       engine: "Unity 2D",
       status: "Released",
       desc: "Firebase entegrasyonlu Android bayrak tahmin oyunu. İsim/kod çekme, resim yükleme ve yüksek skor kaydı.",
-      links: [{ label: "GitHub", url: "#" }]
+      links: [{ label: "GitHub", url: githubProfileUrl }]
     },
     {
       title: "Platform",
@@ -132,7 +236,7 @@ const Portfolio = () => {
       engine: "Unity",
       status: "Demo Available",
       desc: "10 seviyeli Unity tabanlı 2D platform oyunu. Engelleri aş ve 30 yıldızı topla.",
-      links: [{ label: "GitHub", url: "#" }, { label: "Itch.io", url: "#" }]
+      links: [{ label: "GitHub", url: githubProfileUrl }]
     }
   ];
 
@@ -214,6 +318,10 @@ const Portfolio = () => {
               <Play size={18} fill="currentColor" />
               PROJELERİ GÖR
             </button>
+            <a href={cvUrl} target="_blank" rel="noreferrer" className="px-8 py-3 border border-cyan-500/50 hover:border-cyan-400 text-cyan-300 hover:text-cyan-200 font-bold rounded transition-colors flex items-center gap-2 justify-center">
+              <ExternalLink size={16} />
+              CV AÇ
+            </a>
             <button onClick={() => scrollToSection('contact')} className="px-8 py-3 border border-slate-600 hover:border-purple-500 hover:text-purple-400 text-slate-300 font-bold rounded transition-colors flex items-center gap-2 justify-center">
               <Mail size={18} />
               İLETİŞİME GEÇ
@@ -402,7 +510,7 @@ const Portfolio = () => {
                     
                     <div className="flex gap-3">
                       {project.links.map((link, i) => (
-                        <a key={i} href={link.url} className="text-slate-400 hover:text-white transition-colors flex items-center gap-1 text-sm font-bold">
+                        <a key={i} href={link.url} target="_blank" rel="noreferrer" className="text-slate-400 hover:text-white transition-colors flex items-center gap-1 text-sm font-bold">
                           {link.label} <ExternalLink size={14} />
                         </a>
                       ))}
@@ -415,7 +523,7 @@ const Portfolio = () => {
           
           <div className="mt-12 text-center">
             <p className="text-slate-500 mb-4">Ve daha fazlası GitHub profilimde...</p>
-            <a href="#" className="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 font-mono border-b border-cyan-400 pb-1">
+            <a href={githubProfileUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 font-mono border-b border-cyan-400 pb-1">
               github.com/hekyetmisbes <ExternalLink size={16} />
             </a>
           </div>
@@ -455,10 +563,10 @@ const Portfolio = () => {
           </div>
 
           <div className="flex justify-center gap-6 mb-12">
-            <a href="https://github.com/Hekyetmisbes" className="p-3 bg-slate-900 rounded-full text-slate-400 hover:text-white hover:bg-slate-800 transition-all hover:-translate-y-1">
+            <a href={githubProfileUrl} target="_blank" rel="noreferrer" className="p-3 bg-slate-900 rounded-full text-slate-400 hover:text-white hover:bg-slate-800 transition-all hover:-translate-y-1">
               <Github size={24} />
             </a>
-            <a href="https://www.linkedin.com/in/harunemrecankarabag/" className="p-3 bg-slate-900 rounded-full text-slate-400 hover:text-blue-400 hover:bg-slate-800 transition-all hover:-translate-y-1">
+            <a href={linkedinProfileUrl} target="_blank" rel="noreferrer" className="p-3 bg-slate-900 rounded-full text-slate-400 hover:text-blue-400 hover:bg-slate-800 transition-all hover:-translate-y-1">
               <Linkedin size={24} />
             </a>
           </div>
