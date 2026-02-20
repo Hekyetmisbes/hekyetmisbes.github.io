@@ -183,39 +183,57 @@ const Portfolio = () => {
       setActiveSection(id);
     }
   };
+  const openProjectFromCard = (project) => {
+    const primaryLink = project.links?.[0]?.url;
+    if (!primaryLink) return;
+    trackEvent("project_card_click", { project: project.title, url: primaryLink });
+    window.open(primaryLink, "_blank", "noopener,noreferrer");
+  };
+
+  const handleProjectCardClick = (event, project) => {
+    if (event.target.closest("a, button")) return;
+    openProjectFromCard(project);
+  };
+
+  const handleProjectCardKeyDown = (event, project) => {
+    if (event.target.closest("a, button")) return;
+    if (event.key !== "Enter" && event.key !== " ") return;
+    event.preventDefault();
+    openProjectFromCard(project);
+  };
 
   // --- DATA FROM CV ---
   const experiences = [
     {
       role: "Co-Founder",
       company: "Fiction Technology Studios",
-      location: "Ankara, Türkiye",
-      date: "Aralık 2025 - Günümüz",
-      desc: "Indie stüdyo kurucu ortağı. Ürün planlama, görev takibi ve teslimat süreçleri. Kotlin tabanlı mobil uygulama geliştirme ve ürün yol haritası yönetimi. Stüdyo web sitesinin React ile geliştirilmesi.",
+      location: "Ankara, Turkey",
+      date: "December 2025 - Present",
+      desc: "Co-founded an indie studio. Led product planning, task tracking, and delivery processes. Built Kotlin-based mobile applications and managed product roadmaps. Developed the studio website using React.",
       tech: ["Project Management", "Kotlin", "React"]
     },
     {
       role: "Intern Software Engineer",
       company: "Erciyes University IT Dept.",
       location: "Kayseri",
-      date: "Temmuz 2025 - Ağustos 2025",
-      desc: "ASP.NET Core 8 ve Clean Architecture kullanarak Personel Rehberi sistemi geliştirilmesi. Elasticsearch entegrasyonu, Rol tabanlı admin paneli ve Bootstrap 5 ile UI tasarımı.",
+      date: "July 2025 - August 2025",
+      desc: "Developed a Personnel Directory system using ASP.NET Core 8 and Clean Architecture. Integrated Elasticsearch, built a role-based admin panel, and designed the UI with Bootstrap 5.",
       tech: ["ASP.NET Core", "Elasticsearch", "CQRS", "Docker"]
     },
     {
       role: "Hardware Engineering Intern",
       company: "Fotonik Teknoloji A.Ş.",
       location: "Ankara",
-      date: "Temmuz 2024 - Ağustos 2024",
-      desc: "Donanım bileşenlerinin tasarımı ve iyileştirilmesi. Test ve performans analizleri. Sorun giderme ve teknik dokümantasyon.",
+      date: "July 2024 - August 2024",
+      desc: "Designed and improved hardware components. Conducted testing and performance analysis. Performed troubleshooting and prepared technical documentation.",
       tech: ["Hardware Design", "Testing", "Documentation"]
     },
     {
       role: "STAR Research Intern Fellow",
       company: "TÜBİTAK",
       location: "Remote / Hybrid",
-      date: "Şubat 2024 - Temmuz 2024",
-      desc: "Yapay Zeka Destekli Öğrenme, Tahmin ve Optimizasyon Algoritmaları Kullanarak Elektrik Piyasaları için Ajan Tabanlı Simülasyon Modeli Oluşturma.",
+      date: "February 2024 - July 2024",
+      desc: "Built an agent-based simulation model for electricity markets using AI-assisted learning, forecasting, and optimization algorithms.",
       tech: ["AI", "Simulation", "Optimization"]
     }
   ];
@@ -226,9 +244,9 @@ const Portfolio = () => {
       genre: "3D Simulation",
       engine: "Unity",
       status: "In Development",
-      desc: "Kurye rolunu ustlendiginiz ve sehirdeki farkli noktalara siparis teslim ettiginiz Unity 3D oyunu.",
+      desc: "A Unity 3D game where you play as a courier delivering orders to different locations across the city.",
       technologies: ["Unity", "C#", "3D Physics"],
-      impact: "Moduler gorev akisi ile yeni rota ekleme suresi kisaldi.",
+      impact: "Reduced new route integration time with a modular mission flow.",
       links: [
         { label: "Repo", url: "https://github.com/Hekyetmisbes/Delivery-Driver", event: "github_click" },
         { label: "Demo", url: "https://github.com/Hekyetmisbes?tab=repositories&q=delivery+driver+demo&type=&language=&sort=", event: "project_demo_click" }
@@ -239,9 +257,9 @@ const Portfolio = () => {
       genre: "Web Game / Puzzle",
       engine: "React / JS",
       status: "Released",
-      desc: "IMDB Top 250'den rastgele secilen filmleri tahmin etme oyunu. Renk kodlu geri bildirim mekanizmasi.",
+      desc: "A movie guessing game featuring random titles from the IMDb Top 250, with color-coded feedback.",
       technologies: ["React", "JavaScript", "REST API"],
-      impact: "Gunluk oynanabilir dongu ile tekrar ziyaret oranini artirdi.",
+      impact: "Increased repeat visits through a daily replay loop.",
       links: [
         { label: "Repo", url: "https://github.com/Hekyetmisbes/Movidle-Game", event: "github_click" },
         { label: "Demo", url: "https://github.com/Hekyetmisbes?tab=repositories&q=movidle+demo&type=&language=&sort=", event: "project_demo_click" }
@@ -252,11 +270,11 @@ const Portfolio = () => {
       genre: "Mobile / Puzzle",
       engine: "Unity 2D",
       status: "Released",
-      desc: "Firebase entegrasyonlu Android bayrak tahmin oyunu. Isim/kod cekme, resim yukleme ve yuksek skor kaydi.",
+      desc: "An Android flag guessing game with Firebase integration, including name/code retrieval, image upload, and high-score tracking.",
       technologies: ["Unity 2D", "Firebase", "Android"],
-      impact: "Canli veritabanina bagli icerik guncellemesi ile manuel operasyon azaldi.",
+      impact: "Reduced manual operations by enabling live database-driven content updates.",
       links: [
-        { label: "Repo", url: "https://github.com/Hekyetmisbes/Flag-Quiz", event: "github_click" },
+        { label: "Repo", url: "https://github.com/Hekyetmisbes/flag-quiz-game", event: "github_click" },
         { label: "Demo", url: "https://github.com/Hekyetmisbes?tab=repositories&q=flag+quiz+apk&type=&language=&sort=", event: "project_demo_click" }
       ]
     },
@@ -265,11 +283,11 @@ const Portfolio = () => {
       genre: "2D Platformer",
       engine: "Unity",
       status: "Demo Available",
-      desc: "10 seviyeli Unity tabanli 2D platform oyunu. Engelleri as ve 30 yildizi topla.",
+      desc: "A 10-level Unity-based 2D platformer. Overcome obstacles and collect 30 stars.",
       technologies: ["Unity", "C#", "Level Design"],
-      impact: "Tekrar kullanilabilir level yapisiyla iterasyon hizi artirildi.",
+      impact: "Increased iteration speed through a reusable level structure.",
       links: [
-        { label: "Repo", url: "https://github.com/Hekyetmisbes/Platform-Game", event: "github_click" },
+        { label: "Repo", url: "https://github.com/Hekyetmisbes/platform", event: "github_click" },
         { label: "Demo", url: "https://github.com/Hekyetmisbes?tab=repositories&q=platformer+demo&type=&language=&sort=", event: "project_demo_click" }
       ]
     }
@@ -300,7 +318,7 @@ const Portfolio = () => {
 
       {/* --- HUD NAVIGATION --- */}
       <header>
-      <nav aria-label="Ana navigasyon" className={`fixed top-0 w-full z-40 transition-all duration-300 border-b ${scrolled ? 'bg-slate-900/90 backdrop-blur-md border-cyan-500/30 py-3' : 'bg-transparent border-transparent py-6'}`}>
+      <nav aria-label="Main navigation" className={`fixed top-0 w-full z-40 transition-all duration-300 border-b ${scrolled ? 'bg-slate-900/90 backdrop-blur-md border-cyan-500/30 py-3' : 'bg-transparent border-transparent py-6'}`}>
         <div className="container mx-auto px-6 flex justify-between items-center">
           <div className="flex items-center gap-2">
             <Gamepad2 className="text-cyan-400 animate-pulse" />
@@ -309,10 +327,10 @@ const Portfolio = () => {
             </span>
           </div>
           <div className="hidden md:flex gap-8 text-sm font-mono uppercase tracking-widest">
-            {['Start', 'Stats', 'Quests', 'Levels', 'Contact'].map((item) => (
+            {['Start', 'Stats', 'Quests', 'Levels', 'Side Quest', 'Contact'].map((item) => (
               <button 
                 key={item}
-                onClick={() => scrollToSection(item.toLowerCase() === 'start' ? 'hero' : item.toLowerCase())}
+                onClick={() => scrollToSection(item === 'Start' ? 'hero' : item === 'Side Quest' ? 'sidequest' : item.toLowerCase())}
                 className="hover:text-cyan-400 transition-colors relative group"
               >
                 {item}
@@ -346,18 +364,18 @@ const Portfolio = () => {
           </div>
 
           <p className="text-slate-400 max-w-2xl mx-auto text-lg leading-relaxed mt-6">
-            Erciyes Üniversitesi Bilgisayar Mühendisliği mezunu. Unreal Engine ve Unity uzmanı. 
-            Oyun programlama, sistem tasarımı ve gerçek zamanlı geliştirme konularında yetkin.
+            Graduated in Computer Engineering from Erciyes University. Specialized in Unreal Engine and Unity. 
+            Skilled in game programming, systems design, and real-time development.
           </p>
 
                     <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
             <button onClick={() => scrollToSection('levels')} className="px-8 py-3 bg-cyan-600 hover:bg-cyan-500 text-white font-bold rounded clip-path-polygon transition-transform hover:scale-105 shadow-[0_0_15px_rgba(8,145,178,0.5)] flex items-center gap-2 justify-center">
               <Play size={18} fill="currentColor" />
-              PROJELERI GOR
+              VIEW PROJECTS
             </button>
             <a href={cvUrl} target="_blank" rel="noreferrer" onClick={() => trackEvent('cv_download', { source: 'hero' })} className="px-8 py-3 border border-cyan-500/50 hover:border-cyan-400 text-cyan-300 hover:text-cyan-200 font-bold rounded transition-colors flex items-center gap-2 justify-center">
               <ExternalLink size={16} />
-              CV INDIR
+              DOWNLOAD CV
             </a>
             <a href={linkedinProfileUrl} target="_blank" rel="noreferrer" onClick={() => trackEvent('linkedin_click', { source: 'hero' })} className="px-8 py-3 border border-blue-500/50 hover:border-blue-400 text-blue-300 hover:text-blue-200 font-bold rounded transition-colors flex items-center gap-2 justify-center">
               <Linkedin size={18} />
@@ -365,7 +383,7 @@ const Portfolio = () => {
             </a>
             <a href="mailto:harunemrecankarabag@gmail.com" onClick={() => trackEvent('contact_click', { source: 'hero' })} className="px-8 py-3 border border-slate-600 hover:border-purple-500 hover:text-purple-400 text-slate-300 font-bold rounded transition-colors flex items-center gap-2 justify-center">
               <Mail size={18} />
-              MAIL GONDER
+              SEND EMAIL
             </a>
           </div>
         </div>
@@ -498,12 +516,12 @@ const Portfolio = () => {
              <div className="grid md:grid-cols-2 gap-6">
                 <div className="bg-slate-900/50 p-6 rounded border-l-4 border-blue-500">
                   <h4 className="font-bold text-lg text-white">M.Sc. Computer Animation & Game Tech</h4>
-                  <p className="text-slate-400">Hacettepe Üniversitesi</p>
+                  <p className="text-slate-400">Hacettepe University</p>
                   <p className="text-sm font-mono text-blue-400 mt-2">2026 - Present</p>
                 </div>
                 <div className="bg-slate-900/50 p-6 rounded border-l-4 border-blue-500 opacity-75 hover:opacity-100 transition-opacity">
                   <h4 className="font-bold text-lg text-white">B.Sc. Computer Engineering</h4>
-                  <p className="text-slate-400">Erciyes Üniversitesi (GPA: 3.00/4.00)</p>
+                  <p className="text-slate-400">Erciyes University (GPA: 3.00/4.00)</p>
                   <p className="text-sm font-mono text-blue-400 mt-2">2020 - 2025</p>
                 </div>
              </div>
@@ -526,7 +544,15 @@ const Portfolio = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {projects.map((project, index) => (
-              <div key={index} className="group relative bg-slate-950 rounded-xl overflow-hidden border border-slate-800 hover:border-cyan-500 transition-all duration-300 hover:shadow-[0_0_20px_rgba(8,145,178,0.2)] hover:-translate-y-1">
+              <div
+                key={index}
+                role="link"
+                tabIndex={0}
+                aria-label={`Open ${project.title} project link`}
+                onClick={(event) => handleProjectCardClick(event, project)}
+                onKeyDown={(event) => handleProjectCardKeyDown(event, project)}
+                className="group relative bg-slate-950 rounded-xl overflow-hidden border border-slate-800 hover:border-cyan-500 transition-all duration-300 hover:shadow-[0_0_20px_rgba(8,145,178,0.2)] hover:-translate-y-1 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/70"
+              >
                 <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-500 to-purple-600 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
                 
                 <div className="p-8">
@@ -545,7 +571,7 @@ const Portfolio = () => {
                   </p>
 
                   <p className="text-sm text-cyan-300 mb-4">
-                    <strong>Ne basardi?</strong> {project.impact}
+                    <strong>What did it achieve?</strong> {project.impact}
                   </p>
 
                   <div className="flex flex-wrap gap-2 mb-6">
@@ -575,14 +601,29 @@ const Portfolio = () => {
           </div>
           
           <div className="mt-12 text-center">
-            <p className="text-slate-500 mb-4">Ve daha fazlası GitHub profilimde...</p>
+            <p className="text-slate-500 mb-4">And more on my GitHub profile...</p>
             <a href={githubProfileUrl} target="_blank" rel="noreferrer" onClick={() => trackEvent('github_click', { source: 'levels-footer' })} className="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 font-mono border-b border-cyan-400 pb-1">
               github.com/hekyetmisbes <ExternalLink size={16} />
             </a>
           </div>
         </div>
       </section>
+      {/* --- SIDE QUEST --- */}
+      <section id="sidequest" className="py-16 bg-slate-950 border-t border-slate-800">
+        <div className="container mx-auto px-6">
+          <div className="flex items-center gap-4 mb-8">
+            <Trophy className="text-pink-400" size={28} />
+            <h2 className="text-2xl md:text-3xl font-bold text-white uppercase tracking-wider">Side Quest</h2>
+            <div className="h-px bg-pink-500/40 flex-grow ml-4"></div>
+          </div>
 
+          <div className="bg-slate-900/60 border border-slate-800 rounded-xl p-6 md:p-8">
+            <h3 className="text-xl font-bold text-slate-100">School Support Association</h3>
+            <p className="text-pink-300 text-sm font-mono mt-1">Volunteer Math Instructor</p>
+            <p className="text-slate-400 mt-3 max-w-3xl">Provided math support sessions for middle school students and helped improve their exam readiness through regular practice and mentoring.</p>
+          </div>
+        </div>
+      </section>
       </main>
 
       {/* --- FOOTER / GAME OVER --- */}
@@ -592,7 +633,7 @@ const Portfolio = () => {
             GAME OVER?
           </h2>
           <p className="text-slate-400 mb-8 max-w-xl mx-auto">
-            Hayır, bu sadece bir sonraki seviyenin başlangıcı. Yeni bir proje veya iş birliği için benimle iletişime geçin.
+            No, this is just the start of the next level. Reach out for a new project or collaboration.
           </p>
 
           <div className="flex flex-col md:flex-row justify-center items-center gap-6 mb-12">
@@ -611,7 +652,7 @@ const Portfolio = () => {
                 <Phone size={20} />
               </div>
               <div className="text-left">
-                <p className="text-xs text-slate-500 uppercase">Telefon</p>
+                <p className="text-xs text-slate-500 uppercase">Phone</p>
                 <p className="text-slate-200">+90 507 049 35 74</p>
               </div>
             </a>
@@ -627,19 +668,19 @@ const Portfolio = () => {
           </div>
 
           <div className="text-slate-600 text-sm font-mono">
-            <p>&copy; 2026 Harun Emrecan Karabağ. Ankara, Türkiye.</p>
+            <p>&copy; 2026 Harun Emrecan Karabağ. Ankara, Turkey.</p>
           </div>
         </div>
       </footer>
 
-      {/* --- FLOATING VOLUNTEER BADGE --- */}
+      {/* --- FLOATING UPDATE BADGE --- */}
       <div className="fixed bottom-6 right-6 z-30 hidden lg:block">
-        <div className="bg-slate-900/90 backdrop-blur border border-pink-500/30 p-4 rounded-lg shadow-2xl max-w-xs transform transition-transform hover:scale-105">
-           <div className="flex items-center gap-2 mb-2 text-pink-400 font-bold text-sm uppercase">
-             <Trophy size={14} /> Side Quest Completed
+        <div className="bg-slate-900/90 backdrop-blur border border-cyan-500/30 p-4 rounded-lg shadow-2xl max-w-xs transform transition-transform hover:scale-105">
+           <div className="flex items-center gap-2 mb-2 text-cyan-400 font-bold text-sm uppercase">
+             <Trophy size={14} /> Latest Update
            </div>
-           <p className="text-slate-300 text-sm font-bold">Okul Destek Derneği</p>
-           <p className="text-xs text-slate-500 mt-1">Volunteer Math Instructor for middle school students.</p>
+           <p className="text-slate-200 text-sm font-bold">Delivery Driver got a new update</p>
+           <p className="text-xs text-slate-400 mt-1">Added new city routes, improved delivery flow, and tuned checkpoint balance.</p>
         </div>
       </div>    </div>
   );
