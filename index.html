@@ -1,10 +1,10 @@
-﻿<!DOCTYPE html>
+﻿<!doctype html>
 <html lang="tr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Harun Emrecan Karabag | Portfolio</title>
-    <meta name="description" content="Harun Emrecan Karabag - Computer Engineer and Game Developer Portfolio" />
+    <title>Harun Emrecan Karabag | Computer Engineer Portfolio</title>
+    <meta name="description" content="Harun Emrecan Karabag - Computer Engineer and Game Developer portfolio." />
     <script src="https://cdn.tailwindcss.com"></script>
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
@@ -81,9 +81,17 @@ const GraduationCap = ({ className = '', size = 20 }) => (
 );
 
 const Github = ({ className = '', size = 20 }) => (
-  <SvgIcon className={className} size={size}>
-    <path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-2c-2.8.6-3.4-1.2-3.4-1.2-.5-1.1-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.6 1 1.6 1 .9 1.5 2.4 1.1 2.9.8.1-.7.4-1.1.7-1.4-2.2-.3-4.5-1.1-4.5-4.9 0-1.1.4-2 1-2.8-.1-.2-.4-1.3.1-2.7 0 0 .8-.3 2.8 1a9.4 9.4 0 0 1 5 0c2-1.3 2.8-1 2.8-1 .5 1.4.2 2.5.1 2.7.6.8 1 1.7 1 2.8 0 3.8-2.3 4.6-4.5 4.9.4.3.8 1 .8 2.1v3c0 .3.2.6.7.5A10 10 0 0 0 12 2Z" fill="currentColor" stroke="none" />
-  </SvgIcon>
+  <svg
+    aria-hidden="true"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    width={size}
+    height={size}
+    className={`inline-block align-middle ${className}`}
+    fill="currentColor"
+  >
+    <path d="M12 .5C5.73.5.75 5.48.75 11.75c0 5.02 3.25 9.28 7.76 10.79.57.1.78-.25.78-.56v-2.15c-3.16.69-3.83-1.34-3.83-1.34-.52-1.3-1.27-1.65-1.27-1.65-1.04-.71.08-.69.08-.69 1.15.08 1.75 1.18 1.75 1.18 1.02 1.75 2.68 1.25 3.34.96.1-.74.4-1.25.72-1.53-2.52-.29-5.17-1.26-5.17-5.61 0-1.24.44-2.25 1.17-3.05-.12-.29-.51-1.46.11-3.04 0 0 .95-.3 3.11 1.17a10.8 10.8 0 0 1 5.66 0c2.16-1.47 3.11-1.17 3.11-1.17.62 1.58.23 2.75.12 3.04.73.8 1.17 1.81 1.17 3.05 0 4.36-2.66 5.31-5.2 5.59.41.35.77 1.04.77 2.1v3.12c0 .31.21.67.79.56A11.26 11.26 0 0 0 23.25 11.75C23.25 5.48 18.27.5 12 .5Z" />
+  </svg>
 );
 
 const Linkedin = ({ className = '', size = 20 }) => (
@@ -158,8 +166,9 @@ const Portfolio = () => {
   // Typing effect for Hero
   useEffect(() => {
     let index = 0;
+    setTypedText("");
     const interval = setInterval(() => {
-      setTypedText((prev) => prev + fullText.charAt(index));
+      setTypedText(fullText.slice(0, index + 1));
       index++;
       if (index === fullText.length) clearInterval(interval);
     }, 100);
@@ -226,7 +235,7 @@ const Portfolio = () => {
       engine: "Unity",
       status: "In Development",
       desc: "Kurye rolünü üstlendiğiniz ve şehirdeki farklı noktalara sipariş teslim ettiğiniz Unity 3D oyunu.",
-      links: [{ label: "GitHub", url: githubProfileUrl }]
+      links: [{ label: "GitHub", url: "https://github.com/Hekyetmisbes/Delivery-Driver" }]
     },
     {
       title: "Movidle Game",
@@ -234,7 +243,7 @@ const Portfolio = () => {
       engine: "React / JS",
       status: "Released",
       desc: "IMDB Top 250'den rastgele seçilen filmleri tahmin etme oyunu. Renk kodlu geri bildirim mekanizması.",
-      links: [{ label: "GitHub", url: githubProfileUrl }]
+      links: [{ label: "GitHub", url: "https://github.com/Hekyetmisbes/Movidle-Game" }]
     },
     {
       title: "Flag Quiz",
@@ -242,7 +251,7 @@ const Portfolio = () => {
       engine: "Unity 2D",
       status: "Released",
       desc: "Firebase entegrasyonlu Android bayrak tahmin oyunu. İsim/kod çekme, resim yükleme ve yüksek skor kaydı.",
-      links: [{ label: "GitHub", url: githubProfileUrl }]
+      links: [{ label: "GitHub", url: "https://github.com/Hekyetmisbes/Flag-Quiz" }]
     },
     {
       title: "Platform",
@@ -250,7 +259,7 @@ const Portfolio = () => {
       engine: "Unity",
       status: "Demo Available",
       desc: "10 seviyeli Unity tabanlı 2D platform oyunu. Engelleri aş ve 30 yıldızı topla.",
-      links: [{ label: "GitHub", url: githubProfileUrl }]
+      links: [{ label: "GitHub", url: "https://github.com/Hekyetmisbes/Platform-Game" }]
     }
   ];
 
@@ -636,6 +645,11 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(<Portfolio />);
 
 
+
+
+
+
     </script>
   </body>
 </html>
+
