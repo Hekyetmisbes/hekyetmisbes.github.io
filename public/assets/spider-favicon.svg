@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="spider-body" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#d946ef" />
+      <stop offset="100%" stop-color="#7c3aed" />
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="#09090f" />
+  <g fill="none" stroke="#a855f7" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+    <path d="M23 24 11 18" />
+    <path d="M21 31 8 31" />
+    <path d="M23 39 11 45" />
+    <path d="M41 24 53 18" />
+    <path d="M43 31 56 31" />
+    <path d="M41 39 53 45" />
+    <path d="M25 21 17 10" />
+    <path d="M39 21 47 10" />
+    <path d="M25 42 17 54" />
+    <path d="M39 42 47 54" />
+  </g>
+  <polygon points="32,13 44,23 40,38 32,46 24,38 20,23" fill="url(#spider-body)" />
+  <polygon points="32,19 37,23 35,31 32,34 29,31 27,23" fill="#f5d0fe" opacity="0.9" />
+  <circle cx="28" cy="26" r="2.2" fill="#faf5ff" />
+  <circle cx="36" cy="26" r="2.2" fill="#faf5ff" />
+</svg>
