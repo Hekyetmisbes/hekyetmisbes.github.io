@@ -58,6 +58,33 @@ const Briefcase = ({ className = '', size = 20 }) => (
   </SvgIcon>
 );
 
+const CharacterIcon = ({ className = '', size = 20 }) => (
+  <SvgIcon className={className} size={size}>
+    <circle cx="12" cy="8" r="3" />
+    <path d="M7 20v-2a5 5 0 0 1 10 0v2" />
+    <path d="M9 13l-2 3M15 13l2 3" />
+  </SvgIcon>
+);
+
+const MapIcon = ({ className = '', size = 20 }) => (
+  <SvgIcon className={className} size={size}>
+    <path d="M3 6.5 9 4l6 2.5L21 4v13.5L15 20l-6-2.5L3 20Z" />
+    <path d="M9 4v13.5M15 6.5V20" />
+  </SvgIcon>
+);
+
+const StairsIcon = ({ className = '', size = 20 }) => (
+  <SvgIcon className={className} size={size}>
+    <path d="M4 19h4v-4h4v-4h4V7h4" />
+  </SvgIcon>
+);
+
+const StarIcon = ({ className = '', size = 20 }) => (
+  <SvgIcon className={className} size={size}>
+    <path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1 6.2L12 17.2 6.5 20.2l1-6.2L3 9.6l6.2-.9Z" />
+  </SvgIcon>
+);
+
 const GraduationCap = ({ className = '', size = 20 }) => (
   <SvgIcon className={className} size={size}>
     <path d="m2 9 10-5 10 5-10 5Z" />
@@ -445,7 +472,7 @@ const Portfolio = () => {
       <section id="stats" className="py-20 bg-slate-900 relative">
         <div className="container mx-auto px-6">
           <div className="flex items-center gap-4 mb-12">
-            <Cpu className="text-purple-500" size={32} />
+            <CharacterIcon className="text-purple-500" size={32} />
             <h2 className="text-3xl md:text-4xl font-bold text-white uppercase tracking-wider">Character Stats</h2>
             <div className="h-px bg-purple-500/50 flex-grow ml-4"></div>
           </div>
@@ -518,7 +545,7 @@ const Portfolio = () => {
       <section id="quests" className="py-20 bg-slate-950">
         <div className="container mx-auto px-6">
           <div className="flex items-center gap-4 mb-12">
-            <Briefcase className="text-yellow-500" size={32} />
+            <MapIcon className="text-yellow-500" size={32} />
             <h2 className="text-3xl md:text-4xl font-bold text-white uppercase tracking-wider">Quest Log</h2>
             <div className="h-px bg-yellow-500/50 flex-grow ml-4"></div>
           </div>
@@ -585,7 +612,7 @@ const Portfolio = () => {
 
         <div className="container mx-auto px-6 relative z-10">
           <div className="flex items-center gap-4 mb-12">
-            <Trophy className="text-red-500" size={32} />
+            <StairsIcon className="text-red-500" size={32} />
             <h2 className="text-3xl md:text-4xl font-bold text-white uppercase tracking-wider">Select Level</h2>
             <div className="h-px bg-red-500/50 flex-grow ml-4"></div>
           </div>
@@ -660,7 +687,7 @@ const Portfolio = () => {
       <section id="sidequest" className="py-16 bg-slate-950 border-t border-slate-800">
         <div className="container mx-auto px-6">
           <div className="flex items-center gap-4 mb-8">
-            <Trophy className="text-pink-400" size={28} />
+            <StarIcon className="text-pink-400" size={28} />
             <h2 className="text-2xl md:text-3xl font-bold text-white uppercase tracking-wider">Side Quest</h2>
             <div className="h-px bg-pink-500/40 flex-grow ml-4"></div>
           </div>
@@ -677,9 +704,19 @@ const Portfolio = () => {
       {/* --- FOOTER / GAME OVER --- */}
       <footer id="contact" className="py-20 bg-black text-center relative border-t border-slate-800">
         <div className="container mx-auto px-6">
-          <h2 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-600 mb-8">
-            GAME OVER?
-          </h2>
+          <a
+            href="/easter-egg/"
+            onClick={() => trackEvent("easter_egg_click", { source: "footer-game-over" })}
+            className="game-over-link group mx-auto mb-8"
+            aria-label="Open Neon Bug Hunt easter egg"
+          >
+            <span
+              className="game-over-title text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-white to-fuchsia-400"
+              data-text="GAME OVER?"
+            >
+              GAME OVER?
+            </span>
+          </a>
           <p className="text-slate-400 mb-8 max-w-xl mx-auto">
             No, this is just the start of the next level. Reach out for a new project or collaboration.
           </p>
