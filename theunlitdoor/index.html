@@ -77,6 +77,46 @@
     margin-bottom: 0.5rem;
     text-shadow: 0 0 60px rgba(123, 111, 222, 0.4);
   }
+  .game-logo {
+    max-width: min(500px, 80vw);
+    height: auto;
+    margin-bottom: 0.5rem;
+    filter: drop-shadow(0 0 40px rgba(123, 111, 222, 0.3));
+  }
+  .team-strip {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+  }
+  .team-logo {
+    height: 48px;
+    width: auto;
+    opacity: 0.9;
+  }
+  .team-members {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .team-member {
+    text-align: center;
+  }
+  .team-member strong {
+    display: block;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+  .team-member span {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    font-weight: 300;
+  }
   .hero .subtitle {
     font-size: 1.1rem;
     font-weight: 300;
@@ -515,7 +555,7 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero-content">
-    <h1>The Unlit Door</h1>
+    <img src="gamelogo.svg" alt="The Unlit Door" class="game-logo">
     <div class="subtitle">Revize Oyun Öneri Dokümanı</div>
     <p style="color: var(--text-secondary); font-size: 0.95rem; max-width: 600px; margin: 0 auto; line-height: 1.8;">
       Çocukluk korkusu, utanç, sessizlik ve birikmiş duygusal baskıyı dört farklı dokunmatik oynanış biçimine dönüştüren, mobil öncelikli psikolojik bir anlatı oyunu.
@@ -526,6 +566,15 @@
       <div class="meta-item"><strong>Format:</strong> Tek oyunculu, bölüm temelli</div>
       <div class="meta-item"><strong>Süre:</strong> 2–3,5 saat</div>
       <div class="meta-item"><strong>Durum:</strong> Konsept + dikey dilim geliştirme</div>
+    </div>
+    <div class="team-strip">
+      <img src="logo.svg" alt="UN4 Studio" class="team-logo">
+      <div class="team-members">
+        <div class="team-member"><strong>Harun</strong><span>Game Developer</span></div>
+        <div class="team-member"><strong>Hilal</strong><span>Designer</span></div>
+        <div class="team-member"><strong>Eymen</strong><span>Game Developer</span></div>
+        <div class="team-member"><strong>Batuhan</strong><span>Designer</span></div>
+      </div>
     </div>
   </div>
 </section>
