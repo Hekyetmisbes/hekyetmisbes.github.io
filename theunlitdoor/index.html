@@ -1,0 +1,1302 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Unlit Door — Revize Oyun Öneri Dokümanı</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg-primary: #0D1117;
+    --bg-secondary: #161B22;
+    --bg-card: #1C2129;
+    --border: #30363D;
+    --border-light: #484F58;
+    --text-primary: #E6EDF3;
+    --text-secondary: #8B949E;
+    --text-tertiary: #484F58;
+    --accent-purple: #7B6FDE;
+    --accent-green: #2EA87A;
+    --accent-blue: #3B8DD6;
+    --accent-orange: #E8764A;
+    --accent-red: #F85149;
+    --accent-cyan: #58A6FF;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.7;
+    font-size: 15px;
+  }
+
+  /* Hero */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url('img_stage.png') center/cover no-repeat;
+    opacity: 0.35;
+    filter: blur(2px);
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(13,17,23,0.3) 0%, rgba(13,17,23,0.7) 60%, var(--bg-primary) 100%);
+  }
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    padding: 2rem;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 700;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: #fff;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 60px rgba(123, 111, 222, 0.4);
+  }
+  .hero .subtitle {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: var(--text-secondary);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+  }
+  .hero .meta-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+  .meta-item {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    backdrop-filter: blur(10px);
+  }
+  .meta-item strong { color: var(--text-primary); font-weight: 500; }
+
+  /* Navigation */
+  .nav-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(13,17,23,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    padding: 0.75rem 2rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  .nav-bar a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    transition: color 0.2s;
+    flex-shrink: 0;
+  }
+  .nav-bar a:hover { color: var(--text-primary); }
+
+  /* Container */
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  /* Sections */
+  .section {
+    padding: 5rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .section:last-child { border-bottom: none; }
+
+  .section-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  .section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 1.5rem;
+    line-height: 1.3;
+  }
+  .section h3 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-top: 2.5rem;
+    margin-bottom: 0.75rem;
+  }
+  .section h4 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--accent-cyan);
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
+  }
+  .section p {
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+  }
+  .section p strong, .section li strong {
+    color: var(--text-primary);
+    font-weight: 500;
+  }
+  .lead {
+    font-size: 1.1rem;
+    color: var(--text-primary) !important;
+    font-weight: 300;
+    line-height: 1.8;
+  }
+
+  /* Lists */
+  ul.feature-list {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+  }
+  ul.feature-list li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 0.6rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+  ul.feature-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.6em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent-purple);
+  }
+
+  ol.numbered-list {
+    padding-left: 1.5rem;
+    margin: 1rem 0;
+  }
+  ol.numbered-list li {
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+  }
+
+  /* Cards */
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+  }
+  .card-accent {
+    border-left: 3px solid var(--accent-purple);
+  }
+
+  /* Quote */
+  .quote-block {
+    background: rgba(123, 111, 222, 0.08);
+    border-left: 3px solid var(--accent-purple);
+    padding: 1.25rem 1.5rem;
+    border-radius: 0 8px 8px 0;
+    margin: 1.5rem 0;
+    font-style: italic;
+    color: var(--text-primary);
+    font-size: 1.05rem;
+    line-height: 1.7;
+  }
+
+  /* Image blocks */
+  .img-block {
+    margin: 2.5rem 0;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .img-block img {
+    width: 100%;
+    display: block;
+  }
+  .img-caption {
+    padding: 0.75rem 1rem;
+    background: var(--bg-secondary);
+    font-size: 0.8rem;
+    color: var(--text-tertiary);
+    text-align: center;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  /* Chapter cards */
+  .chapter-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+  }
+  .chapter-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .chapter-card:hover {
+    border-color: var(--border-light);
+    transform: translateY(-2px);
+  }
+  .chapter-card .ch-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+  }
+  .chapter-card .ch-body {
+    padding: 1.25rem;
+  }
+  .chapter-card .ch-num {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+  .chapter-card .ch-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    color: #fff;
+    margin-bottom: 0.35rem;
+  }
+  .chapter-card .ch-emotion {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.75rem;
+    font-style: italic;
+  }
+  .chapter-card .ch-desc {
+    font-size: 0.85rem;
+    color: var(--text-tertiary);
+    line-height: 1.5;
+  }
+
+  /* Comparison table */
+  .comp-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.85rem;
+  }
+  .comp-table th {
+    text-align: left;
+    padding: 0.75rem 1rem;
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.75rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .comp-table td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-secondary);
+    vertical-align: top;
+  }
+  .comp-table td:first-child {
+    color: var(--text-primary);
+    font-weight: 500;
+  }
+  .comp-table tr:hover td {
+    background: rgba(255,255,255,0.02);
+  }
+
+  /* Milestone timeline */
+  .milestone-list {
+    list-style: none;
+    padding: 0;
+    margin: 2rem 0;
+    border-left: 2px solid var(--border);
+    padding-left: 2rem;
+  }
+  .milestone-list li {
+    position: relative;
+    margin-bottom: 2rem;
+  }
+  .milestone-list li::before {
+    content: '';
+    position: absolute;
+    left: -2.35rem;
+    top: 0.35rem;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid var(--accent-cyan);
+    background: var(--bg-primary);
+  }
+  .milestone-list .ml-tag {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--accent-cyan);
+  }
+  .milestone-list .ml-title {
+    font-size: 1rem;
+    color: var(--text-primary);
+    font-weight: 500;
+    margin: 0.15rem 0;
+  }
+  .milestone-list .ml-desc {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+  }
+
+  /* Gantt wrapper */
+  .gantt-wrapper {
+    background: var(--bg-primary);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin: 2rem 0;
+    overflow-x: auto;
+  }
+
+  /* Risk cards */
+  .risk-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+  .risk-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.25rem;
+  }
+  .risk-card .risk-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--accent-orange);
+    font-weight: 600;
+    margin-bottom: 0.35rem;
+  }
+  .risk-card .risk-title {
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+  .risk-card .risk-solution {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  /* Divider */
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 3rem 0;
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 3rem 2rem;
+    color: var(--text-tertiary);
+    font-size: 0.8rem;
+    border-top: 1px solid var(--border);
+  }
+
+  /* Interaction pills */
+  .pill-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: 1rem 0;
+  }
+  .pill {
+    background: rgba(88, 166, 255, 0.1);
+    border: 1px solid rgba(88, 166, 255, 0.2);
+    color: var(--accent-cyan);
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+  }
+
+  /* Weekly focus table */
+  .weekly-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.85rem;
+  }
+  .weekly-table th {
+    text-align: left;
+    padding: 0.6rem 0.75rem;
+    background: var(--bg-secondary);
+    color: var(--text-tertiary);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.7rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .weekly-table td {
+    padding: 0.6rem 0.75rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-secondary);
+    vertical-align: top;
+  }
+  .weekly-table td:first-child {
+    color: var(--accent-cyan);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .weekly-table td:nth-child(2) {
+    color: var(--text-primary);
+  }
+
+  /* Scroll to top */
+  @media (max-width: 768px) {
+    .nav-bar { gap: 1.25rem; padding: 0.75rem 1rem; }
+    .container { padding: 0 1rem; }
+    .section { padding: 3rem 0; }
+    .chapter-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>The Unlit Door</h1>
+    <div class="subtitle">Revize Oyun Öneri Dokümanı</div>
+    <p style="color: var(--text-secondary); font-size: 0.95rem; max-width: 600px; margin: 0 auto; line-height: 1.8;">
+      Çocukluk korkusu, utanç, sessizlik ve birikmiş duygusal baskıyı dört farklı dokunmatik oynanış biçimine dönüştüren, mobil öncelikli psikolojik bir anlatı oyunu.
+    </p>
+    <div class="meta-grid">
+      <div class="meta-item"><strong>Proje Türü:</strong> Psikolojik bulmaca / macera</div>
+      <div class="meta-item"><strong>Platform:</strong> Mobil (iOS / Android)</div>
+      <div class="meta-item"><strong>Format:</strong> Tek oyunculu, bölüm temelli</div>
+      <div class="meta-item"><strong>Süre:</strong> 2–3,5 saat</div>
+      <div class="meta-item"><strong>Durum:</strong> Konsept + dikey dilim geliştirme</div>
+    </div>
+  </div>
+</section>
+
+<!-- NAV -->
+<nav class="nav-bar">
+  <a href="#tanitim">Tanıtım</a>
+  <a href="#mekanikler">Mekanikler</a>
+  <a href="#bolumler">Bölümler</a>
+  <a href="#pazar">Pazar</a>
+  <a href="#yenilikci">Yenilikçi Yönler</a>
+  <a href="#gantt">Geliştirme Planı</a>
+  <a href="#materyaller">Materyaller</a>
+  <a href="#sunum">Sunum Notları</a>
+</nav>
+
+<!-- 1. OYUNUN TANITIMI -->
+<section class="section" id="tanitim">
+<div class="container">
+  <div class="section-label" style="color: var(--accent-purple);">Bölüm 1</div>
+  <h2>Oyunun Tanıtımı</h2>
+
+  <p class="lead">Bazı duygular tek bir olayla başlamaz. Yıllar içinde birikirler. Çocuklukta hissedilen bir korku, unutulamayan bir utanç anı, konuşmak isterken sesin çıkmaması ya da nedeni tam çözülemeyen bir iç baskı; zamanla birbirinin üstüne binen katmanlara dönüşür.</p>
+
+  <p><strong>The Unlit Door</strong>, tam olarak bu birikimin oyuna çevrilmiş hâlidir.</p>
+
+  <p>Oyuncu, eski televizyonların, kırık sinyallerin ve dört geçidin bulunduğu bir hafıza merkezinde uyanır. İlk üç kapı, tanımlanabilir çocukluk anılarına açılır. Dördüncü kapı ise karanlıktır. Çünkü o kapı tek bir olaya değil, yıllar içinde birikmiş duygusal ağırlığa açılır.</p>
+
+  <div class="img-block">
+    <img src="img_hub.png" alt="Hafıza Merkezi — Memory Hub">
+    <div class="img-caption">Hafıza Merkezi — Dört kapı, eski televizyonlar ve kırık sinyaller</div>
+  </div>
+
+  <p>Oyunun amacı oyuncuya klasik anlamda "bir tehdidi yenme" hissi vermek değildir. Amaç; bazı iç çatışmaların güç kullanılarak değil, fark edilerek, anlaşarak ve bırakılarak çözülebileceğini hissettirmektir. Bu nedenle The Unlit Door yalnızca karanlık bir hikâye anlatan bir oyun değil, <strong>duyguların oynanabildiği bir deneyimdir</strong>.</p>
+
+  <h3>Temel Deneyim Vaatleri</h3>
+  <ul class="feature-list">
+    <li>Tanıdık ama görsel olarak bozulmuş anılar</li>
+    <li>Mobil kullanım alışkanlıklarına uygun kısa bölüm yapısı</li>
+    <li>Basit ama anlam taşıyan dokunmatik kontroller</li>
+    <li>Atmosferin hikâye kadar önemli olduğu bir anlatım dili</li>
+    <li>Zafer yerine kabullenme ile sonuçlanan bir final</li>
+  </ul>
+
+  <h3>Neden İlgi Çekici?</h3>
+  <div class="quote-block">
+    Çünkü oyun, oyuncuya yalnızca "ne olduğunu" anlatmaz; "nasıl hissettirdiğini" oynatır.
+  </div>
+  <ul class="feature-list">
+    <li><strong>Korku</strong> yalnızca sahne tasarımında kalmaz; koşu ve kaçışa dönüşür.</li>
+    <li><strong>Utanç</strong> yalnızca diyalogla verilmez; başkalarının bakışı altında daralan bir başarı penceresine dönüşür.</li>
+    <li><strong>Sessizlik</strong>, oyuncunun nefes ve ritim kontrolünü bozarak yaşanır.</li>
+    <li>Son bölümde ise <strong>saldırmak çözüm değil</strong>, sorunu büyüten bir refleks olur.</li>
+  </ul>
+</div>
+</section>
+
+<!-- 2. MEKANİKLER -->
+<section class="section" id="mekanikler">
+<div class="container">
+  <div class="section-label" style="color: var(--accent-green);">Bölüm 2</div>
+  <h2>Oyun Mekanikleri ve Oynanış</h2>
+
+  <h3>2.1 Tasarım Felsefesi</h3>
+  <div class="quote-block">
+    Her bölüm farklı bir duyguyu temsil eder ve her duygu farklı bir oynanış dili üretir.
+  </div>
+  <p>Bu sayede oyuncu her bölümde yeni bir his, yeni bir ritim ve yeni bir baskı biçimiyle karşılaşır. Oynanış çeşitliliği yalnızca çeşitlilik üretmek için değil; oyunun duygusal yapısına hizmet etmek için tasarlanır.</p>
+
+  <h3>2.2 Ortak Mobil Etkileşim Dili</h3>
+  <p>Tüm oyun boyunca temel giriş sistemi sade ve mobil uyumlu kalır:</p>
+  <div class="pill-row">
+    <span class="pill">Swipe — Yön değiştirme, kaçış</span>
+    <span class="pill">Tap — Anlık tepki, zamanlama</span>
+    <span class="pill">Hold — Nefes kontrolü, sabretme</span>
+    <span class="pill">Hızlı girişler — Panik anları</span>
+  </div>
+  <p>Bu ortak dil, bölümler arasında öğrenme yükünü azaltır. Oyuncu sıfırdan kontrol öğrenmek zorunda kalmaz; sadece aynı hareketlerin anlamı ve kullanım bağlamı değişir.</p>
+
+  <h3>2.3 Oyun Döngüsü</h3>
+  <ol class="numbered-list">
+    <li>Oyuncu hafıza merkezine gelir.</li>
+    <li>Dört kapıdan biri seçilir.</li>
+    <li>Bölüm kendi duygusal temasına uygun bir oynanış döngüsü sunar.</li>
+    <li>Bölüm sonunda oyuncu yeniden merkeze döner.</li>
+    <li>Son kapı, ilk üç bölüm deneyimlendikçe anlam kazanır.</li>
+    <li>Final bölümünde oyunun ana tezi mekanik olarak açığa çıkar.</li>
+  </ol>
+  <p>Bu yapı, mobil kullanım için özellikle uygundur. Oyuncu <strong>8–15 dakikalık</strong> oturumlarla ilerleyebilir; parçalı oynasa bile duygusal süreklilik korunur.</p>
+
+  <h3>2.4 Hafıza Merkezi (Memory Hub)</h3>
+  <p>Hafıza merkezi yalnızca bir menü değildir. Dört kritik işlevi vardır:</p>
+  <ul class="feature-list">
+    <li>Anlatısal merkez görevi görür</li>
+    <li>İlerleme takibini sağlar</li>
+    <li>Bölüm seçim alanı olur</li>
+    <li>Kısa oturumlar arasında doğal bir duraklama noktası sunar</li>
+  </ul>
+  <p>Her bölüm için ayrı sahne yüklenir. Oyuncunun açtığı kapılar ve tamamladığı bölümler tek bir ilerleme sistemi içinde tutulur. Hub, yeniden girişte son durumu yansıtır: ışık değişimleri, ses tasarımı, televizyonlardaki bozulmalar ve dördüncü kapının giderek daha baskın hâle gelmesi.</p>
+</div>
+</section>
+
+<!-- 3. BÖLÜMLER -->
+<section class="section" id="bolumler">
+<div class="container">
+  <div class="section-label" style="color: var(--accent-blue);">Bölüm 2.5</div>
+  <h2>Bölüm Bazlı Oynanış</h2>
+
+  <div class="chapter-grid">
+    <div class="chapter-card">
+      <img class="ch-img" src="img_chase.png" alt="The Chase">
+      <div class="ch-body">
+        <div class="ch-num" style="color: var(--accent-orange);">Bölüm 1</div>
+        <div class="ch-title">The Chase</div>
+        <div class="ch-emotion">Çocukluk korkusu</div>
+        <div class="ch-desc">Karanlık, bozulmuş bir çocukluk mekânında görünmeyen bir tehdit tarafından takip edilme. Sürekli tetikte olma duygusu.</div>
+      </div>
+    </div>
+    <div class="chapter-card">
+      <img class="ch-img" src="img_match.png" alt="The Match">
+      <div class="ch-body">
+        <div class="ch-num" style="color: var(--accent-green);">Bölüm 2</div>
+        <div class="ch-title">The Match</div>
+        <div class="ch-emotion">Başkalarının önünde başarısız olma korkusu</div>
+        <div class="ch-desc">Okul maçındaki kritik an. Baskı arttıkça daralan başarı penceresi ve seyirci önünde hata yapma korkusu.</div>
+      </div>
+    </div>
+    <div class="chapter-card">
+      <img class="ch-img" src="img_stage.png" alt="The Stage">
+      <div class="ch-body">
+        <div class="ch-num" style="color: var(--accent-purple);">Bölüm 3</div>
+        <div class="ch-title">The Stage</div>
+        <div class="ch-emotion">Konuşamama, kitlenme, görülme korkusu</div>
+        <div class="ch-desc">Sahne performansı. Nefesi, ritmi ve sesi kontrol altında tutabilmek. Refleks değil kompozisyon.</div>
+      </div>
+    </div>
+    <div class="chapter-card" style="border-color: var(--accent-red); border-width: 1px;">
+      <div style="height: 180px; background: linear-gradient(135deg, #1a0a0a 0%, #0D1117 100%); display: flex; align-items: center; justify-content: center;">
+        <div style="width: 60px; height: 90px; border: 2px solid var(--accent-red); border-radius: 6px; opacity: 0.4;"></div>
+      </div>
+      <div class="ch-body">
+        <div class="ch-num" style="color: var(--accent-red);">Bölüm 4</div>
+        <div class="ch-title">The Unlit Door</div>
+        <div class="ch-emotion">Birikmiş iç baskı — güçle küçültülemeyen ağırlık</div>
+        <div class="ch-desc">Saldırı refleksi tersine çevrilir. Her agresif hareket tehdidi büyütür. Çözüm saldırmayı bırakmaktır.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Detaylar -->
+  <div class="divider"></div>
+
+  <h3>Bölüm 1 — The Chase</h3>
+  <h4>Hedef</h4>
+  <p>Oyuncuya ani tehdit altında olma hissini yaşatmak.</p>
+  <h4>Oynanış</h4>
+  <ul class="feature-list">
+    <li>Sağa / sola kaçmak için <strong>swipe</strong></li>
+    <li>Kısa tepkiler için <strong>tap</strong></li>
+    <li>Dar zaman pencerelerinde saklanmak için <strong>hold</strong></li>
+  </ul>
+  <p>Tehdit, oyuncunun yakınlığına göre ses ve ekran baskısını artırır. Hata yapan oyuncu "ölmek" yerine kısa bir gerilim zirvesi yaşar ve checkpoint'e döner; böylece tempo korunur, frustrasyon artmaz.</p>
+  <div class="img-block">
+    <img src="img_chase.png" alt="The Chase — Bozulmuş çocukluk mekânı">
+    <div class="img-caption">The Chase — Bozulmuş çocukluk mekânında kaçış</div>
+  </div>
+
+  <h3>Bölüm 2 — The Match</h3>
+  <h4>Hedef</h4>
+  <p>Sosyal baskının performansı nasıl bozduğunu oynanışa çevirmek.</p>
+  <h4>Oynanış</h4>
+  <ul class="feature-list">
+    <li>Şut gücü için <strong>hold</strong></li>
+    <li>Yön ve zamanlama için <strong>tap</strong></li>
+    <li>Baskı yükseldikçe daralan başarı penceresinde karar verme</li>
+  </ul>
+  <p>Oyuncu sakin kaldığında başarı alanı daha okunaklıdır. Baskı arttıkça arayüz daralır, ses yoğunlaşır, çevresel bozulmalar artar. Bu bölümde hata, puan kaybından çok özgüven kaybı hissi üretir.</p>
+  <div class="img-block">
+    <img src="img_match.png" alt="The Match — Okul sahası">
+    <div class="img-caption">The Match — Seyircinin baskısı altında kritik an</div>
+  </div>
+
+  <h3>Bölüm 3 — The Stage</h3>
+  <h4>Hedef</h4>
+  <p>Sessizliği aktif bir oynanış deneyimine dönüştürmek.</p>
+  <h4>Oynanış</h4>
+  <ul class="feature-list">
+    <li>Nefes stabilitesi için <strong>hold</strong></li>
+    <li>Cümle çıkışı ve vurgu anları için <strong>timed tap</strong></li>
+    <li>Yanlış ritim tuttuğunda sahne baskısı artışı</li>
+  </ul>
+  <p>Hatalar arttıkça yazılar bozulur, ışık sertleşir, seyirci siluetleri daha baskın görünür. Oyuncu panik yaptıkça ritim kaçar; dolayısıyla bölüm refleks değil kompozisyon talep eder.</p>
+  <div class="img-block">
+    <img src="img_stage.png" alt="The Stage — Sahne">
+    <div class="img-caption">The Stage — Işık altında yalnız, seyircinin gözünde kaybolmak</div>
+  </div>
+
+  <h3>Bölüm 4 — The Unlit Door</h3>
+  <h4>Hedef</h4>
+  <p>Oyuncunun oyunlardan öğrendiği saldırı refleksini tersine çevirmek.</p>
+  <h4>Oynanış</h4>
+  <ul class="feature-list">
+    <li>Saldırı için <strong>tap</strong></li>
+    <li>Yeniden konum almak için <strong>swipe</strong></li>
+    <li>Silahı indirmek, durmak ve gerilimi düşürmek için <strong>hold</strong></li>
+  </ul>
+  <p>Oyuncunun her agresif hareketi yaratığın boyutunu, ses yoğunluğunu ve görsel baskısını artırır. İlk bakışta oyun, geleneksel bir boss savaşı başlatıyormuş gibi görünür. Bir noktadan sonra oyuncu çözümün saldırmak değil, <strong>saldırmayı bırakmak</strong> olduğunu fark eder. Bu fark ediş oyunun kavramsal zirvesidir.</p>
+
+  <div class="quote-block">
+    Bazı iç çatışmalar, onlara güç uygulandığında küçülmez; büyür.
+  </div>
+
+  <h3>Final ve Duygusal Çözülme</h3>
+  <p>Finalde oyuncu sessiz bir odaya uyanır. Tehdit yoktur. Sayaç yoktur. Son saldırı paterni yoktur. Bu alan, oyunun geri kalanına göre bilinçli olarak sakin, yavaş ve güvenlidir. Oyunun finali "büyük zafer" ile değil, <strong>"gerçeği anlama"</strong> ile kapanır.</p>
+
+  <h3>Tekrar Oynanabilirlik</h3>
+  <ul class="feature-list">
+    <li>Kısa bölüm yapısı nedeniyle yeniden oynama kolaydır</li>
+    <li>Her bölüm bağımsız olarak tekrar deneyimlenebilir</li>
+    <li>Bölüm sonlarında kısa performans özetleri veya atmosferik varyasyonlar eklenebilir</li>
+    <li>İsteğe bağlı erişilebilirlik seçenekleri (titreşim kapatma, basitleştirilmiş zamanlama vb.)</li>
+  </ul>
+</div>
+</section>
+
+<!-- 4. PAZAR -->
+<section class="section" id="pazar">
+<div class="container">
+  <div class="section-label" style="color: var(--accent-orange);">Bölüm 3</div>
+  <h2>Pazar Potansiyeli ve Hedef Kitle</h2>
+
+  <h3>3.1 Pazar Konumu</h3>
+  <p>The Unlit Door, yüksek tekrar döngüsüyle çalışan gündelik mobil oyunlarla aynı kulvarda yarışmak için tasarlanmamıştır. Bu proje; kısa ama yoğun, duygusal etkisi yüksek, güçlü bir görsel ve kavramsal kimliğe sahip <strong>premium anlatı odaklı mobil puzzle / macera oyunu</strong> olarak konumlanır.</p>
+
+  <h3>3.2 Hedef Kitle</h3>
+  <div class="card">
+    <h4 style="margin-top: 0;">Birincil Hedef Kitle</h4>
+    <ul class="feature-list">
+      <li>16–34 yaş arası oyuncular</li>
+      <li>Hikâye odaklı, atmosferi güçlü, kısa ama etkili deneyimleri seven mobil kullanıcılar</li>
+      <li>Ses tasarımı, sanat yönetimi ve duygusal anlatıya duyarlı oyuncular</li>
+      <li>Premium his veren mobil oyunları tercih eden kullanıcılar</li>
+    </ul>
+    <h4>İkincil Hedef Kitle</h4>
+    <ul class="feature-list">
+      <li>Monument Valley, Florence, GRIS, LIMBO gibi yapımları seven oyuncular</li>
+      <li>Steam/konsolda bağımsız anlatı oyunları oynayıp mobilde benzer kalite arayan kullanıcılar</li>
+    </ul>
+    <h4>Üçüncül Hedef Kitle</h4>
+    <ul class="feature-list">
+      <li>Bağımsız oyun yayıncıları, festival seçicileri ve küratörler</li>
+      <li>İçerik üreticileri ve oyun inceleme kanalları</li>
+      <li>Yaratıcı IP potansiyeli arayan yatırımcılar</li>
+    </ul>
+  </div>
+
+  <h3>3.3 Neden Mobilde Çalışır?</h3>
+  <ul class="feature-list">
+    <li>Kısa bölüm yapısı, mobil oyun tüketim alışkanlıklarına uygundur</li>
+    <li>Tap / hold / swipe temelli kontroller kolay öğrenilir</li>
+    <li>Ses, titreşim ve ekran bozulmaları mobil cihazda daha kişisel hissedilir</li>
+    <li>Düşük kontrol karmaşıklığı erişilebilirliği artırır</li>
+    <li>Yüksek kavramsal netlik, mağaza vitrini ve sunum için avantaj sağlar</li>
+  </ul>
+
+  <h3>3.4 Dağıtım ve Ticari Yaklaşım</h3>
+  <ol class="numbered-list">
+    <li>İlk bölüm / dikey dilim <strong>ücretsiz erişim</strong></li>
+    <li>Tam deneyim için <strong>tek seferlik açılım</strong></li>
+    <li>Festival ve sunum sürümü</li>
+    <li>İkinci aşama genişleme planı (PC / Switch / konsol)</li>
+  </ol>
+  <p>Reklam baskısı oyunun atmosferini ve duygusal akışını parçalar. Bu oyunun gücü tekrar bağımlılığı değil, <strong>bitince başkasına anlatılmak istenmesidir</strong>.</p>
+
+  <h3>3.5 Benzer Oyunlarla Karşılaştırma</h3>
+  <table class="comp-table">
+    <thead>
+      <tr>
+        <th>Oyun</th>
+        <th>Temel Güç</th>
+        <th>The Unlit Door İçin Alınan Ders</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Monument Valley</td><td>Güçlü görsel imza, premium mobil kimlik</td><td>Sade kontrol ile yüksek hatırlanırlık kurulabilir</td></tr>
+      <tr><td>Florence</td><td>Kısa sürede yoğun duygusal etki</td><td>Küçük etkileşimlere büyük duygusal anlam yüklenebilir</td></tr>
+      <tr><td>GRIS</td><td>Sanat yönü yüksek duygusal yolculuk</td><td>Duygu yalnızca tema değil, deneyim taşıyıcısı olabilir</td></tr>
+      <tr><td>The Room</td><td>Dokunsal kalite ve premium algı</td><td>Dokunma hissi kalite algısını yükseltir</td></tr>
+      <tr><td>LIMBO</td><td>Düşük karmaşıklıkla yüksek atmosfer</td><td>Basit kontrollerle yoğun tehdit duygusu kurulabilir</td></tr>
+      <tr><td>The Stanley Parable</td><td>Oyuncu beklentisini tersine çevirme</td><td>Mekanik karar, anlatısal anlama dönüştürülebilir</td></tr>
+    </tbody>
+  </table>
+
+  <h3>3.8 Sonuçlandırılmış Pazar Tezi</h3>
+  <div class="quote-block">
+    Bu proje, reklamla tüketilen geniş hacimli mobil oyunlardan biri değil; güçlü kimliği, yüksek anlatı değeri, premium hissi ve kavramsal özgünlüğü sayesinde hatırlanan, önerilen ve başka platformlara taşınabilecek bir bağımsız mobil anlatı oyunu olmalıdır.
+  </div>
+</div>
+</section>
+
+<!-- 5. YENİLİKÇİ YÖNLER -->
+<section class="section" id="yenilikci">
+<div class="container">
+  <div class="section-label" style="color: var(--accent-cyan);">Bölüm 4</div>
+  <h2>Yenilikçi ve Yaratıcı Yönler</h2>
+
+  <h3>4.1 Duygunun Dekor Değil Sistem Olması</h3>
+  <p>Birçok oyunda tema ile mekanik arasında mesafe vardır. The Unlit Door bu ayrımı azaltmayı hedefler. Burada duygular dekor değildir; <strong>sistemin kendisidir</strong>.</p>
+  <ul class="feature-list">
+    <li style="--dot-color: var(--accent-orange);">Korku → kovalamacaya dönüşür</li>
+    <li>Sosyal baskı → zamanlama çöküşüne dönüşür</li>
+    <li>Sessizlik → nefes ve ritim kaybına dönüşür</li>
+    <li>Birikmiş iç çatışma → yanlış yönlendiren bir savaş sistemine dönüşür</li>
+  </ul>
+
+  <h3>4.2 Son Bölümün Oyuncu İçgüdüsünü Tersine Çevirmesi</h3>
+  <p>Oyuncular oyunlardan şunu öğrenir: tehdit varsa saldır, güçlen, yen. The Unlit Door bu refleksi alır ve tersine çevirir. Oyuncuya silah verilir; ama o silah çözüm değildir. Bu ters köşe, projenin en güçlü ayrışma noktalarından biridir.</p>
+
+  <h3>4.3 Karanlık Dördüncü Kapı Metaforu</h3>
+  <p>İlk üç kapı tanımlanabilir anılardır; dördüncü kapı ise tek bir olaya değil, yıllar içinde oluşmuş iç ağırlığa açılır. Bu fikir görsel olarak çok basit, anlatısal olarak çok zengin, sunumlarda hızlı anlatılabilir ve oyunun imza metaforu olmaya uygundur.</p>
+
+  <h3>4.4 Dokunmanın Duygusal Araca Dönüşmesi</h3>
+  <p>Oyuncunun parmağı, karakterin duygusal dengesizliğini taşıyan bir araca dönüşür:</p>
+  <ul class="feature-list">
+    <li>Nefes almak için basılı tutmak</li>
+    <li>Panik altında hızlı dokunmak</li>
+    <li>Yön kaybında kaydırmak</li>
+    <li>Saldırmamak için elini geri çekmek</li>
+  </ul>
+
+  <h3>4.5 Zafer Yerine Kabullenme ile Biten Yapı</h3>
+  <p>Oyun, karanlığı tamamen yok ederek değil; onunla kurulan yanlış ilişkinin fark edilmesiyle biter. Bu tercih daha olgun, daha az klişe ve daha kalıcı bir final duygusu üretir.</p>
+
+  <h3>4.6 Benzerlerinden Ayrıldığı Noktalar</h3>
+  <ul class="feature-list">
+    <li>Duyguyu doğrudan oynanış sistemine dönüştürmesi</li>
+    <li>Dört bölümün her birinde farklı ama tematik olarak bağlı mekanikler kullanması</li>
+    <li>Finalde "savaş" beklentisini boşa çıkararak anlam üretmesi</li>
+    <li>Mobili sadece platform olarak değil, hissin taşıyıcısı olarak kullanması</li>
+    <li>Kısa süreli olmasına rağmen festival / yayıncı / vitrin açısından güçlü sunum potansiyeli</li>
+  </ul>
+</div>
+</section>
+
+<!-- 6. GELİŞTİRME PLANI -->
+<section class="section" id="gantt">
+<div class="container">
+  <div class="section-label" style="color: var(--accent-green);">Bölüm 5</div>
+  <h2>Geliştirme Planı ve Gantt Chart</h2>
+
+  <p>Bu plan 10 haftalık bir üretim sürecini dört ana faza ayırır. Her satır bir iş kalemini, her sütun ise haftayı temsil eder.</p>
+
+  <h3>5.2 Görev Sahipleri</h3>
+  <div class="pill-row">
+    <span class="pill">GD — Game / Narrative Design</span>
+    <span class="pill">TECH — Programming / Technical</span>
+    <span class="pill">ART — Visual / UI</span>
+    <span class="pill">AUDIO — Ses & Müzik</span>
+    <span class="pill">QA — Test & Dengeleme</span>
+    <span class="pill">LEAD — Proje Entegrasyonu</span>
+  </div>
+
+  <!-- FAZ 1 GANTT -->
+  <div class="gantt-wrapper">
+    <div style="min-width: 880px;">
+      <div style="margin-bottom: 1.5rem;">
+        <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #7B6FDE; font-weight: 500; margin-bottom: 4px;">Faz 1</div>
+        <div style="font-size: 18px; font-weight: 500; color: #E6EDF3; margin-bottom: 2px;">Ön hazırlık ve yön netleştirme</div>
+        <div style="font-size: 13px; color: #8B949E;">Hafta 1–2 &middot; Milestone: M1 — Kavramsal kilitlenme (Hafta 2 sonu)</div>
+      </div>
+      <div id="chart1"></div>
+      <div style="display: flex; gap: 16px; margin-top: 1.25rem; font-size: 12px; color: #8B949E;">
+        <span style="display: flex; align-items: center; gap: 4px;"><span style="width: 10px; height: 10px; border-radius: 2px; background: #7B6FDE;"></span>Aktif çalışma</span>
+        <span style="display: flex; align-items: center; gap: 4px;"><span style="width: 8px; height: 8px; border-radius: 50%; background: #7B6FDE;"></span>Teslimat</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAZ 2 GANTT -->
+  <div class="gantt-wrapper">
+    <div style="min-width: 880px;">
+      <div style="margin-bottom: 1.5rem;">
+        <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #2EA87A; font-weight: 500; margin-bottom: 4px;">Faz 2</div>
+        <div style="font-size: 18px; font-weight: 500; color: #E6EDF3; margin-bottom: 2px;">Çekirdek sistemler ve bölüm prototipleri</div>
+        <div style="font-size: 13px; color: #8B949E;">Hafta 3–6 &middot; Milestone: M2 — Mekanik çekirdek tamam (Hafta 6 sonu)</div>
+      </div>
+      <div id="chart2"></div>
+      <div style="display: flex; gap: 16px; margin-top: 1.25rem; font-size: 12px; color: #8B949E;">
+        <span style="display: flex; align-items: center; gap: 4px;"><span style="width: 10px; height: 10px; border-radius: 2px; background: #2EA87A;"></span>Aktif çalışma</span>
+        <span style="display: flex; align-items: center; gap: 4px;"><span style="width: 8px; height: 8px; border-radius: 50%; background: #2EA87A;"></span>Teslimat</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAZ 3 GANTT -->
+  <div class="gantt-wrapper">
+    <div style="min-width: 880px;">
+      <div style="margin-bottom: 1.5rem;">
+        <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #3B8DD6; font-weight: 500; margin-bottom: 4px;">Faz 3</div>
+        <div style="font-size: 18px; font-weight: 500; color: #E6EDF3; margin-bottom: 2px;">Dikey dilim entegrasyonu ve polish</div>
+        <div style="font-size: 13px; color: #8B949E;">Hafta 7–8 &middot; Milestone: M3 — Vertical slice build (Hafta 8 sonu)</div>
+      </div>
+      <div id="chart3"></div>
+      <div style="display: flex; gap: 16px; margin-top: 1.25rem; font-size: 12px; color: #8B949E;">
+        <span style="display: flex; align-items: center; gap: 4px;"><span style="width: 10px; height: 10px; border-radius: 2px; background: #3B8DD6;"></span>Aktif çalışma</span>
+        <span style="display: flex; align-items: center; gap: 4px;"><span style="width: 8px; height: 8px; border-radius: 50%; background: #3B8DD6;"></span>Teslimat</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAZ 4 GANTT -->
+  <div class="gantt-wrapper">
+    <div style="min-width: 880px;">
+      <div style="margin-bottom: 1.5rem;">
+        <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #E8764A; font-weight: 500; margin-bottom: 4px;">Faz 4</div>
+        <div style="font-size: 18px; font-weight: 500; color: #E6EDF3; margin-bottom: 2px;">Test, sunum paketi ve final hazırlık</div>
+        <div style="font-size: 13px; color: #8B949E;">Hafta 9–10 &middot; Milestone: M4 — Pitch-ready paket (Hafta 10 sonu)</div>
+      </div>
+      <div id="chart4"></div>
+      <div style="display: flex; gap: 16px; margin-top: 1.25rem; font-size: 12px; color: #8B949E;">
+        <span style="display: flex; align-items: center; gap: 4px;"><span style="width: 10px; height: 10px; border-radius: 2px; background: #E8764A;"></span>Aktif çalışma</span>
+        <span style="display: flex; align-items: center; gap: 4px;"><span style="width: 8px; height: 8px; border-radius: 50%; background: #E8764A;"></span>Teslimat</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Haftalık Odak Tablosu -->
+  <h3>5.4 Haftalık Odak ve Beklenen Çıktılar</h3>
+  <table class="weekly-table">
+    <thead><tr><th>Hafta</th><th>Ana Odak</th><th>Beklenen Çıktı</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Konsept ve tez netleştirme</td><td>Nihai pitch yönü, hikâye omurgası başlangıcı</td></tr>
+      <tr><td>2</td><td>Input, moodboard, teknik iskelet</td><td>Interaction prototype, moodboard, scene flow</td></tr>
+      <tr><td>3</td><td>Hub + Bölüm 1 başlangıcı</td><td>Hafıza merkezi graybox, chase temel akışı</td></tr>
+      <tr><td>4</td><td>Bölüm 1 tamamlama + Bölüm 2 başlangıcı</td><td>Chase prototipi, Match baskı sistemi ilk sürüm</td></tr>
+      <tr><td>5</td><td>Bölüm 2 tamamlama + Bölüm 3 başlangıcı</td><td>Match sequence, Stage nefes/ritim prototipi</td></tr>
+      <tr><td>6</td><td>Bölüm 3 ve Bölüm 4 proof-of-concept</td><td>Stage-pressure prototipi, final sistem temeli</td></tr>
+      <tr><td>7</td><td>Entegrasyon ve polish başlangıcı</td><td>UI/UX paketi, ses geçişleri, atmosfer katmanları</td></tr>
+      <tr><td>8</td><td>İlk entegre build</td><td>Vertical slice demo, ilk test turu</td></tr>
+      <tr><td>9</td><td>Test, dengeleme ve final netliği</td><td>Optimize edilmiş demo, test raporu</td></tr>
+      <tr><td>10</td><td>Sunum ve teslim hazırlığı</td><td>Final paket, video capture, sunum materyalleri</td></tr>
+    </tbody>
+  </table>
+
+  <!-- Milestone -->
+  <h3>5.5 Milestone Yapısı</h3>
+  <ul class="milestone-list">
+    <li>
+      <div class="ml-tag">M1 — Hafta 2 sonu</div>
+      <div class="ml-title">Kavramsal Kilitlenme</div>
+      <div class="ml-desc">Konsept, hikâye akışı ve input dili onaylanmış olmalı.</div>
+    </li>
+    <li>
+      <div class="ml-tag">M2 — Hafta 6 sonu</div>
+      <div class="ml-title">Mekanik Çekirdek Tamam</div>
+      <div class="ml-desc">Dört bölümün de oynanabilir prototip mantığı kurulmuş olmalı.</div>
+    </li>
+    <li>
+      <div class="ml-tag">M3 — Hafta 8 sonu</div>
+      <div class="ml-title">Vertical Slice Build</div>
+      <div class="ml-desc">Hafıza merkezi + en az üç güçlü bölüm akışı entegre çalışmalı.</div>
+    </li>
+    <li>
+      <div class="ml-tag">M4 — Hafta 10 sonu</div>
+      <div class="ml-title">Pitch Ready Paket</div>
+      <div class="ml-desc">Demo, dokümantasyon, video ve sunum paketi tamamlanmış olmalı.</div>
+    </li>
+  </ul>
+
+  <!-- Paralel İş Akışları -->
+  <h3>5.6 Paralel Yürütülecek İş Akışları</h3>
+  <div class="chapter-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+    <div class="card">
+      <h4 style="margin-top: 0; color: var(--accent-purple);">Tasarım</h4>
+      <ul class="feature-list">
+        <li>Anlatı yapısı</li>
+        <li>Bölüm temposu</li>
+        <li>Mobil UX</li>
+        <li>Mekanik okunabilirliği</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4 style="margin-top: 0; color: var(--accent-green);">Teknik</h4>
+      <ul class="feature-list">
+        <li>Giriş sistemi</li>
+        <li>Sahne akışı</li>
+        <li>Checkpoint sistemi</li>
+        <li>Performans optimizasyonu</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4 style="margin-top: 0; color: var(--accent-blue);">Sanat</h4>
+      <ul class="feature-list">
+        <li>Konsept çizimleri</li>
+        <li>Çevre atmosferi</li>
+        <li>Arayüz dili</li>
+        <li>Marka materyalleri</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4 style="margin-top: 0; color: var(--accent-orange);">Ses</h4>
+      <ul class="feature-list">
+        <li>Baskı katmanları</li>
+        <li>Bölüm bazlı ses kimliği</li>
+        <li>Final rahatlama tonu</li>
+        <li>Etkileşim geri bildirimi</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Riskler -->
+  <h3>5.7 Riskler ve Çözüm Yaklaşımı</h3>
+  <div class="risk-grid">
+    <div class="risk-card">
+      <div class="risk-label">Risk 1</div>
+      <div class="risk-title">Duygusal konseptin fazla soyut kalması</div>
+      <div class="risk-solution">Her bölüm için tek cümlelik net tasarım hedefi belirlenir ve tüm testlerde bu hedefe göre geri bildirim toplanır.</div>
+    </div>
+    <div class="risk-card">
+      <div class="risk-label">Risk 2</div>
+      <div class="risk-title">Mekanik çeşitlilik nedeniyle üretim dağılması</div>
+      <div class="risk-solution">Her bölüm "tek güçlü fikir" mantığıyla sınırlandırılır; gereksiz yan sistemler eklenmez.</div>
+    </div>
+    <div class="risk-card">
+      <div class="risk-label">Risk 3</div>
+      <div class="risk-title">Mobilde atmosferin yeterince güçlü hissedilememesi</div>
+      <div class="risk-solution">Ses, titreşim, UI bozulmaları ve kontrastlı görsel işaretler erken aşamada prototipe dahil edilir.</div>
+    </div>
+    <div class="risk-card">
+      <div class="risk-label">Risk 4</div>
+      <div class="risk-title">Final fikrinin oyuncu tarafından yanlış anlaşılması</div>
+      <div class="risk-solution">Final bölümünde saldırının sorunu büyüttüğünü aşamalı ve okunabilir biçimde gösteren açık geri bildirimler kullanılır.</div>
+    </div>
+  </div>
+
+  <!-- Başarı Kriterleri -->
+  <h3>5.8 Başarı Kriterleri</h3>
+  <ul class="feature-list">
+    <li>Oyun mobil için bilinçli tasarlanmış hissettirmeli</li>
+    <li>Her bölüm mekanik olarak farklı ama tematik olarak bağlantılı olmalı</li>
+    <li>Final bölümünün anlamı, açıklama metnine ihtiyaç duymadan anlaşılmalı</li>
+    <li>Dikey dilim ilk birkaç dakikada merak uyandırmalı</li>
+    <li>Sunum paketi, projenin değerini hızlı biçimde anlatabilmeli</li>
+  </ul>
+</div>
+</section>
+
+<!-- 7. MATERYALLER -->
+<section class="section" id="materyaller">
+<div class="container">
+  <div class="section-label" style="color: var(--accent-purple);">Bölüm 6</div>
+  <h2>Hazırlanacak Taslak / Prototip Materyaller</h2>
+
+  <h3>6.1 Görsel Geliştirme Materyalleri</h3>
+  <ul class="feature-list">
+    <li>Hafıza merkezi konsept görseli</li>
+    <li>Dört kapının görsel hiyerarşisi</li>
+    <li>Bölüm 1 için kaçış koridoru ve tehdit eskizleri</li>
+    <li>Bölüm 2 için okul sahası, kalabalık baskısı ve UI bozulma örnekleri</li>
+    <li>Bölüm 3 için sahne ışığı, seyirci siluetleri ve yazı bozulma örnekleri</li>
+    <li>Bölüm 4 için sisli yaratık, koridor varyasyonları ve saldırı sonrası büyüme aşamaları</li>
+    <li>Sessiz oda final konsepti</li>
+  </ul>
+
+  <h3>6.2 Prototip Materyalleri</h3>
+  <ul class="feature-list">
+    <li>Bölüm 1 için swipe / tap kovalamaca testi</li>
+    <li>Bölüm 2 için şut zamanlama ve baskı daralması testi</li>
+    <li>Bölüm 3 için nefes / ritim arayüz denemesi</li>
+    <li>Bölüm 4 için saldırdıkça büyüyen düşman test sahnesi</li>
+  </ul>
+
+  <h3>6.3 Marka ve Sunum Materyalleri</h3>
+  <ul class="feature-list">
+    <li>The Unlit Door logo eskizleri</li>
+    <li>CRT / kırık sinyal estetiğini taşıyan arayüz dili</li>
+    <li>Mobil store capsule taslakları</li>
+    <li>Pitch deck ana görseli</li>
+    <li>Dikey dilim tanıtım videosu için kapak kareleri</li>
+  </ul>
+
+  <h3>6.4 Önceliklendirme</h3>
+  <div class="card card-accent">
+    <p style="margin-bottom: 0.5rem;"><strong>Zaman kısıtlıysa ilk etapta şu dört materyal mutlaka hazırlanmalıdır:</strong></p>
+    <ol class="numbered-list">
+      <li>Karanlık dördüncü kapı</li>
+      <li>Kovalamaca sahnesi</li>
+      <li>Sahne baskısı mekaniği</li>
+      <li>Saldırıldıkça büyüyen tehdit</li>
+    </ol>
+    <p style="margin: 0;">Bu dört unsur, oyunun görsel ve kavramsal imzasını en hızlı anlatan öğelerdir.</p>
+  </div>
+</div>
+</section>
+
+<!-- 8. SUNUM NOTLARI -->
+<section class="section" id="sunum">
+<div class="container">
+  <div class="section-label" style="color: var(--accent-orange);">Bölüm 7</div>
+  <h2>Sunum ve Doküman Kullanım Notları</h2>
+
+  <p>Bu metin yalnızca konsepti açıklamak için değil; jüri, danışman, yayıncı veya yatırımcı karşısında savunulabilir bir yapı oluşturmak için düzenlenmiştir.</p>
+
+  <div class="card card-accent">
+    <ul class="feature-list">
+      <li>Bu oyun "üzücü bir hikâye" değil, <strong>duygunun oynanışa dönüştüğü bir sistem önerisidir</strong></li>
+      <li>En büyük fark, final bölümündeki beklenti kırılmasıdır</li>
+      <li>Stanley Parable referansı, metanın kendisini değil; oyuncu refleksini sorgulama cesaretini temsil eder</li>
+      <li>Mobil tercih, zayıf bir teknik mecburiyet değil; <strong>duyguyu elde hissettiren bilinçli bir tasarım kararıdır</strong></li>
+    </ul>
+  </div>
+
+  <h3>Canlı Sunumda Önerilen Anlatım Sırası</h3>
+  <ol class="numbered-list">
+    <li>Karanlık dördüncü kapı fikri</li>
+    <li>Dört bölümün tek cümlelik oynanış özeti</li>
+    <li>Finalde saldırının sorunu büyütmesi</li>
+    <li>Referans oyunlarla ayrışma</li>
+    <li>Gantt planı ve dikey dilim üretim yolu</li>
+  </ol>
+</div>
+</section>
+
+<!-- 9. SONUÇ -->
+<section class="section">
+<div class="container">
+  <div class="section-label" style="color: var(--text-tertiary);">Bölüm 8</div>
+  <h2>Sonuç</h2>
+
+  <p class="lead">The Unlit Door, mobil öncelikli, kısa süreli ama yüksek etkili bir psikolojik anlatı oyunudur. Projenin en büyük gücü, konu ile sistem arasında güçlü bir birlik kurmasıdır.</p>
+
+  <div style="margin: 2rem 0; padding: 2rem; background: var(--bg-secondary); border-radius: 12px; border: 1px solid var(--border); text-align: center;">
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem; margin-bottom: 1.5rem;">
+      <div style="font-size: 1rem; color: var(--accent-orange);">Korku oynanır.</div>
+      <div style="font-size: 1rem; color: var(--accent-green);">Utanç oynanır.</div>
+      <div style="font-size: 1rem; color: var(--accent-purple);">Sessizlik oynanır.</div>
+    </div>
+    <p style="color: var(--text-secondary); max-width: 600px; margin: 0 auto; font-size: 0.95rem;">Son bölümde ise oyuncu, bazı iç yüklerin neden güç kullanıldığında daha da büyüdüğünü <strong>oynayarak</strong> anlar.</p>
+  </div>
+
+  <p>Bu yönüyle proje yalnızca karanlık ve sanatsal bir mobil oyun önerisi değil; net bir metafora, güçlü bir sunum cümlesine, bölümlere ayrılmış üretim planına ve akılda kalıcı bir yaratıcı merkeze sahip bir oyun önerisidir.</p>
+
+  <p>Doğru görsel destek, güçlü bir dikey dilim ve temiz bir sunumla <strong>The Unlit Door</strong>; mobil anlatı oyunları içinde özgün kimliği yüksek, festival ve yayıncı sunumlarında dikkat çekebilecek, yaratıcı değeri güçlü bir proje olarak konumlanabilir.</p>
+</div>
+</section>
+
+<!-- FOOTER -->
+<div class="footer">
+  The Unlit Door &mdash; Revize Oyun Öneri Dokümanı &mdash; 2026
+</div>
+
+<!-- GANTT CHART SCRIPTS -->
+<script>
+function buildGantt(containerId, tasks, accentColor, lightColor, phaseRange, totalWeeks) {
+  const container = document.getElementById(containerId);
+  const cols = '36px 1fr 90px 150px minmax(0, 500px)';
+
+  const headerRow = document.createElement('div');
+  headerRow.style.cssText = `display: grid; grid-template-columns: ${cols}; gap: 0; align-items: end; margin-bottom: 6px; padding-bottom: 6px; border-bottom: 0.5px solid #30363D;`;
+  ['WBS', 'Görev', 'Sorumlu', 'Beklenen Çıktı', ''].forEach((h, i) => {
+    const d = document.createElement('div');
+    d.style.cssText = 'font-size: 11px; color: #484F58; text-transform: uppercase; letter-spacing: 0.5px;' + (i === 0 ? 'padding-left: 2px;' : '') + (i === 2 ? 'text-align: center;' : '') + (i === 3 ? 'padding-left: 6px;' : '');
+    if (i === 4) {
+      d.style.display = 'grid';
+      d.style.gridTemplateColumns = `repeat(${totalWeeks}, 1fr)`;
+      for (let w = 1; w <= totalWeeks; w++) {
+        const ws = document.createElement('div');
+        ws.style.cssText = 'text-align: center; font-size: 11px; color: #484F58;';
+        ws.textContent = w;
+        d.appendChild(ws);
+      }
+    } else {
+      d.textContent = h;
+    }
+    headerRow.appendChild(d);
+  });
+  container.appendChild(headerRow);
+
+  tasks.forEach(t => {
+    const row = document.createElement('div');
+    row.style.cssText = `display: grid; grid-template-columns: ${cols}; gap: 0; align-items: center; padding: 5px 0;`;
+
+    const wbs = document.createElement('div');
+    wbs.style.cssText = 'font-size: 12px; color: #8B949E; font-weight: 500; padding-left: 2px;';
+    wbs.textContent = t.wbs;
+
+    const lbl = document.createElement('div');
+    lbl.style.cssText = 'font-size: 13px; color: #E6EDF3; line-height: 1.3; padding-right: 8px;';
+    lbl.textContent = t.label;
+
+    const own = document.createElement('div');
+    own.style.cssText = 'font-size: 11px; color: #8B949E; text-align: center;';
+    own.textContent = t.owner;
+
+    const out = document.createElement('div');
+    out.style.cssText = `font-size: 11px; color: ${lightColor}; padding-left: 6px; line-height: 1.3;`;
+    out.textContent = t.output;
+
+    const grid = document.createElement('div');
+    grid.style.cssText = `position: relative; height: 30px; display: grid; grid-template-columns: repeat(${totalWeeks}, 1fr);`;
+
+    for (let i = 0; i < totalWeeks; i++) {
+      const cell = document.createElement('div');
+      const inRange = i >= phaseRange[0] && i <= phaseRange[1];
+      cell.style.cssText = 'border-left: 0.5px solid #30363D; height: 100%;' + (!inRange ? 'opacity: 0.3;' : '');
+      if (i === totalWeeks - 1) cell.style.borderRight = '0.5px solid #30363D';
+      grid.appendChild(cell);
+    }
+
+    const bar = document.createElement('div');
+    const l = (t.start / totalWeeks * 100);
+    const w = (t.span / totalWeeks * 100);
+    bar.style.cssText = `position: absolute; left: ${l}%; width: ${w}%; top: 4px; height: 22px; background: ${accentColor}22; border: 1px solid ${accentColor}; border-radius: 4px; z-index: 1;`;
+
+    const dot = document.createElement('div');
+    const dotPos = ((t.start + t.span) / totalWeeks * 100);
+    dot.style.cssText = `position: absolute; left: calc(${dotPos}% - 4px); top: 11px; width: 8px; height: 8px; border-radius: 50%; background: ${accentColor}; z-index: 2;`;
+
+    grid.appendChild(bar);
+    grid.appendChild(dot);
+
+    row.appendChild(wbs);
+    row.appendChild(lbl);
+    row.appendChild(own);
+    row.appendChild(out);
+    row.appendChild(grid);
+    container.appendChild(row);
+  });
+}
+
+// Faz 1
+buildGantt('chart1', [
+  { wbs: "1.1", label: "Konsept hizalama ve tez netleştirme", owner: "LEAD + GD", start: 0, span: 1, output: "Nihai pitch yönü" },
+  { wbs: "1.2", label: "Hikâye omurgası ve bölüm akışı", owner: "GD", start: 0, span: 2, output: "Anlatı iskeleti" },
+  { wbs: "1.3", label: "Referans analizi ve moodboard", owner: "ART + GD", start: 0, span: 2, output: "Görsel yön dokümanı" },
+  { wbs: "1.4", label: "Mobil input prensipleri prototipi", owner: "TECH", start: 1, span: 1, output: "Tap/hold/swipe test sahnesi" },
+  { wbs: "1.5", label: "Hub akışı ve teknik mimari planı", owner: "TECH + GD", start: 1, span: 1, output: "Interaction map + scene flow" },
+], '#7B6FDE', '#A99EF0', [0, 1], 10);
+
+// Faz 2
+buildGantt('chart2', [
+  { wbs: "2.1", label: "Hub graybox ve kapı sistemi", owner: "TECH + ART", start: 2, span: 2, output: "Hafıza merkezi" },
+  { wbs: "2.2", label: "Bölüm 1: The Chase graybox", owner: "TECH", start: 2, span: 2, output: "Chase prototipi" },
+  { wbs: "2.3", label: "Bölüm 1 ses ve baskı katmanları", owner: "AUDIO", start: 3, span: 2, output: "Chase feedback seti" },
+  { wbs: "2.4", label: "Bölüm 2: The Match prototipi", owner: "TECH + GD", start: 3, span: 2, output: "Zamanlama ve baskı" },
+  { wbs: "2.5", label: "Bölüm 2 UI bozulma mantığı", owner: "ART + TECH", start: 4, span: 2, output: "Dinamik başarı UI" },
+  { wbs: "2.6", label: "Bölüm 3: The Stage prototipi", owner: "TECH + GD", start: 4, span: 2, output: "Nefes/ritim oynanışı" },
+  { wbs: "2.7", label: "Bölüm 3 ses ve ritim baskısı", owner: "AUDIO", start: 4, span: 2, output: "Stage ses sistemi" },
+  { wbs: "2.8", label: "Bölüm 4: Final proof-of-concept", owner: "TECH + GD", start: 5, span: 2, output: "Büyüyen tehdit" },
+  { wbs: "2.9", label: "Checkpoint, retry ve state yönetimi", owner: "TECH", start: 3, span: 3, output: "Bölümler arası sistem" },
+], '#2EA87A', '#56D4A0', [2, 6], 10);
+
+// Faz 3
+buildGantt('chart3', [
+  { wbs: "3.1", label: "Bölümler arası geçişler ve pacing", owner: "GD + TECH", start: 6, span: 2, output: "Akışın bağlanması" },
+  { wbs: "3.2", label: "UI/UX paketi ve okunabilirlik", owner: "ART", start: 6, span: 2, output: "Mobil arayüz paketi" },
+  { wbs: "3.3", label: "VFX, ekran bozulmaları, titreşim", owner: "ART + TECH", start: 6, span: 2, output: "Atmosfer feedback" },
+  { wbs: "3.4", label: "Ses geçişleri ve final rahatlama tonu", owner: "AUDIO", start: 6, span: 2, output: "Tam ses akışı" },
+  { wbs: "3.5", label: "İlk entegre vertical slice build", owner: "LEAD", start: 7, span: 1, output: "Oynanabilir demo" },
+  { wbs: "3.6", label: "Görsel cilalama ve temel branding", owner: "ART", start: 6, span: 2, output: "Logo, başlık, ekran dili" },
+], '#3B8DD6', '#6DB3E8', [6, 7], 10);
+
+// Faz 4
+buildGantt('chart4', [
+  { wbs: "4.1", label: "İç oyun testleri ve gözlem notları", owner: "QA + LEAD", start: 8, span: 1, output: "Test raporu" },
+  { wbs: "4.2", label: "Dengeleme ve optimizasyon", owner: "TECH + QA", start: 8, span: 2, output: "İyileştirilmiş demo" },
+  { wbs: "4.3", label: "Anlatı netliği ve final okunabilirliği testi", owner: "GD + QA", start: 8, span: 2, output: "Final düzenlemeleri" },
+  { wbs: "4.4", label: "Sunum dokümanı, video capture, görsel paket", owner: "LEAD + ART", start: 8, span: 2, output: "Pitch-ready paket" },
+  { wbs: "4.5", label: "Demo paketleme ve teslim", owner: "LEAD", start: 9, span: 1, output: "Sunuma hazır proje" },
+], '#E8764A', '#F0A07A', [8, 9], 10);
+</script>
+
+</body>
+</html>
