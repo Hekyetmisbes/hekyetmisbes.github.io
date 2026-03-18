@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Top Game Genres by In-App Purchase Revenue — Q2 2025</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg-primary: #0D1117;
+    --bg-secondary: #161B22;
+    --bg-card: #1C2129;
+    --border: #30363D;
+    --text-primary: #E6EDF3;
+    --text-secondary: #8B949E;
+    --accent-teal: #2DD4A8;
+    --accent-orange: #F97066;
+  }
+
+  body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.6;
+    padding: 2rem;
+    min-height: 100vh;
+  }
+
+  .page-title {
+    text-align: center;
+    margin-bottom: 0.25rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  .page-subtitle {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+  }
+
+  .chart-container {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem;
+  }
+
+  .chart-section h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+
+  .donut-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .donut-wrapper canvas {
+    max-width: 380px;
+    max-height: 380px;
+  }
+
+  .region-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.35rem 1rem;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+  }
+
+  .bar-section {
+    position: relative;
+  }
+
+  .bar-canvas-wrap {
+    position: relative;
+    height: 420px;
+  }
+
+  .legend-row {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+  }
+
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+
+  /* Growth column */
+  .growth-overlay {
+    position: absolute;
+    top: 47px;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .growth-item {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    height: 33.6px;
+    justify-content: flex-end;
+    padding-right: 4px;
+  }
+
+  .growth-item.up { color: var(--accent-teal); }
+  .growth-item.down { color: var(--accent-orange); }
+
+  .arrow-up::before { content: '▲'; font-size: 0.65rem; }
+  .arrow-down::before { content: '▼'; font-size: 0.65rem; }
+
+  .source-note {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 0.72rem;
+    margin-top: 1.5rem;
+    opacity: 0.6;
+  }
+
+  @media (max-width: 860px) {
+    .chart-container {
+      grid-template-columns: 1fr;
+    }
+    body { padding: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<h1 class="page-title">Top Game Genres by In-App Purchase Revenue in Q2 2025</h1>
+<p class="page-subtitle">iOS and Google Play</p>
+
+<div class="chart-container">
+  <!-- Left: Donut Chart -->
+  <div class="chart-section donut-wrapper">
+    <h3>Share by Game Genre / Subgenre</h3>
+    <div class="region-badge">&#9664; &nbsp; Worldwide &nbsp; &#9654;</div>
+    <canvas id="donutChart"></canvas>
+  </div>
+
+  <!-- Right: Bar Chart -->
+  <div class="chart-section bar-section">
+    <h3>Top Game Genres</h3>
+    <div class="legend-row">
+      <div class="legend-item"><span class="legend-dot" style="background:#4B5568"></span> Q2 2024</div>
+      <div class="legend-item"><span class="legend-dot" style="background:#2DD4A8"></span> Q2 2025</div>
+    </div>
+    <div class="bar-canvas-wrap">
+      <canvas id="barChart"></canvas>
+      <div class="growth-overlay" id="growthOverlay"></div>
+    </div>
+  </div>
+</div>
+
+<p class="source-note">Source: Sensor Tower Q2 2025 Digital Market Index / Appfigures 2025 Mobile Games Trends Report</p>
+
+<script>
+Chart.register(ChartDataLabels);
+
+// ── Color palette ──
+const DARK_BG = '#161B22';
+const GRID_COLOR = '#30363D';
+const LABEL_COLOR = '#8B949E';
+const TEAL = '#2DD4A8';
+const BAR_OLD = '#4B5568';
+
+// ── Bar Chart Data (Source: Sensor Tower Q2 2025 Digital Market Index) ──
+const genres = ['Strategy','RPG','Puzzle','Casino','Simulation','Shooter','Action','Sports','Lifestyle','Tabletop'];
+const q2_2025 = [4.75, 3.62, 3.48, 2.50, 1.60, 1.80, 1.20, 1.05, 0.95, 0.85];
+const yoyPct  = [23, -12, 13, -7, -15, 12, -33, -2, 13, 13];
+
+// Compute Q2 2024 from Q2 2025 and YoY
+const q2_2024 = q2_2025.map((v, i) => +(v / (1 + yoyPct[i]/100)).toFixed(2));
+
+// Render growth overlay
+const overlay = document.getElementById('growthOverlay');
+yoyPct.forEach(p => {
+  const up = p >= 0;
+  const div = document.createElement('div');
+  div.className = `growth-item ${up ? 'up' : 'down'}`;
+  div.innerHTML = `<span class="${up ? 'arrow-up' : 'arrow-down'}"></span>${Math.abs(p)}%`;
+  overlay.appendChild(div);
+});
+
+new Chart(document.getElementById('barChart'), {
+  type: 'bar',
+  data: {
+    labels: genres,
+    datasets: [
+      {
+        label: 'Q2 2024',
+        data: q2_2024,
+        backgroundColor: BAR_OLD,
+        borderRadius: 3,
+        barPercentage: 0.55,
+        categoryPercentage: 0.8,
+      },
+      {
+        label: 'Q2 2025',
+        data: q2_2025,
+        backgroundColor: TEAL,
+        borderRadius: 3,
+        barPercentage: 0.55,
+        categoryPercentage: 0.8,
+      }
+    ]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      datalabels: { display: false },
+      legend: { display: false },
+      tooltip: {
+        backgroundColor: '#1C2129',
+        titleColor: '#E6EDF3',
+        bodyColor: '#8B949E',
+        borderColor: '#30363D',
+        borderWidth: 1,
+        callbacks: {
+          label: ctx => `${ctx.dataset.label}: $${ctx.raw.toFixed(1)}B`
+        }
+      }
+    },
+    scales: {
+      x: {
+        grid: { color: GRID_COLOR, drawBorder: false },
+        ticks: {
+          color: LABEL_COLOR,
+          font: { size: 11 },
+          callback: v => v === 0 ? '0' : `$${v}B`
+        },
+        max: 5.5,
+        border: { display: false }
+      },
+      y: {
+        grid: { display: false },
+        ticks: { color: '#E6EDF3', font: { size: 12, weight: 500 } },
+        border: { display: false }
+      }
+    }
+  }
+});
+
+// ── Donut Chart Data (revenue-based share, Source: Sensor Tower / Appfigures) ──
+// Inner ring: main genres (% of total IAP revenue ~$19.8B)
+const mainGenres = [
+  { label: 'Strategy',   value: 24.0, color: '#7B6FDE' },
+  { label: 'RPG',        value: 18.3, color: '#4ECDC4' },
+  { label: 'Puzzle',     value: 17.6, color: '#F7B267' },
+  { label: 'Casino',     value: 12.6, color: '#FF6B8A' },
+  { label: 'Shooter',    value: 9.1,  color: '#DDA0DD' },
+  { label: 'Simulation', value: 8.1,  color: '#45B7D1' },
+  { label: 'Action',     value: 6.1,  color: '#96E6A1' },
+  { label: 'Sports',     value: 5.3,  color: '#F0E68C' },
+  { label: 'Lifestyle',  value: 4.8,  color: '#87CEEB' },
+  { label: 'Tabletop',   value: 4.3,  color: '#FFA07A' },
+];
+
+// Outer ring: subgenres (proportional breakdown within each genre)
+const subGenres = [
+  // Strategy (24.0%) — Battlers 46%, 4X 35%, RealTime 19%
+  { label: 'MOBA',          value: 11.0, color: '#9B8FEE' },
+  { label: '4X Strategy',   value: 8.4,  color: '#8A7EDE' },
+  { label: 'RealTime',      value: 4.6,  color: '#6B5FCE' },
+  // RPG (18.3%) — MMORPG 22%, Action RPG 21%, Idle RPG 15%, Other 42%
+  { label: 'MMORPG',        value: 4.0,  color: '#5EDDD4' },
+  { label: 'Action RPG',    value: 3.8,  color: '#3EBDB4' },
+  { label: 'Idle RPG',      value: 2.7,  color: '#2E9D94' },
+  { label: 'Squad RPG',     value: 7.8,  color: '#1E8D84' },
+  // Puzzle (17.6%) — Match 38%, Board 13%, Other 49%
+  { label: 'Match 3',       value: 6.7,  color: '#F7C277' },
+  { label: 'Board Games',   value: 2.3,  color: '#E8A347' },
+  { label: 'Other Puzzle',  value: 8.6,  color: '#D99437' },
+  // Casino (12.6%)
+  { label: 'Slots',         value: 6.3,  color: '#FF7B9A' },
+  { label: 'Coin & Loot',   value: 3.8,  color: '#FF5B7A' },
+  { label: 'Landlord',      value: 2.5,  color: '#E04B6A' },
+  // Shooter (9.1%)
+  { label: 'FPS/TPS',       value: 5.5,  color: '#EDB0ED' },
+  { label: 'Other Shooter', value: 3.6,  color: '#CDA0CD' },
+  // Simulation (8.1%)
+  { label: 'Simulation',    value: 4.9,  color: '#55C7E1' },
+  { label: 'Realistic Sim', value: 3.2,  color: '#35A7C1' },
+  // Action (6.1%)
+  { label: 'Action',        value: 3.7,  color: '#A6F6B1' },
+  { label: 'io Games',      value: 2.4,  color: '#76D681' },
+  // Sports (5.3%)
+  { label: 'Sports',        value: 5.3,  color: '#F0E68C' },
+  // Lifestyle (4.8%)
+  { label: 'Lifestyle',     value: 4.8,  color: '#87CEEB' },
+  // Tabletop (4.3%)
+  { label: 'Tabletop',      value: 4.3,  color: '#FFA07A' },
+];
+
+new Chart(document.getElementById('donutChart'), {
+  type: 'doughnut',
+  data: {
+    labels: [...mainGenres.map(g => g.label), ...subGenres.map(g => g.label)],
+    datasets: [
+      {
+        // Outer ring — subgenres
+        data: subGenres.map(g => g.value),
+        backgroundColor: subGenres.map(g => g.color),
+        borderColor: DARK_BG,
+        borderWidth: 2,
+        weight: 1,
+        datalabels: {
+          display: ctx => subGenres[ctx.dataIndex].value >= 4,
+          formatter: (_, ctx) => subGenres[ctx.dataIndex].label,
+          color: '#0D1117',
+          font: { size: 9, weight: 600 },
+          anchor: 'center',
+          align: 'center',
+          textAlign: 'center',
+        }
+      },
+      {
+        // Inner ring — main genres
+        data: mainGenres.map(g => g.value),
+        backgroundColor: mainGenres.map(g => g.color),
+        borderColor: DARK_BG,
+        borderWidth: 2,
+        weight: 1,
+        datalabels: {
+          display: ctx => mainGenres[ctx.dataIndex].value >= 5,
+          formatter: (_, ctx) => mainGenres[ctx.dataIndex].label,
+          color: '#0D1117',
+          font: { size: 10, weight: 700 },
+          anchor: 'center',
+          align: 'center',
+          textAlign: 'center',
+        }
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    cutout: '30%',
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        backgroundColor: '#1C2129',
+        titleColor: '#E6EDF3',
+        bodyColor: '#8B949E',
+        borderColor: '#30363D',
+        borderWidth: 1,
+        callbacks: {
+          label: ctx => {
+            const dsIndex = ctx.datasetIndex;
+            const labels = dsIndex === 0
+              ? subGenres.map(g => g.label)
+              : mainGenres.map(g => g.label);
+            return ` ${labels[ctx.dataIndex]}: ${ctx.raw}%`;
+          }
+        }
+      }
+    }
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,1929 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Final Loop — Written Pitch Dokümani</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg-primary: #060B14;
+    --bg-secondary: #0C1220;
+    --bg-card: #111A2E;
+    --border: #162040;
+    --border-light: #1E3A6E;
+    --text-primary: #D8E3F0;
+    --text-secondary: #7089A8;
+    --text-tertiary: #3A5070;
+    --accent-cyan: #00D4FF;
+    --accent-blue: #2E7CF6;
+    --accent-purple: #6366F1;
+    --accent-orange: #F59E0B;
+    --accent-red: #EF4444;
+    --accent-green: #10B981;
+    --glow-cyan: rgba(0, 212, 255, 0.15);
+    --glow-cyan-strong: rgba(0, 212, 255, 0.35);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.7;
+    font-size: 15px;
+  }
+
+  /* Scanline overlay */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 212, 255, 0.008) 2px,
+      rgba(0, 212, 255, 0.008) 4px
+    );
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  /* Hero */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url('Gemini_Generated_Image_8jxu6b8jxu6b8jxu%20%281%29.png') center/cover no-repeat;
+    opacity: 0.3;
+    filter: blur(2px) saturate(0.4) brightness(0.7);
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 50% 30%, rgba(0, 212, 255, 0.06) 0%, transparent 60%),
+      linear-gradient(180deg, rgba(6,11,20,0.2) 0%, rgba(6,11,20,0.6) 50%, var(--bg-primary) 100%);
+  }
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 860px;
+    padding: 2rem;
+  }
+  .game-logo {
+    max-width: min(520px, 85vw);
+    height: auto;
+    margin-bottom: 0.75rem;
+    filter: drop-shadow(0 0 60px rgba(0, 212, 255, 0.3)) drop-shadow(0 0 120px rgba(0, 212, 255, 0.1));
+  }
+  .hero-eyebrow {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--accent-cyan);
+    margin-bottom: 1.5rem;
+    opacity: 0.8;
+  }
+  .hero .subtitle {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+  }
+  .hero .description {
+    font-size: 1.05rem;
+    font-weight: 300;
+    color: var(--text-secondary);
+    max-width: 640px;
+    margin: 0 auto 2rem;
+    line-height: 1.8;
+  }
+  .hero .meta-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+  }
+  .meta-item {
+    background: rgba(0, 212, 255, 0.04);
+    border: 1px solid rgba(0, 212, 255, 0.12);
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    font-family: 'Space Mono', monospace;
+    letter-spacing: 0.3px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  .meta-item:hover {
+    border-color: rgba(0, 212, 255, 0.3);
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.08);
+  }
+  .meta-item strong { color: var(--accent-cyan); font-weight: 700; }
+
+  .team-strip {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+  }
+  .team-logo {
+    height: 44px;
+    width: auto;
+    opacity: 0.7;
+    filter: brightness(1.2);
+  }
+  .team-members {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .team-member {
+    text-align: center;
+  }
+  .team-member strong {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+  .team-member span {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--text-tertiary);
+    font-weight: 400;
+    letter-spacing: 0.5px;
+  }
+
+  /* Navigation */
+  .nav-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(6, 11, 20, 0.88);
+    backdrop-filter: blur(24px);
+    border-bottom: 1px solid var(--border);
+    padding: 0.7rem 2rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  .nav-bar::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent-cyan), transparent);
+    opacity: 0.2;
+  }
+  .nav-bar a {
+    color: var(--text-tertiary);
+    text-decoration: none;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 400;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: color 0.3s, text-shadow 0.3s;
+    flex-shrink: 0;
+  }
+  .nav-bar a:hover {
+    color: var(--accent-cyan);
+    text-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
+  }
+
+  /* Container */
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  /* Sections */
+  .section {
+    padding: 5rem 0;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+  .section:last-child { border-bottom: none; }
+
+  .section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--accent-cyan);
+  }
+  .section h2 {
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 1.5rem;
+    line-height: 1.3;
+    letter-spacing: 1px;
+  }
+  .section h3 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-top: 2.5rem;
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.5px;
+  }
+  .section h4 {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--accent-cyan);
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.5px;
+  }
+  .section p {
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+  }
+  .section p strong, .section li strong {
+    color: var(--text-primary);
+    font-weight: 500;
+  }
+  .lead {
+    font-size: 1.1rem;
+    color: var(--text-primary) !important;
+    font-weight: 300;
+    line-height: 1.9;
+  }
+
+  /* Lists */
+  ul.feature-list {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+  }
+  ul.feature-list li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 0.6rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+  ul.feature-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.6em;
+    width: 6px;
+    height: 6px;
+    border-radius: 1px;
+    background: var(--accent-cyan);
+    box-shadow: 0 0 8px rgba(0, 212, 255, 0.4);
+  }
+
+  ol.numbered-list {
+    padding-left: 1.5rem;
+    margin: 1rem 0;
+  }
+  ol.numbered-list li {
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+  }
+  ol.numbered-list li::marker {
+    color: var(--accent-cyan);
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+  }
+
+  /* Cards */
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  .card:hover {
+    border-color: var(--border-light);
+    box-shadow: 0 0 30px rgba(0, 212, 255, 0.04);
+  }
+  .card-accent {
+    border-left: 2px solid var(--accent-cyan);
+  }
+  .card-glow {
+    border-color: rgba(0, 212, 255, 0.2);
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.04) 0%, var(--bg-card) 100%);
+  }
+
+  /* Quote */
+  .quote-block {
+    background: rgba(0, 212, 255, 0.04);
+    border-left: 2px solid var(--accent-cyan);
+    padding: 1.25rem 1.5rem;
+    border-radius: 0 6px 6px 0;
+    margin: 1.5rem 0;
+    font-style: italic;
+    color: var(--text-primary);
+    font-size: 1.05rem;
+    line-height: 1.7;
+    box-shadow: inset 0 0 40px rgba(0, 212, 255, 0.02);
+  }
+
+  /* Image blocks */
+  .img-block {
+    margin: 2.5rem 0;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    transition: border-color 0.3s;
+  }
+  .img-block:hover {
+    border-color: var(--border-light);
+  }
+  .img-block img {
+    width: 100%;
+    display: block;
+  }
+  .img-caption {
+    padding: 0.65rem 1rem;
+    background: var(--bg-secondary);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--text-tertiary);
+    text-align: center;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+
+  /* Chapter cards */
+  .chapter-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.25rem;
+    margin: 2rem 0;
+  }
+  .chapter-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+  }
+  .chapter-card:hover {
+    border-color: var(--border-light);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 212, 255, 0.04);
+  }
+  .chapter-card .ch-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    filter: saturate(0.6) brightness(0.8);
+    transition: filter 0.3s;
+  }
+  .chapter-card:hover .ch-img {
+    filter: saturate(0.8) brightness(0.9);
+  }
+  .chapter-card .ch-body {
+    padding: 1.25rem;
+  }
+  .chapter-card .ch-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+  }
+  .chapter-card .ch-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 0.35rem;
+    letter-spacing: 0.5px;
+  }
+  .chapter-card .ch-emotion {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.75rem;
+    font-style: italic;
+  }
+  .chapter-card .ch-desc {
+    font-size: 0.85rem;
+    color: var(--text-tertiary);
+    line-height: 1.5;
+  }
+
+  /* Emotion card */
+  .emotion-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+  .emotion-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.25rem;
+    text-align: center;
+    transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+  }
+  .emotion-card:hover {
+    border-color: rgba(0, 212, 255, 0.25);
+    box-shadow: 0 0 24px rgba(0, 212, 255, 0.06);
+    transform: translateY(-2px);
+  }
+  .emotion-card .em-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--accent-cyan);
+    opacity: 0.3;
+    margin-bottom: 0.5rem;
+  }
+  .emotion-card .em-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.35rem;
+  }
+  .emotion-card .em-desc {
+    font-size: 0.8rem;
+    color: var(--text-tertiary);
+    line-height: 1.4;
+  }
+
+  /* Comparison table */
+  .comp-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.85rem;
+  }
+  .comp-table th {
+    text-align: left;
+    padding: 0.75rem 1rem;
+    background: var(--bg-secondary);
+    color: var(--accent-cyan);
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.65rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .comp-table td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-secondary);
+    vertical-align: top;
+  }
+  .comp-table td:first-child {
+    color: var(--text-primary);
+    font-weight: 500;
+  }
+  .comp-table tr:hover td {
+    background: rgba(0, 212, 255, 0.02);
+  }
+
+  /* Milestone timeline */
+  .milestone-list {
+    list-style: none;
+    padding: 0;
+    margin: 2rem 0;
+    border-left: 1px solid var(--border);
+    padding-left: 2rem;
+  }
+  .milestone-list li {
+    position: relative;
+    margin-bottom: 2rem;
+  }
+  .milestone-list li::before {
+    content: '';
+    position: absolute;
+    left: -2.3rem;
+    top: 0.35rem;
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    border: 2px solid var(--accent-cyan);
+    background: var(--bg-primary);
+    box-shadow: 0 0 12px rgba(0, 212, 255, 0.3);
+    transform: rotate(45deg);
+  }
+  .milestone-list .ml-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--accent-cyan);
+  }
+  .milestone-list .ml-title {
+    font-size: 1rem;
+    color: var(--text-primary);
+    font-weight: 500;
+    margin: 0.15rem 0;
+  }
+  .milestone-list .ml-desc {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+  }
+
+  /* Pill tags */
+  .pill-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1rem 0;
+  }
+  .pill {
+    background: rgba(0, 212, 255, 0.06);
+    border: 1px solid rgba(0, 212, 255, 0.15);
+    color: var(--accent-cyan);
+    padding: 0.35rem 0.85rem;
+    border-radius: 2px;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .pill:hover {
+    background: rgba(0, 212, 255, 0.1);
+    border-color: rgba(0, 212, 255, 0.3);
+  }
+
+  /* Weekly focus table */
+  .weekly-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.85rem;
+  }
+  .weekly-table th {
+    text-align: left;
+    padding: 0.6rem 0.75rem;
+    background: var(--bg-secondary);
+    color: var(--text-tertiary);
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.65rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .weekly-table td {
+    padding: 0.6rem 0.75rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-secondary);
+    vertical-align: top;
+  }
+  .weekly-table td:first-child {
+    color: var(--accent-cyan);
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+    white-space: nowrap;
+    font-size: 0.8rem;
+  }
+  .weekly-table td:nth-child(2) {
+    color: var(--text-primary);
+  }
+
+  /* Phase roadmap */
+  .phase-roadmap {
+    display: grid;
+    gap: 1.25rem;
+    margin: 2rem 0;
+  }
+  .phase-card {
+    position: relative;
+    background:
+      linear-gradient(180deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0) 100%),
+      var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.5rem;
+    overflow: hidden;
+  }
+  .phase-card::before {
+    content: '';
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 3px;
+    background: var(--phase-color, var(--accent-cyan));
+    box-shadow: 0 0 24px color-mix(in srgb, var(--phase-color, var(--accent-cyan)) 50%, transparent);
+  }
+  .phase-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.25rem;
+  }
+  .phase-kicker {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--phase-color, var(--accent-cyan));
+    margin-bottom: 0.35rem;
+  }
+  .phase-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 0.2rem;
+  }
+  .phase-subtitle {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+  }
+  .phase-milestone {
+    min-width: min(280px, 100%);
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 8px;
+    padding: 0.85rem 1rem;
+  }
+  .phase-milestone-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--phase-color, var(--accent-cyan));
+    margin-bottom: 0.2rem;
+  }
+  .phase-milestone-text {
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+  .phase-chart {
+    overflow-x: visible;
+    padding-bottom: 0.15rem;
+  }
+  .phase-grid {
+    width: 100%;
+    min-width: 0;
+  }
+  .phase-grid-row {
+    display: grid;
+    grid-template-columns: 42px minmax(0, 1.8fr) 88px minmax(110px, 1.1fr) minmax(0, 2.8fr);
+    gap: 0;
+    align-items: center;
+  }
+  .phase-grid-row.header {
+    margin-bottom: 0.35rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .phase-cell {
+    padding: 0.35rem 0;
+  }
+  .phase-cell.meta {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--text-tertiary);
+  }
+  .phase-cell.wbs {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+  }
+  .phase-cell.task {
+    color: var(--text-primary);
+    font-size: 0.84rem;
+    line-height: 1.45;
+    padding-right: 0.7rem;
+  }
+  .phase-cell.owner {
+    color: var(--text-secondary);
+    font-size: 0.72rem;
+    text-align: center;
+    font-family: 'Space Mono', monospace;
+  }
+  .phase-cell.output {
+    color: var(--phase-soft-color, var(--text-primary));
+    font-size: 0.74rem;
+    line-height: 1.45;
+    padding-left: 0.5rem;
+  }
+  .phase-weeks {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 0;
+  }
+  .phase-week-label {
+    text-align: center;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.58rem;
+    color: var(--text-tertiary);
+  }
+  .phase-timeline {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    height: 32px;
+  }
+  .phase-timeline-cell {
+    height: 100%;
+    border-left: 1px solid rgba(255,255,255,0.08);
+  }
+  .phase-timeline-cell:last-child {
+    border-right: 1px solid rgba(255,255,255,0.08);
+  }
+  .phase-timeline-cell.dim {
+    opacity: 0.28;
+  }
+  .phase-bar {
+    position: absolute;
+    top: 5px;
+    height: 22px;
+    border-radius: 5px;
+    border: 1px solid var(--phase-color, var(--accent-cyan));
+    background: color-mix(in srgb, var(--phase-color, var(--accent-cyan)) 16%, transparent);
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02);
+    z-index: 1;
+  }
+  .phase-dot {
+    position: absolute;
+    top: 12px;
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: var(--phase-color, var(--accent-cyan));
+    box-shadow: 0 0 10px color-mix(in srgb, var(--phase-color, var(--accent-cyan)) 55%, transparent);
+    z-index: 2;
+  }
+  .phase-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1rem;
+    color: var(--text-secondary);
+    font-size: 0.78rem;
+  }
+  .phase-legend-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+  }
+  .phase-legend-swatch,
+  .phase-legend-dot {
+    background: var(--phase-color, var(--accent-cyan));
+    box-shadow: 0 0 10px color-mix(in srgb, var(--phase-color, var(--accent-cyan)) 40%, transparent);
+  }
+  .phase-legend-swatch {
+    width: 11px;
+    height: 11px;
+    border-radius: 3px;
+  }
+  .phase-legend-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+  }
+
+  /* Risk cards */
+  .risk-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+  .risk-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.25rem;
+    transition: border-color 0.3s;
+  }
+  .risk-card:hover {
+    border-color: rgba(245, 158, 11, 0.3);
+  }
+  .risk-card .risk-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--accent-orange);
+    font-weight: 700;
+    margin-bottom: 0.35rem;
+  }
+  .risk-card .risk-title {
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+  .risk-card .risk-solution {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  /* Color swatch cards */
+  .color-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+  .color-card {
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .color-card .swatch {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 1rem;
+  }
+  .color-card .swatch-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+  .color-card .color-body {
+    padding: 1rem 1.25rem;
+    background: var(--bg-card);
+  }
+  .color-card .color-phase {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-tertiary);
+    margin-bottom: 0.25rem;
+  }
+  .color-card .color-desc {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+  }
+
+  /* Mechanic cards */
+  .mech-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.5rem;
+    margin: 1.25rem 0;
+    transition: border-color 0.3s;
+  }
+  .mech-card:hover {
+    border-color: var(--border-light);
+  }
+  .mech-card .mech-id {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--accent-cyan);
+    opacity: 0.6;
+    margin-bottom: 0.25rem;
+  }
+  .mech-card h4 {
+    margin-top: 0;
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    letter-spacing: 0.3px;
+  }
+  .mech-card p {
+    margin-bottom: 0;
+  }
+
+  /* Stat cards */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+  .stat-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.25rem;
+    text-align: center;
+    transition: border-color 0.3s;
+  }
+  .stat-card:hover {
+    border-color: rgba(0, 212, 255, 0.25);
+  }
+  .stat-card .stat-val {
+    font-family: 'Space Mono', monospace;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--accent-cyan);
+    margin-bottom: 0.25rem;
+  }
+  .stat-card .stat-label {
+    font-size: 0.8rem;
+    color: var(--text-tertiary);
+  }
+
+  /* Team role cards */
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+  .team-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.25rem;
+  }
+  .team-card .tc-role {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--accent-cyan);
+    margin-bottom: 0.35rem;
+  }
+  .team-card .tc-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+  }
+  .team-card .tc-desc {
+    font-size: 0.8rem;
+    color: var(--text-tertiary);
+  }
+
+  /* Divider */
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 3rem 0;
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 3rem 2rem;
+    color: var(--text-tertiary);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    border-top: 1px solid var(--border);
+  }
+
+  /* Mechanic highlight (hap) */
+  .mech-highlight {
+    border-color: rgba(0, 212, 255, 0.25);
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.05) 0%, var(--bg-card) 100%);
+    box-shadow: 0 0 40px rgba(0, 212, 255, 0.04);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .nav-bar { gap: 1.25rem; padding: 0.7rem 1rem; }
+    .container { padding: 0 1rem; }
+    .section { padding: 3rem 0; }
+    .chapter-grid { grid-template-columns: 1fr; }
+    .emotion-grid { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); }
+    .team-strip { flex-direction: column; gap: 1rem; }
+    .hero h1 { letter-spacing: 6px; }
+    .phase-card { padding: 1.15rem; }
+    .phase-grid-row {
+      grid-template-columns: 38px minmax(0, 1.6fr) 74px minmax(92px, 1fr) minmax(0, 2.2fr);
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-eyebrow">// Written Pitch Dokümanı</div>
+    <img src="Oyun%20Logo.svg" alt="The Final Loop" class="game-logo">
+    <div class="subtitle">Hafıza &middot; Kimlik &middot; Kabulleniş</div>
+    <p class="description">
+      Terk edilmiş bir araştırma tesisinde geçen, psikolojik gerilim tonuna sahip, tek oyunculu bir bulmaca / anlatı odaklı escape-room deneyimi.
+    </p>
+    <div class="meta-grid">
+      <div class="meta-item"><strong>Tür:</strong> Psikolojik Bulmaca / Escape-room</div>
+      <div class="meta-item"><strong>Platform:</strong> PC (Steam)</div>
+      <div class="meta-item"><strong>Format:</strong> Tek oyunculu, oda temelli</div>
+      <div class="meta-item"><strong>Süre:</strong> 20–30 dk (Vertical Slice)</div>
+      <div class="meta-item"><strong>Durum:</strong> 12 Haftalık Geliştirme</div>
+    </div>
+    <div class="team-strip">
+      <img src="../theunlitdoor/logo.svg" alt="UN4 Studio" class="team-logo">
+      <div class="team-members">
+        <div class="team-member"><strong>Harun</strong><span>Game Developer</span></div>
+        <div class="team-member"><strong>Hilal</strong><span>Designer</span></div>
+        <div class="team-member"><strong>Eymen</strong><span>Game Developer</span></div>
+        <div class="team-member"><strong>Batuhan</strong><span>Designer</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NAV -->
+<nav class="nav-bar">
+  <a href="#konsept">Yüksek Konsept</a>
+  <a href="#hikaye">Hikâye</a>
+  <a href="#mekanikler">Mekanikler</a>
+  <a href="#sanat">Sanat Yönetimi</a>
+  <a href="#pazar">Pazar</a>
+  <a href="#benzer">Benzer Oyunlar</a>
+  <a href="#plan">Geliştirme Planı</a>
+  <a href="#riskler">Riskler</a>
+</nav>
+
+<!-- 1. YÜKSEK KONSEPT -->
+<section class="section" id="konsept">
+<div class="container">
+  <div class="section-label">Bölüm 01</div>
+  <h2>Yüksek Konsept</h2>
+
+  <p class="lead">
+    <strong>The Final Loop</strong>, terk edilmiş bir araştırma tesisinde uyanan bir karakterin, odalarda saklanan takviye hapları ve parçalanmış anılar aracılığıyla yalnızca binadan değil, kendi zihninin içinden de çıkmaya çalıştığı <strong>tek oyunculu psikolojik bulmaca / anlatı odaklı escape-room deneyimi</strong>dir.
+  </p>
+
+  <div class="quote-block">
+    Portal'ın çevresel bulmaca gücünü, bir psikolojik kaçış anlatısı ve hafıza parçalama temasıyla birleştiren; finalinde bütün oynanışı yeniden çerçeveleyen karanlık bir anlatı bulmaca oyunu.
+  </div>
+
+  <h3>Kısa Tanıtım</h3>
+  <p>
+    Oyuncu, kim olduğunu ve neden orada olduğunu bilmeden soğuk bir tesiste gözlerini açar. Odalardan çıkmak için bulmacalar çözer, notları okur, objeleri birleştirir ve özel takviye hapları bulur. Ancak bu haplar yalnızca ilerleme aracı değildir; aynı zamanda bastırılmış anıları geri getirir. Oyun ilerledikçe oyuncu, kilitli olanın kapılar değil kendi zihni olduğunu fark eder.
+  </p>
+
+  <h3>Oyun Tanımı</h3>
+  <ul class="feature-list">
+    <li><strong>Psikolojik bulmaca</strong></li>
+    <li><strong>Anlatı odaklı escape-room</strong></li>
+    <li><strong>Gizem / bilimkurgu / post-apokaliptik gerilim</strong></li>
+  </ul>
+
+  <h3>Hedef Deneyim</h3>
+  <p>Oyuncunun hissetmesi istenen temel duygular:</p>
+  <div class="emotion-grid">
+    <div class="emotion-card">
+      <div class="em-num">01</div>
+      <div class="em-title">Yabancılaşma</div>
+      <div class="em-desc">Nerede olduğunu anlamaya çalışma</div>
+    </div>
+    <div class="emotion-card">
+      <div class="em-num">02</div>
+      <div class="em-title">Merak</div>
+      <div class="em-desc">Her odanın neden var olduğunu çözme isteği</div>
+    </div>
+    <div class="emotion-card">
+      <div class="em-num">03</div>
+      <div class="em-title">Paranoya</div>
+      <div class="em-desc">Notları kimin yazdığını sorgulama</div>
+    </div>
+    <div class="emotion-card">
+      <div class="em-num">04</div>
+      <div class="em-title">Aydınlanma</div>
+      <div class="em-desc">Bina ile zihin arasındaki bağı fark etme</div>
+    </div>
+    <div class="emotion-card">
+      <div class="em-num">05</div>
+      <div class="em-title">Kabulleniş</div>
+      <div class="em-desc">Kaçışın değil, hatırlamanın asıl hedef olduğunu anlama</div>
+    </div>
+  </div>
+
+  <div class="img-block">
+    <img src="Gemini_Generated_Image_wu9fvpwu9fvpwu9f%20%281%29.png" alt="Araştırma Tesisi Ana Laboratuvar">
+    <div class="img-caption">Konsept Görsel &mdash; Araştırma Tesisi Ana Laboratuvar</div>
+  </div>
+</div>
+</section>
+
+<!-- 2. HİKÂYE VE DÜNYA -->
+<section class="section" id="hikaye">
+<div class="container">
+  <div class="section-label">Bölüm 02</div>
+  <h2>Hikâye ve Dünya</h2>
+
+  <p class="lead">
+    Oyun, soğuk, steril, aşınmış ve kısmen çökmüş bir araştırma tesisinde geçer. Mekân, klasik bir laboratuvar / bunker / gözlem merkezi gibi görünür; fakat ilerledikçe bunun yalnızca fiziksel bir yer değil, karakterin <strong>zihinsel savunma mekanizması</strong> olduğu anlaşılır.
+  </p>
+
+  <h3>Anlatı Omurgası</h3>
+  <p>
+    Başlangıçta oyuncu, dışarı çıkmak isteyen bir tutsağı kontrol ettiğini sanır. Fakat bulduğu takviye hapları aracılığıyla gördüğü bozuk flashback'ler ve kendisine bırakılmış notlar, olayın çok daha kişisel olduğunu ortaya çıkarır. Oyunun finalinde karakterin tesise kapatılmadığı, aksine dış dünyanın yaşanamaz hale gelmesinden sonra kendi zihnini tamamen kaybetmemek için bu <strong>döngüyü kendi eliyle kurduğu</strong> öğrenilir.
+  </p>
+
+  <h3>Tematik Katmanlar</h3>
+  <ul class="feature-list">
+    <li>Hafızanın yükü</li>
+    <li>Kimliği koruma çabası</li>
+    <li>Kaçış yanılsaması</li>
+    <li>Kendine yabancılaşma</li>
+    <li>Umudun değil, anlamın peşinden gitme</li>
+  </ul>
+
+  <h3>Bölüm Yapısı</h3>
+  <div class="chapter-grid">
+    <div class="chapter-card">
+      <img src="Gemini_Generated_Image_kosdrpkosdrpkosd%20%281%29.png" alt="Uyanış" class="ch-img">
+      <div class="ch-body">
+        <div class="ch-num" style="color: var(--accent-cyan);">Bölüm 1</div>
+        <div class="ch-title">Uyanış</div>
+        <div class="ch-emotion">Yabancılaşma &middot; Merak</div>
+        <div class="ch-desc">Oyuncu temel etkileşimleri öğrenir. Oyun bir kaçış senaryosu gibi görünür.</div>
+      </div>
+    </div>
+    <div class="chapter-card">
+      <img src="Gemini_Generated_Image_af1znhaf1znhaf1z%20%281%29.png" alt="Çatlaklar" class="ch-img">
+      <div class="ch-body">
+        <div class="ch-num" style="color: var(--accent-blue);">Bölüm 2</div>
+        <div class="ch-title">Çatlaklar</div>
+        <div class="ch-emotion">Şüphe &middot; Keşfetme</div>
+        <div class="ch-desc">İlk takviye haplarıyla birlikte çevre yeniden anlam kazanır. Notlar kişiselleşir.</div>
+      </div>
+    </div>
+    <div class="chapter-card">
+      <img src="Gemini_Generated_Image_hbzc1qhbzc1qhbzc%20%281%29.png" alt="Gözlem" class="ch-img">
+      <div class="ch-body">
+        <div class="ch-num" style="color: var(--accent-purple);">Bölüm 3</div>
+        <div class="ch-title">Gözlem</div>
+        <div class="ch-emotion">Paranoya &middot; Kaygı</div>
+        <div class="ch-desc">Denek raporları, güvenlik odaları ve kayıt cihazları anlatının çerçevesini değiştirir.</div>
+      </div>
+    </div>
+    <div class="chapter-card">
+      <img src="Gemini_Generated_Image_p6r945p6r945p6r9%20%281%29.png" alt="Kabul" class="ch-img">
+      <div class="ch-body">
+        <div class="ch-num" style="color: var(--accent-orange);">Bölüm 4</div>
+        <div class="ch-title">Kabul</div>
+        <div class="ch-emotion">Aydınlanma &middot; Şok</div>
+        <div class="ch-desc">Son takviye hapı, büyük gerçeği açığa çıkarır. Oyuncu dışarı çıkmak yerine, döngünün neden kurulduğunu öğrenir.</div>
+      </div>
+    </div>
+    <div class="chapter-card">
+      <img src="Gemini_Generated_Image_pkdltkpkdltkpkdl%20%281%29.png" alt="Son Oda" class="ch-img">
+      <div class="ch-body">
+        <div class="ch-num" style="color: var(--accent-red);">Final</div>
+        <div class="ch-title">Son Oda</div>
+        <div class="ch-emotion">Kabulleniş &middot; Sessizlik</div>
+        <div class="ch-desc">Kaçışın değil, tükenişin ve kabullenişin mekânı. Sessiz ama vurucu bir kapanış.</div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- 3. MEKANİKLER -->
+<section class="section" id="mekanikler">
+<div class="container">
+  <div class="section-label">Bölüm 03</div>
+  <h2>Çekirdek Mekanikler</h2>
+
+  <h3>Oynanış Döngüsü</h3>
+  <p>Oyuncu her bölümde tekrar eden ama derinleşen bir döngü içerisinde ilerler:</p>
+  <ol class="numbered-list">
+    <li>Odayı inceler</li>
+    <li>Çevresel ipuçlarını toplar</li>
+    <li>Objeleri birleştirir veya doğru sırada kullanır</li>
+    <li>Bir mekânsal / mantıksal bulmacayı çözer</li>
+    <li>Bir takviye hapı bulur</li>
+    <li>Takviye hapı sonrası kısa bir hafıza kırılması yaşar</li>
+    <li>Aynı odaya veya sonraki bölüme yeni anlamla bakar</li>
+    <li>Yeni kapıyı açar ve bir sonraki aşamaya geçer</li>
+  </ol>
+
+  <div class="card card-accent" style="margin-top: 2rem;">
+    <p style="margin-bottom: 0;"><strong>Çekirdek tasarım ilkesi:</strong> Her bölümde ilerleme yalnızca fiziksel açılmadan gelmez. Oyuncu, <strong>yeni bir bilgi katmanı kazandığı</strong> için ilerler. Bu sayede anlatı ve oynanış aynı rayda akar.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="mech-card">
+    <div class="mech-id">Sistem 01</div>
+    <h4>Çevresel İnceleme</h4>
+    <p>Oyuncu çekmeceler, monitörler, ses kayıt cihazları, güvenlik panelleri, laboratuvar malzemeleri ve notlarla etkileşime girer. İnceleme sistemi, oyunun hem bilgi toplama hem de atmosfer kurma aracıdır.</p>
+    <div class="pill-row">
+      <span class="pill">Çekmeceler</span>
+      <span class="pill">Monitörler</span>
+      <span class="pill">Ses Kayıtları</span>
+      <span class="pill">Güvenlik Panelleri</span>
+      <span class="pill">Notlar</span>
+    </div>
+  </div>
+
+  <div class="mech-card">
+    <div class="mech-id">Sistem 02</div>
+    <h4>Hafif Envanter / Nesne Birleştirme</h4>
+    <p>Bazı bulmacalar tek bir obje ile değil, birkaç parçanın doğru bağlamda kullanılmasıyla çözülür. Bu sistem oyunu ağır crafting'e dönüştürmeden, escape-room hissini güçlendirir.</p>
+    <div class="pill-row">
+      <span class="pill">Sigorta + Güç Paneli</span>
+      <span class="pill">Kırık Anahtar + Pense</span>
+      <span class="pill">Kod Parçası + Monitör</span>
+    </div>
+  </div>
+
+  <div class="mech-card">
+    <div class="mech-id">Sistem 03</div>
+    <h4>Oda Tabanlı Mantık Bulmacaları</h4>
+    <p>Her oda kendi içinde küçük bir problem alanıdır. Bulmacalar çeşitli eksenlerde tasarlanır:</p>
+    <div class="pill-row">
+      <span class="pill">Sıralama / Düzen</span>
+      <span class="pill">Elektrik Yönlendirme</span>
+      <span class="pill">Şifre Çözme</span>
+      <span class="pill">Gözlem Farkı</span>
+      <span class="pill">Mekânı Yeniden Okuma</span>
+      <span class="pill">Hafıza Yorumlama</span>
+    </div>
+  </div>
+
+  <div class="mech-card mech-highlight">
+    <div class="mech-id">Sistem 04 &mdash; Ana Mekanik</div>
+    <h4>Takviye Hapı Mekaniği</h4>
+    <p>Oyunun en ayırt edici sistemidir. Takviye hapları klasik "anahtar eşya" değildir. Oyuncuya üç şeyi aynı anda sağlar:</p>
+    <ul class="feature-list">
+      <li><strong>İlerleme izni</strong> &mdash; sonraki alana geçiş</li>
+      <li><strong>Kısa süreli anlatı kırılması / flashback</strong> &mdash; bastırılmış anılar</li>
+      <li><strong>Yeniden yorumlama şansı</strong> &mdash; daha önce gördüğün mekânı farklı okuma</li>
+    </ul>
+    <p>Takviye hapını almak, bulmacanın ödülü olduğu kadar bir sonraki bulmacanın da ipucudur.</p>
+  </div>
+
+  <div class="img-block">
+    <img src="Gemini_Generated_Image_psp6k6psp6k6psp6%20%281%29.png" alt="Takviye Hapı Mekaniği">
+    <div class="img-caption">Konsept Görsel &mdash; Takviye Hapı Mekaniği</div>
+  </div>
+
+  <div class="mech-card">
+    <div class="mech-id">Sistem 05</div>
+    <h4>Hafıza Kırılması / Flashback Katmanı</h4>
+    <p>Flashback'ler tam açıklama vermez. Bozulmuş sesler, tek cümlelik kayıtlar, kısa görüntüler ve tekrar eden semboller halinde gelir. Bu kırık bilgi yapısı, gizemin erken dağılmasını engeller.</p>
+  </div>
+
+  <div class="mech-card">
+    <div class="mech-id">Sistem 06</div>
+    <h4>Not Sistemi</h4>
+    <p>Notların tonu giderek değişir: önce yönlendirici, sonra uyarıcı, sonra neredeyse itiraf niteliğinde. Böylece notlar, hem tutorial hem de anlatı aracına dönüşür.</p>
+  </div>
+
+  <div class="mech-card">
+    <div class="mech-id">Sistem 07</div>
+    <h4>Final Recontextualization</h4>
+    <p>Oyunun finalinde oyuncunun daha önce çözdüğü her oda, yaptığı her seçim ve topladığı her bilgi yeni bir anlam kazanır. Bu, oyunun "twist"ini yalnızca şok unsuru olmaktan çıkarır; bütün tasarımın omurgası haline getirir.</p>
+  </div>
+</div>
+</section>
+
+<!-- 4. SANAT YÖNETİMİ -->
+<section class="section" id="sanat">
+<div class="container">
+  <div class="section-label">Bölüm 04</div>
+  <h2>Sanat Yönetimi ve Atmosfer</h2>
+
+  <p>Oyunun görsel dili gerçekçi ile stilize arasında dengeli olmalıdır. Aşırı detay yerine okunabilir, kasvetli ve hafif soyut bir atmosfer daha uygundur.</p>
+
+  <h3>Renk Dili</h3>
+  <div class="color-grid">
+    <div class="color-card">
+      <div class="swatch" style="background: linear-gradient(135deg, #1a2a3a, #2a3a4a, #e0e5ea);">
+        <span class="swatch-dot" style="background: #1a2a3a;"></span>
+        <span class="swatch-dot" style="background: #4a6a8a;"></span>
+        <span class="swatch-dot" style="background: #e0e5ea;"></span>
+      </div>
+      <div class="color-body">
+        <div class="color-phase">Başlangıç</div>
+        <div class="color-desc">Soğuk mavi / gri / steril beyaz</div>
+      </div>
+    </div>
+    <div class="color-card">
+      <div class="swatch" style="background: linear-gradient(135deg, #8a4a1a, #6a6a2a, #2a3a1a);">
+        <span class="swatch-dot" style="background: #8a4a1a;"></span>
+        <span class="swatch-dot" style="background: #6a6a2a;"></span>
+        <span class="swatch-dot" style="background: #2a3a1a;"></span>
+      </div>
+      <div class="color-body">
+        <div class="color-phase">Orta Oyun</div>
+        <div class="color-desc">Paslı turuncu / kirli sarı / karanlık yeşil</div>
+      </div>
+    </div>
+    <div class="color-card">
+      <div class="swatch" style="background: linear-gradient(135deg, #8a7a4a, #4a4a3a, #2a2a2a);">
+        <span class="swatch-dot" style="background: #8a7a4a;"></span>
+        <span class="swatch-dot" style="background: #4a4a3a;"></span>
+        <span class="swatch-dot" style="background: #2a2a2a;"></span>
+      </div>
+      <div class="color-body">
+        <div class="color-phase">Final</div>
+        <div class="color-desc">Solgun amber / tükenmiş elektrik / neredeyse renksiz</div>
+      </div>
+    </div>
+  </div>
+
+  <h3>Mekân Dili</h3>
+  <ul class="feature-list">
+    <li>Aşınmış laboratuvar yüzeyleri</li>
+    <li>Arızalı floresan ışıklar</li>
+    <li>CRT monitörler ve analog kayıt cihazları</li>
+    <li>Gözlem camları ve karanlık koridorlar</li>
+    <li>Bozulmuş arşiv ve ilaç üretim alanı</li>
+  </ul>
+
+  <div class="img-block">
+    <img src="Gemini_Generated_Image_du3qz1du3qz1du3q%20%281%29.png" alt="Koridor ve Laboratuvar Girişi">
+    <div class="img-caption">Konsept Görsel &mdash; Koridor ve Laboratuvar Girişi</div>
+  </div>
+
+  <h3>Ses Tasarımı</h3>
+  <ul class="feature-list">
+    <li>Uzak jeneratör uğultusu</li>
+    <li>Elektrik cızırtısı</li>
+    <li>Nefes ve ayak sesi odaklı boşluk hissi</li>
+    <li>Bant kayıtlarından gelen kırık sesler</li>
+    <li>Müzikte düşük frekanslı, minimal ve boğucu katmanlar</li>
+  </ul>
+
+  <div class="card card-accent">
+    <p style="margin-bottom: 0;">Bu oyunda korku "ani saldırı" ile değil, <strong>gerçeğin giderek kişiselleşmesiyle</strong> kurulmalıdır.</p>
+  </div>
+
+  <div class="img-block">
+    <img src="Gemini_Generated_Image_p6r945p6r945p6r9%20%281%29.png" alt="Section D-4 Koridoru">
+    <div class="img-caption">Konsept Görsel &mdash; Section D-4 Koridoru</div>
+  </div>
+</div>
+</section>
+
+<!-- 5. PAZAR -->
+<section class="section" id="pazar">
+<div class="container">
+  <div class="section-label">Bölüm 05</div>
+  <h2>Pazar Potansiyeli</h2>
+
+  <div class="stat-grid">
+    <div class="stat-card">
+      <div class="stat-val">$197B</div>
+      <div class="stat-label">Küresel Oyun Pazarı (2025)</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-val">3.6B</div>
+      <div class="stat-label">Toplam Oyuncu Sayısı</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-val">PC-First</div>
+      <div class="stat-label">Steam-First Strateji</div>
+    </div>
+  </div>
+
+  <p>
+    The Final Loop tam da bu istikrarlı PC pazarında konumlanan, premium fiyatlı, tek oyunculu, yüksek konseptli bir bağımsız puzzle deneyimi öneriyor. Steam'in demo, festival ve istek listesi ekosistemi; kısa ama dikkat çekici vertical slice'ların görünürlük kazanması için doğrudan uygundur.
+  </p>
+
+  <h3>Referans Fiyat Bandı</h3>
+  <table class="comp-table">
+    <thead>
+      <tr>
+        <th>Oyun</th>
+        <th>Steam Fiyatı</th>
+        <th>Fiyat Dersi</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Portal 2</td>
+        <td>&euro;9,75</td>
+        <td>Güçlü marka ve eski çıkış yılı nedeniyle düşük bantta istisna referans</td>
+      </tr>
+      <tr>
+        <td>The Last Cube</td>
+        <td>&euro;16,79</td>
+        <td>Premium indie puzzle için erişilebilir orta bant</td>
+      </tr>
+      <tr>
+        <td>Patrick's Parabox</td>
+        <td>&euro;19,50</td>
+        <td>Sistem odaklı güçlü indie puzzle için standart premium bant</td>
+      </tr>
+      <tr>
+        <td>Manifold Garden</td>
+        <td>&euro;19,50</td>
+        <td>Sanat yönü yüksek puzzle deneyimleri için kabul gören bant</td>
+      </tr>
+      <tr>
+        <td>Viewfinder</td>
+        <td>&euro;24,99</td>
+        <td>Yüksek konsept ve güçlü görsel sunum, üst premium bandı destekler</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="card card-glow" style="text-align: center;">
+    <p style="margin-bottom: 0.25rem;"><strong>Önerilen Lansman Fiyat Bandı</strong></p>
+    <p style="font-family: 'Space Mono', monospace; font-size: 1.5rem; color: var(--accent-cyan); margin-bottom: 0.25rem; font-weight: 700;">$14.99 &ndash; $19.99</p>
+    <p style="font-size: 0.85rem; margin-bottom: 0;">Premium indie puzzle alanında erişilebilir ama değersiz görünmeyecek bir bant</p>
+  </div>
+</div>
+</section>
+
+<!-- 6. BENZER OYUNLAR -->
+<section class="section" id="benzer">
+<div class="container">
+  <div class="section-label">Bölüm 06</div>
+  <h2>Benzer Oyunlar ve Karşılaştırma</h2>
+
+  <table class="comp-table">
+    <thead>
+      <tr>
+        <th>Oyun</th>
+        <th>Neden Benziyor?</th>
+        <th>Bizim Farkımız</th>
+        <th>Pazar Sinyali</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Portal 2</td>
+        <td>Hikâye ile bulmaca entegrasyonu çok güçlü</td>
+        <td>Bizde mizah yerine psikolojik kapanış ve içe dönük gizem var</td>
+        <td>Anlatı + bulmaca birleşiminin güçlü benchmark'ı</td>
+      </tr>
+      <tr>
+        <td>The Last Cube</td>
+        <td>Çevresel bulmaca, ilerleme ve mekânsal okuma ekseni</td>
+        <td>Bizim oyunumuz daha anlatı odaklı, daha karanlık ve daha kişisel</td>
+        <td>Tematik sunumu güçlü puzzle oyunlarının yer bulabildiğini gösterir</td>
+      </tr>
+      <tr>
+        <td>Patrick's Parabox</td>
+        <td>Tek bir güçlü mekanik fikri etrafında inşa edilen net puzzle tasarımı</td>
+        <td>Bizde sistem saflığı yerine atmosfer ve hikâye yükü daha yüksek</td>
+        <td>Yüksek fikri net anlatılan puzzle'ların fark yarattığını kanıtlar</td>
+      </tr>
+      <tr>
+        <td>Manifold Garden</td>
+        <td>Mekânın yeniden okunmasına dayanan zihinsel deneyim</td>
+        <td>Bizde geometri değil hafıza ve psikoloji merkezde</td>
+        <td>Güçlü sanat yönü ile puzzle oyunlarının ayrışabileceğini gösterir</td>
+      </tr>
+      <tr>
+        <td>Viewfinder</td>
+        <td>Tek bir yüksek konsept üzerinden pazarlama gücü</td>
+        <td>Bizim yüksek konseptimiz fotoğraf değil hafıza / gerçeklik kırılması</td>
+        <td>"Bir fikri tek cümlede anlatabilme" görünürlük açısından kritiktir</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="card card-accent">
+    <p style="margin-bottom: 0;">Bu proje, saf mantık bulmacası satmıyor; aynı zamanda güçlü bir psikolojik anlatı ve finalde yeniden anlam kazanan bir deneyim satıyor. Referans oyunların ortak dersi şu: iyi puzzle oyunu yalnızca akıllı tasarlanmış değil, <strong>çok net anlatılabilir</strong> de olmalıdır.</p>
+  </div>
+</div>
+</section>
+
+<!-- 7. GELİŞTİRME PLANI -->
+<section class="section" id="plan">
+<div class="container">
+  <div class="section-label">Bölüm 07</div>
+  <h2>12 Haftalık Geliştirme Planı</h2>
+
+  <h3>Ekip Yapısı</h3>
+  <div class="team-grid">
+    <div class="team-card">
+      <div class="tc-role">Y1</div>
+      <div class="tc-name">Lead Programmer / Proje Lideri</div>
+      <div class="tc-desc">Teknik mimari, core gameplay, entegrasyon, build yönetimi</div>
+    </div>
+    <div class="team-card">
+      <div class="tc-role">Y2</div>
+      <div class="tc-name">Programmer</div>
+      <div class="tc-desc">Puzzle sistemleri, UI entegrasyonu, kayıt / event / araç desteği</div>
+    </div>
+    <div class="team-card">
+      <div class="tc-role">T1</div>
+      <div class="tc-name">Game & Narrative Designer</div>
+      <div class="tc-desc">Bulmaca akışı, level flow, belge / not içerikleri, pacing</div>
+    </div>
+    <div class="team-card">
+      <div class="tc-role">T2</div>
+      <div class="tc-name">UI/UX & Environment Designer</div>
+      <div class="tc-desc">Görsel dil, çevre seti, UI mockup'ları, sunum materyalleri</div>
+    </div>
+  </div>
+
+  <h3>Milestone Takvimi</h3>
+  <ul class="milestone-list">
+    <li>
+      <div class="ml-tag">Hafta 2</div>
+      <div class="ml-title">Ön üretim tamamlandı</div>
+      <div class="ml-desc">Teknik iskelet kurulmuş, referanslar netleşmiş, oda akışı onaylanmış</div>
+    </li>
+    <li>
+      <div class="ml-tag">Hafta 4</div>
+      <div class="ml-title">İlk oynanabilir oda</div>
+      <div class="ml-desc">En az 1 oda baştan sona oynanabilir; temel etkileşim ve ilk puzzle çalışır durumda</div>
+    </li>
+    <li>
+      <div class="ml-tag">Hafta 6</div>
+      <div class="ml-title">Çekirdek sistem entegrasyonu</div>
+      <div class="ml-desc">Takviye hapı / flashback sistemi, not sistemi ve temel envanter akışı oyun içinde birlikte çalışıyor</div>
+    </li>
+    <li>
+      <div class="ml-tag">Hafta 8</div>
+      <div class="ml-title">Vertical slice kapsamı görünür</div>
+      <div class="ml-desc">En az 3 oda bloklanmış; temel puzzle zinciri ve hikâye ipuçları uçtan uca okunabiliyor</div>
+    </li>
+    <li>
+      <div class="ml-tag">Hafta 10</div>
+      <div class="ml-title">Test ve okunabilirlik kontrolü</div>
+      <div class="ml-desc">En az 3 dahili playtest gerçekleştirilmiş; okunabilirlik, pacing ve zorluk notları toplanmış</div>
+    </li>
+    <li>
+      <div class="ml-tag">Hafta 12</div>
+      <div class="ml-title">Final teslim</div>
+      <div class="ml-desc">Capture-ready demo build, pitch görselleri ve written pitch birlikte sunuma hazır</div>
+    </li>
+  </ul>
+
+  <h3>Faz Bazlı Özet</h3>
+  <table class="weekly-table">
+    <thead>
+      <tr>
+        <th>Faz</th>
+        <th>Odak</th>
+        <th>Detay</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>W1-W2</td>
+        <td>Ön Üretim</td>
+        <td>Proje kapsamı, teknik iskelet, referans analizi, oda akışı tasarımı</td>
+      </tr>
+      <tr>
+        <td>W3-W6</td>
+        <td>Core Sistemler</td>
+        <td>Etkileşim sistemi, envanter, puzzle framework, takviye hapı/flashback, not sistemi</td>
+      </tr>
+      <tr>
+        <td>W7-W8</td>
+        <td>Vertical Slice</td>
+        <td>Bölüm genişletme, görsel güçlendirme, art pass, ses katmanları</td>
+      </tr>
+      <tr>
+        <td>W9-W10</td>
+        <td>Test & Polish</td>
+        <td>Dahili playtest, dengeleme, okunabilirlik kontrolü, bug fixing</td>
+      </tr>
+      <tr>
+        <td>W11-W12</td>
+        <td>Final Teslim</td>
+        <td>Son polish, pitch görselleri, logo, capture-ready build, doküman düzeni</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Detaylı Faz Adımları</h3>
+  <p>
+    Aşağıdaki roadmap, her fazın haftalara dağılan iş kırılımını, sorumlularını ve beklenen çıktısını tek ekranda gösterir.
+  </p>
+  <div id="phaseRoadmap" class="phase-roadmap"></div>
+
+  <h3>12 Hafta Sonunda Teslim Edilecekler</h3>
+  <ul class="feature-list">
+    <li>20–30 dakikalık oynanabilir vertical slice</li>
+    <li>En az 3–4 oda ve çalışır puzzle akışı</li>
+    <li>Takviye hapı / flashback sistemi çalışır durumda</li>
+    <li>Not / kayıt / belge sistemi</li>
+    <li>Pitch'e uygun görsel materyaller</li>
+    <li>Kısa teaser veya capture-ready demo build</li>
+    <li>Gelişim planı, bütçe ve pazar konumlandırması netleşmiş written pitch</li>
+  </ul>
+</div>
+</section>
+
+<!-- 8. RİSKLER -->
+<section class="section" id="riskler">
+<div class="container">
+  <div class="section-label">Bölüm 08</div>
+  <h2>Riskler ve Azaltma Planı</h2>
+
+  <div class="risk-grid">
+    <div class="risk-card">
+      <div class="risk-label">Risk 01</div>
+      <div class="risk-title">Kapsamın büyümesi</div>
+      <div class="risk-solution"><strong>Etki:</strong> 12 haftalık plan kırılır.<br><strong>Önlem:</strong> Sadece vertical slice hedeflenmeli; tam oyun iddiasından kaçınılmalı.</div>
+    </div>
+    <div class="risk-card">
+      <div class="risk-label">Risk 02</div>
+      <div class="risk-title">Fazla karmaşık bulmacalar</div>
+      <div class="risk-solution"><strong>Etki:</strong> Oyuncu kopabilir.<br><strong>Önlem:</strong> Her bulmaca için erken playtest ve okunabilirlik kontrolü yapılmalı.</div>
+    </div>
+    <div class="risk-card">
+      <div class="risk-label">Risk 03</div>
+      <div class="risk-title">Anlatının fazla geç açılması</div>
+      <div class="risk-solution"><strong>Etki:</strong> Merak yerine yorgunluk yaratabilir.<br><strong>Önlem:</strong> Her bölümde küçük ama anlamlı anlatı ödülü verilmeli.</div>
+    </div>
+    <div class="risk-card">
+      <div class="risk-label">Risk 04</div>
+      <div class="risk-title">Görsel üretim yükü</div>
+      <div class="risk-solution"><strong>Etki:</strong> Ekip zorlanabilir.<br><strong>Önlem:</strong> Modüler çevre kiti ve tekrar kullanılabilir oda setleri tasarlanmalı.</div>
+    </div>
+    <div class="risk-card">
+      <div class="risk-label">Risk 05</div>
+      <div class="risk-title">Twist'in zayıf kalması</div>
+      <div class="risk-solution"><strong>Etki:</strong> Oyunun tüm farkı zarar görür.<br><strong>Önlem:</strong> Not dili, flashback ritmi ve final kayıtları erken prototiplenmeli.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- 9. SONUÇ -->
+<section class="section" id="sonuc">
+<div class="container">
+  <div class="section-label">Sonuç</div>
+  <h2>Sonuç</h2>
+
+  <p class="lead">
+    <strong>The Final Loop</strong>, yüksek tempolu aksiyonla değil; güçlü atmosfer, iyi yapılandırılmış bulmaca akışı ve finalde bütün deneyimi yeniden çerçeveleyen anlatı gücüyle öne çıkan bir projedir.
+  </p>
+
+  <p>
+    Bu oyunun en büyük avantajı, "kaçış oyunu" gibi görünen tanıdık bir çatıyı kullanıp onu hafıza, kimlik ve kabulleniş temaları üzerinden daha özgün ve daha duygusal bir şeye dönüştürmesidir. 12 haftalık ekip planı içinde tam sürüm değil ama etkileyici bir vertical slice üretmek gerçekçi ve stratejik bir hedeftir.
+  </p>
+
+  <div class="quote-block">
+    Bu proje 12 haftada tam oyun vaat etmiyor; ama atmosferini, bulmaca kimliğini ve duygusal twist'ini kanıtlayacak kadar güçlü bir dikey kesit vaat ediyor.
+  </div>
+
+  <p>
+    Doğru konumlandırma ile bu proje: ders / jüri sunumu için güçlü bir written pitch, festival başvuruları için dikkat çekici bir prototip ve devam finansmanı için ikna edici bir temel olabilir.
+  </p>
+
+  <div class="card card-glow" style="text-align: center; margin-top: 2rem;">
+    <p style="font-size: 1.05rem; margin-bottom: 0; line-height: 1.8;">
+      The Final Loop, yalnızca <em>"nasıl çıkacağım?"</em> sorusunu değil,<br>
+      <strong style="color: var(--accent-cyan);">"hatırlamak neden hayatta kalmaktan daha önemli hale gelir?"</strong><br>
+      sorusunu oynanışa dönüştüren; küçük kapsamla büyük etki üretmeyi hedefleyen güçlü bir pitch projesidir.
+    </p>
+  </div>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  The Final Loop &mdash; Written Pitch Dokümanı &mdash; 2025
+</footer>
+
+<script>
+  const phasePlans = [
+    {
+      phase: 'Faz 1',
+      title: 'Ön Üretim',
+      weeks: 'Hafta 1-2',
+      milestone: 'M1 - Ön üretim tamamlandı (Hafta 2 sonu)',
+      color: '#7B6FDE',
+      softColor: '#A99EF0',
+      activeRange: [0, 1],
+      tasks: [
+        { wbs: '1.1', label: 'Proje kapsamı ve konsept hizalama', owner: 'Y1 + T1', start: 0, span: 1, output: 'Kapsam dokümanı' },
+        { wbs: '1.2', label: 'Referans analizi ve moodboard', owner: 'T2 + T1', start: 0, span: 2, output: 'Görsel yön dokümanı' },
+        { wbs: '1.3', label: 'Oda akışı ve bölüm yapısı tasarımı', owner: 'T1', start: 0, span: 2, output: 'Level flow haritası' },
+        { wbs: '1.4', label: 'Teknik iskelet ve proje mimarisi', owner: 'Y1', start: 0, span: 2, output: 'Unity proje iskeleti' },
+        { wbs: '1.5', label: 'Etkileşim sistemi prensipleri prototipi', owner: 'Y2', start: 1, span: 1, output: 'Temel input test sahnesi' },
+        { wbs: '1.6', label: 'UI mockup\'ları ve çevre seti konseptleri', owner: 'T2', start: 1, span: 1, output: 'UI/UX wireframe seti' }
+      ]
+    },
+    {
+      phase: 'Faz 2',
+      title: 'Core Sistemler',
+      weeks: 'Hafta 3-6',
+      milestone: 'M2 - İlk oynanabilir oda (Hafta 4) · M3 - Çekirdek sistem entegrasyonu (Hafta 6 sonu)',
+      color: '#2EA87A',
+      softColor: '#56D4A0',
+      activeRange: [2, 5],
+      tasks: [
+        { wbs: '2.1', label: 'Çevresel inceleme ve etkileşim sistemi', owner: 'Y1', start: 2, span: 2, output: 'İnceleme framework\'ü' },
+        { wbs: '2.2', label: 'Hafif envanter ve nesne birleştirme', owner: 'Y2', start: 2, span: 2, output: 'Envanter sistemi' },
+        { wbs: '2.3', label: 'İlk oda graybox ve puzzle prototipi', owner: 'Y1 + T1', start: 2, span: 2, output: 'Oynanabilir ilk oda' },
+        { wbs: '2.4', label: 'Oda tabanlı mantık bulmaca framework\'ü', owner: 'Y2 + T1', start: 3, span: 2, output: 'Puzzle altyapısı' },
+        { wbs: '2.5', label: 'Takviye hapı / flashback sistemi', owner: 'Y1', start: 4, span: 2, output: 'Hafıza kırılma mekaniği' },
+        { wbs: '2.6', label: 'Not sistemi ve anlatı araçları', owner: 'Y2 + T1', start: 4, span: 2, output: 'Not/kayıt sistemi' },
+        { wbs: '2.7', label: 'Çevre seti üretimi ve oda bloklaması', owner: 'T2', start: 2, span: 4, output: 'Modüler çevre kiti' },
+        { wbs: '2.8', label: 'Bulmaca akışı ve not içerikleri', owner: 'T1', start: 3, span: 3, output: 'Puzzle/not dokümanları' }
+      ]
+    },
+    {
+      phase: 'Faz 3',
+      title: 'Vertical Slice',
+      weeks: 'Hafta 7-8',
+      milestone: 'M4 - Vertical slice kapsamı görünür (Hafta 8 sonu)',
+      color: '#3B8DD6',
+      softColor: '#6DB3E8',
+      activeRange: [6, 7],
+      tasks: [
+        { wbs: '3.1', label: 'Bölüm genişletme: 3-4 oda bloklaması', owner: 'Y1 + T1', start: 6, span: 2, output: 'Bloklanmış oda seti' },
+        { wbs: '3.2', label: 'Puzzle zinciri uçtan uca bağlantısı', owner: 'Y2 + T1', start: 6, span: 2, output: 'Çalışır puzzle akışı' },
+        { wbs: '3.3', label: 'Görsel güçlendirme ve art pass', owner: 'T2', start: 6, span: 2, output: 'Cilalanmış ortam seti' },
+        { wbs: '3.4', label: 'Ses katmanları ve atmosfer efektleri', owner: 'Y2', start: 6, span: 2, output: 'Ambiyans ses sistemi' },
+        { wbs: '3.5', label: 'Flashback içerik üretimi ve entegrasyon', owner: 'T1 + Y1', start: 6, span: 2, output: 'Hafıza sahneleri' },
+        { wbs: '3.6', label: 'Hikâye ipuçları okunabilirlik testi', owner: 'T1', start: 7, span: 1, output: 'Anlatı doğrulama' }
+      ]
+    },
+    {
+      phase: 'Faz 4',
+      title: 'Test & Polish',
+      weeks: 'Hafta 9-10',
+      milestone: 'M5 - Test ve okunabilirlik kontrolü (Hafta 10 sonu)',
+      color: '#E8764A',
+      softColor: '#F0A07A',
+      activeRange: [8, 9],
+      tasks: [
+        { wbs: '4.1', label: 'Dahili playtest oturumları (min. 3)', owner: 'Y1 + T1', start: 8, span: 2, output: 'Playtest raporları' },
+        { wbs: '4.2', label: 'Okunabilirlik ve pacing kontrolü', owner: 'T1', start: 8, span: 1, output: 'Pacing notları' },
+        { wbs: '4.3', label: 'Puzzle zorluk dengeleme', owner: 'T1 + Y2', start: 8, span: 2, output: 'Dengelenmiş puzzle seti' },
+        { wbs: '4.4', label: 'Bug fixing ve optimizasyon', owner: 'Y1 + Y2', start: 8, span: 2, output: 'Stabil build' },
+        { wbs: '4.5', label: 'UI/UX iyileştirmeleri', owner: 'T2 + Y2', start: 9, span: 1, output: 'Cilalanmış arayüz' },
+        { wbs: '4.6', label: 'Ses ve atmosfer son düzenlemeleri', owner: 'Y2', start: 9, span: 1, output: 'Final ses mix\'i' }
+      ]
+    },
+    {
+      phase: 'Faz 5',
+      title: 'Final Teslim',
+      weeks: 'Hafta 11-12',
+      milestone: 'M6 - Final teslim (Hafta 12 sonu)',
+      color: '#D94F7A',
+      softColor: '#F08AAF',
+      activeRange: [10, 11],
+      tasks: [
+        { wbs: '5.1', label: 'Son polish ve görsel cilalama', owner: 'T2 + Y2', start: 10, span: 2, output: 'Final görsel kalite' },
+        { wbs: '5.2', label: 'Logo, başlık ve branding materyalleri', owner: 'T2', start: 10, span: 1, output: 'Branding paketi' },
+        { wbs: '5.3', label: 'Pitch görselleri ve sunum dokümanı', owner: 'T2 + T1', start: 10, span: 2, output: 'Pitch-ready materyaller' },
+        { wbs: '5.4', label: 'Kısa teaser / video capture', owner: 'Y1 + T2', start: 10, span: 2, output: 'Teaser video' },
+        { wbs: '5.5', label: 'Capture-ready demo build paketleme', owner: 'Y1', start: 11, span: 1, output: 'Demo build' },
+        { wbs: '5.6', label: 'Written pitch ve doküman düzeni', owner: 'T1', start: 10, span: 2, output: 'Final written pitch' },
+        { wbs: '5.7', label: 'Final teslim ve sunum hazırlığı', owner: 'Y1 + T1', start: 11, span: 1, output: 'Sunuma hazır proje' }
+      ]
+    }
+  ];
+
+  function createPhaseRoadmap(phases) {
+    const mountNode = document.getElementById('phaseRoadmap');
+    if (!mountNode) return;
+
+    const totalWeeks = 12;
+
+    phases.forEach((phase) => {
+      const card = document.createElement('article');
+      card.className = 'phase-card';
+      card.style.setProperty('--phase-color', phase.color);
+      card.style.setProperty('--phase-soft-color', phase.softColor);
+
+      const head = document.createElement('div');
+      head.className = 'phase-head';
+      head.innerHTML = `
+        <div>
+          <div class="phase-kicker">${phase.phase}</div>
+          <div class="phase-title">${phase.title}</div>
+          <div class="phase-subtitle">${phase.weeks}</div>
+        </div>
+        <div class="phase-milestone">
+          <div class="phase-milestone-label">Milestone</div>
+          <div class="phase-milestone-text">${phase.milestone}</div>
+        </div>
+      `;
+
+      const chart = document.createElement('div');
+      chart.className = 'phase-chart';
+
+      const grid = document.createElement('div');
+      grid.className = 'phase-grid';
+
+      const headerRow = document.createElement('div');
+      headerRow.className = 'phase-grid-row header';
+      headerRow.innerHTML = `
+        <div class="phase-cell meta">WBS</div>
+        <div class="phase-cell meta">Görev</div>
+        <div class="phase-cell meta" style="text-align:center;">Sorumlu</div>
+        <div class="phase-cell meta" style="padding-left:0.6rem;">Beklenen Çıktı</div>
+        <div class="phase-cell meta">
+          <div class="phase-weeks"></div>
+        </div>
+      `;
+
+      const weekLabels = headerRow.querySelector('.phase-weeks');
+      for (let week = 1; week <= totalWeeks; week += 1) {
+        const label = document.createElement('div');
+        label.className = 'phase-week-label';
+        label.textContent = week;
+        weekLabels.appendChild(label);
+      }
+      grid.appendChild(headerRow);
+
+      phase.tasks.forEach((task) => {
+        const row = document.createElement('div');
+        row.className = 'phase-grid-row';
+
+        const timeline = document.createElement('div');
+        timeline.className = 'phase-timeline';
+
+        for (let i = 0; i < totalWeeks; i += 1) {
+          const cell = document.createElement('div');
+          cell.className = 'phase-timeline-cell';
+          if (i < phase.activeRange[0] || i > phase.activeRange[1]) {
+            cell.classList.add('dim');
+          }
+          timeline.appendChild(cell);
+        }
+
+        const bar = document.createElement('div');
+        bar.className = 'phase-bar';
+        bar.style.left = `${(task.start / totalWeeks) * 100}%`;
+        bar.style.width = `${(task.span / totalWeeks) * 100}%`;
+
+        const dot = document.createElement('div');
+        dot.className = 'phase-dot';
+        dot.style.left = `calc(${((task.start + task.span) / totalWeeks) * 100}% - 4px)`;
+
+        timeline.appendChild(bar);
+        timeline.appendChild(dot);
+
+        const cells = [
+          `<div class="phase-cell wbs">${task.wbs}</div>`,
+          `<div class="phase-cell task">${task.label}</div>`,
+          `<div class="phase-cell owner">${task.owner}</div>`,
+          `<div class="phase-cell output">${task.output}</div>`
+        ];
+
+        row.innerHTML = cells.join('');
+        const timelineCell = document.createElement('div');
+        timelineCell.className = 'phase-cell';
+        timelineCell.appendChild(timeline);
+        row.appendChild(timelineCell);
+        grid.appendChild(row);
+      });
+
+      chart.appendChild(grid);
+
+      const legend = document.createElement('div');
+      legend.className = 'phase-legend';
+      legend.innerHTML = `
+        <span class="phase-legend-item"><span class="phase-legend-swatch"></span>Aktif çalışma</span>
+        <span class="phase-legend-item"><span class="phase-legend-dot"></span>Teslimat noktası</span>
+      `;
+
+      card.appendChild(head);
+      card.appendChild(chart);
+      card.appendChild(legend);
+      mountNode.appendChild(card);
+    });
+  }
+
+  createPhaseRoadmap(phasePlans);
+</script>
+
+</body>
+</html>

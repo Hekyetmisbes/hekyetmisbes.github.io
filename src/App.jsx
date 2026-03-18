@@ -230,10 +230,16 @@ const Portfolio = () => {
     }
   };
   const openProjectFromCard = (project) => {
-    const primaryLink = project.links?.[0]?.url;
-    if (!primaryLink) return;
-    trackEvent("project_card_click", { project: project.title, url: primaryLink });
-    window.open(primaryLink, "_blank", "noopener,noreferrer");
+    const primaryLink = project.links?.[0];
+    const primaryUrl = primaryLink?.url;
+    const shouldOpenNewTab = primaryLink?.newTab ?? true;
+    if (!primaryUrl) return;
+    trackEvent("project_card_click", { project: project.title, url: primaryUrl });
+    if (shouldOpenNewTab) {
+      window.open(primaryUrl, "_blank", "noopener,noreferrer");
+      return;
+    }
+    window.location.href = primaryUrl;
   };
 
   const handleProjectCardClick = (event, project) => {
@@ -285,6 +291,18 @@ const Portfolio = () => {
   ];
 
     const projects = [
+    {
+      title: "The Final Loop",
+      genre: "Psychological Puzzle / Pitch",
+      engine: "Static Web",
+      status: "Pitch Available",
+      desc: "A written pitch page for a psychological puzzle escape-room project, covering concept, atmosphere, systems, roadmap, and delivery plan.",
+      technologies: ["HTML", "CSS", "JavaScript"],
+      impact: "Turns the project into a shareable standalone presentation at the /thefinalloop/ route.",
+      links: [
+        { label: "Pitch", url: "/thefinalloop/", event: "project_internal_click", newTab: false }
+      ]
+    },
     {
       title: "Delivery Driver",
       genre: "3D Simulation",
@@ -664,7 +682,7 @@ const Portfolio = () => {
                     
                     <div className="flex gap-3">
                       {project.links.map((link, i) => (
-                        <a key={i} href={link.url} target="_blank" rel="noreferrer" onClick={() => trackEvent(link.event, { project: project.title, label: link.label })} className="text-slate-400 hover:text-white transition-colors flex items-center gap-1 text-sm font-bold">
+                        <a key={i} href={link.url} target={link.newTab === false ? undefined : "_blank"} rel={link.newTab === false ? undefined : "noreferrer"} onClick={() => trackEvent(link.event, { project: project.title, label: link.label })} className="text-slate-400 hover:text-white transition-colors flex items-center gap-1 text-sm font-bold">
                           {link.label} <ExternalLink size={14} />
                         </a>
                       ))}

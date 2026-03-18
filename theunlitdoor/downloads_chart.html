@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2024 — Worldwide Top Mobile Game Genres by Downloads</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg-primary: #0D1117;
+    --bg-secondary: #161B22;
+    --bg-card: #1C2129;
+    --border: #30363D;
+    --text-primary: #E6EDF3;
+    --text-secondary: #8B949E;
+    --text-tertiary: #484F58;
+    --accent-teal: #2DD4A8;
+    --accent-orange: #F97066;
+    --accent-purple: #7B6FDE;
+  }
+
+  body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.6;
+    padding: 2rem;
+    min-height: 100vh;
+  }
+
+  .page-title {
+    text-align: center;
+    margin-bottom: 0.25rem;
+    font-size: 1.35rem;
+    font-weight: 700;
+  }
+
+  .page-subtitle {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    margin-bottom: 2rem;
+  }
+
+  .main-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: 2rem;
+    max-width: 1300px;
+    margin: 0 auto;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem;
+  }
+
+  /* Left: Donut */
+  .donut-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .donut-section h3 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 0.75rem;
+  }
+
+  .region-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.3rem 1rem;
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+  }
+
+  .donut-section canvas {
+    max-width: 400px;
+    max-height: 400px;
+  }
+
+  /* Right: Genre Cards */
+  .genres-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .genre-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.1rem;
+    transition: border-color 0.2s;
+  }
+
+  .genre-card:hover {
+    border-color: var(--text-tertiary);
+  }
+
+  .genre-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .genre-rank {
+    font-size: 1.3rem;
+    font-weight: 700;
+    min-width: 28px;
+  }
+
+  .genre-name {
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
+
+  .genre-downloads {
+    font-size: 0.78rem;
+    color: var(--accent-teal);
+    font-weight: 600;
+    margin-bottom: 0.7rem;
+  }
+
+  .genre-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.35rem 0.75rem;
+  }
+
+  .stat-row {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+  }
+
+  .stat-row .label { opacity: 0.7; }
+
+  .stat-row .value { font-weight: 600; }
+  .stat-row .value.up { color: var(--accent-teal); }
+  .stat-row .value.down { color: var(--accent-orange); }
+
+  .color-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .source-note {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 0.72rem;
+    margin-top: 1.5rem;
+    opacity: 0.6;
+  }
+
+  @media (max-width: 960px) {
+    .main-layout { grid-template-columns: 1fr; }
+    .genres-grid { grid-template-columns: 1fr 1fr; }
+    body { padding: 1rem; }
+  }
+
+  @media (max-width: 560px) {
+    .genres-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<h1 class="page-title">2024 | Worldwide Top Mobile Game Genres by Downloads</h1>
+<p class="page-subtitle">Powered by Sensor Tower Game Taxonomy &mdash; iOS &amp; Google Play</p>
+
+<div class="main-layout">
+  <!-- Left: Donut -->
+  <div class="donut-section">
+    <h3>Share by Game Genre / Subgenre</h3>
+    <div class="region-badge">&#9664; &nbsp; Worldwide &nbsp; &#9654;</div>
+    <canvas id="donutChart"></canvas>
+  </div>
+
+  <!-- Right: Genre Cards -->
+  <div class="genres-grid" id="genreCards"></div>
+</div>
+
+<p class="source-note">Source: Sensor Tower — State of Mobile Gaming 2025 Report (2024 full-year data). Total: 49.6B downloads, $80.9B IAP revenue.</p>
+
+<script>
+Chart.register(ChartDataLabels);
+
+const DARK_BG = '#161B22';
+
+// ── Genre data (Sensor Tower 2024 full-year, worldwide) ──
+const genreData = [
+  {
+    rank: 1, name: 'Simulation', downloads: 9.8, color: '#45B7D1',
+    yoyDl: +0.4, yoyRev: +8, pctDl: 19.8, pctRev: 7.5,
+    subgenres: [
+      { label: 'Simulator',       value: 6.2, color: '#55C7E1' },
+      { label: 'Racing/Driving',  value: 5.0, color: '#35A7C1' },
+      { label: 'Tycoon/Idle',     value: 4.2, color: '#2597B1' },
+      { label: 'Other Sim',       value: 4.4, color: '#1587A1' },
+    ]
+  },
+  {
+    rank: 2, name: 'Puzzle', downloads: 9.7, color: '#F7B267',
+    yoyDl: -3, yoyRev: +14, pctDl: 19.6, pctRev: 15.1,
+    subgenres: [
+      { label: 'Match Swap',     value: 8.7, color: '#F7C277' },
+      { label: 'Sort Puzzle',    value: 3.5, color: '#E8A347' },
+      { label: 'Physical Puzzle',value: 3.2, color: '#D99437' },
+      { label: 'Other Puzzle',   value: 4.2, color: '#CA8527' },
+    ]
+  },
+  {
+    rank: 3, name: 'Arcade', downloads: 9.6, color: '#96E6A1',
+    yoyDl: -12.5, yoyRev: -5, pctDl: 19.4, pctRev: 3.7,
+    subgenres: [
+      { label: 'Platformer/Runner', value: 8.3, color: '#A6F6B1' },
+      { label: 'Arcade Racing',     value: 3.8, color: '#76D681' },
+      { label: 'Arcade Action',     value: 4.0, color: '#56C661' },
+      { label: 'Other Arcade',      value: 3.3, color: '#46B651' },
+    ]
+  },
+  {
+    rank: 4, name: 'Lifestyle', downloads: 4.8, color: '#87CEEB',
+    yoyDl: -5, yoyRev: -3, pctDl: 9.7, pctRev: 3.1,
+    subgenres: [
+      { label: 'Customization',  value: 4.0, color: '#97DEEB' },
+      { label: 'Interactive Story', value: 3.2, color: '#67BEDD' },
+      { label: 'Other Lifestyle', value: 2.5, color: '#57AECE' },
+    ]
+  },
+  {
+    rank: 5, name: 'Tabletop', downloads: 2.8, color: '#FFA07A',
+    yoyDl: -1, yoyRev: +5, pctDl: 5.6, pctRev: 2.5,
+    subgenres: [
+      { label: 'Board Games',  value: 3.0, color: '#FFB08A' },
+      { label: 'Card Games',   value: 2.6, color: '#EF906A' },
+    ]
+  },
+  {
+    rank: 6, name: 'Action', downloads: 2.6, color: '#FF6B8A',
+    yoyDl: -2, yoyRev: +46, pctDl: 5.2, pctRev: 4.5,
+    subgenres: [
+      { label: "Beat'em Up",   value: 2.8, color: '#FF7B9A' },
+      { label: 'Action Adv.',  value: 2.4, color: '#FF5B7A' },
+    ]
+  },
+  {
+    rank: 7, name: 'Shooter', downloads: 2.6, color: '#DDA0DD',
+    yoyDl: +3, yoyRev: +8, pctDl: 5.2, pctRev: 6.2,
+    subgenres: [
+      { label: 'Battle Royale', value: 3.1, color: '#EDB0ED' },
+      { label: 'FPS/TPS',       value: 2.1, color: '#CDA0CD' },
+    ]
+  },
+  {
+    rank: 8, name: 'Strategy', downloads: 2.0, color: '#7B6FDE',
+    yoyDl: +12.5, yoyRev: +16.2, pctDl: 4.0, pctRev: 21.6,
+    subgenres: [
+      { label: '4X Strategy',  value: 10.0, color: '#9B8FEE' },
+      { label: 'Coin Looters', value: 5.1, color: '#8A7EDE' },
+      { label: 'MOBA',         value: 3.0, color: '#6B5FCE' },
+      { label: 'Other Strat.', value: 3.5, color: '#5C50BE' },
+    ]
+  },
+];
+
+// ── Render Genre Cards ──
+const cardsContainer = document.getElementById('genreCards');
+genreData.forEach(g => {
+  const dlDir = g.yoyDl >= 0 ? 'up' : 'down';
+  const revDir = g.yoyRev >= 0 ? 'up' : 'down';
+  const dlArrow = g.yoyDl >= 0 ? '▲' : '▼';
+  const revArrow = g.yoyRev >= 0 ? '▲' : '▼';
+
+  cardsContainer.innerHTML += `
+    <div class="genre-card">
+      <div class="genre-header">
+        <span class="color-dot" style="background:${g.color}"></span>
+        <span class="genre-rank">#${g.rank}</span>
+        <span class="genre-name">${g.name}</span>
+      </div>
+      <div class="genre-downloads">${g.downloads}B Downloads</div>
+      <div class="genre-stats">
+        <div class="stat-row">
+          <span class="label">YoY Downloads</span>
+          <span class="value ${dlDir}">${dlArrow} ${Math.abs(g.yoyDl)}%</span>
+        </div>
+        <div class="stat-row">
+          <span class="label">YoY Revenue</span>
+          <span class="value ${revDir}">${revArrow} ${Math.abs(g.yoyRev)}%</span>
+        </div>
+        <div class="stat-row">
+          <span class="label">% of All DL</span>
+          <span class="value">${g.pctDl}%</span>
+        </div>
+        <div class="stat-row">
+          <span class="label">% of All IAP Rev</span>
+          <span class="value">${g.pctRev}%</span>
+        </div>
+      </div>
+    </div>
+  `;
+});
+
+// ── Donut Chart ──
+// Inner ring: main genres (by download share)
+const innerData = genreData.map(g => ({ label: g.name, value: g.pctDl, color: g.color }));
+
+// Outer ring: all subgenres flattened
+const outerData = genreData.flatMap(g => g.subgenres);
+
+new Chart(document.getElementById('donutChart'), {
+  type: 'doughnut',
+  data: {
+    datasets: [
+      {
+        // Outer — subgenres
+        data: outerData.map(s => s.value),
+        backgroundColor: outerData.map(s => s.color),
+        borderColor: DARK_BG,
+        borderWidth: 2,
+        weight: 1,
+        datalabels: {
+          display: ctx => outerData[ctx.dataIndex].value >= 4,
+          formatter: (_, ctx) => outerData[ctx.dataIndex].label,
+          color: '#0D1117',
+          font: { size: 8, weight: 600 },
+          anchor: 'center',
+          align: 'center',
+          textAlign: 'center',
+        }
+      },
+      {
+        // Inner — main genres
+        data: innerData.map(g => g.value),
+        backgroundColor: innerData.map(g => g.color),
+        borderColor: DARK_BG,
+        borderWidth: 2,
+        weight: 1,
+        datalabels: {
+          display: ctx => innerData[ctx.dataIndex].value >= 5,
+          formatter: (_, ctx) => innerData[ctx.dataIndex].label,
+          color: '#0D1117',
+          font: { size: 10, weight: 700 },
+          anchor: 'center',
+          align: 'center',
+          textAlign: 'center',
+        }
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    cutout: '30%',
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        backgroundColor: '#1C2129',
+        titleColor: '#E6EDF3',
+        bodyColor: '#8B949E',
+        borderColor: '#30363D',
+        borderWidth: 1,
+        callbacks: {
+          label: ctx => {
+            const src = ctx.datasetIndex === 0 ? outerData : innerData;
+            return ` ${src[ctx.dataIndex].label}: ${ctx.raw}%`;
+          }
+        }
+      }
+    }
+  }
+});
+</script>
+</body>
+</html>

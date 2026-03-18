@@ -1,0 +1,104 @@
+<div style="padding: 1rem 0; overflow-x: auto; background: #0D1117; border-radius: 12px; padding: 1.5rem;">
+<div style="min-width: 880px;">
+
+<div style="margin-bottom: 1.5rem;">
+  <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #7B6FDE; font-weight: 500; margin-bottom: 4px;">Faz 1</div>
+  <div style="font-size: 18px; font-weight: 500; color: #E6EDF3; margin-bottom: 2px;">Ön Üretim</div>
+  <div style="font-size: 13px; color: #8B949E;">Hafta 1–2 &middot; Milestone: M1 — Ön üretim tamamlandı (Hafta 2 sonu)</div>
+</div>
+
+<div id="chart1"></div>
+
+<div style="display: flex; gap: 16px; margin-top: 1.25rem; font-size: 12px; color: #8B949E;">
+  <span style="display: flex; align-items: center; gap: 4px;"><span style="width: 10px; height: 10px; border-radius: 2px; background: #7B6FDE;"></span>Aktif çalışma</span>
+  <span style="display: flex; align-items: center; gap: 4px;"><span style="width: 8px; height: 8px; border-radius: 50%; background: #7B6FDE;"></span>Teslimat</span>
+</div>
+
+</div>
+</div>
+
+<script>
+const tasks = [
+  { wbs: "1.1", label: "Proje kapsamı ve konsept hizalama", owner: "Y1 + T1", start: 0, span: 1, output: "Kapsam dokümanı" },
+  { wbs: "1.2", label: "Referans analizi ve moodboard", owner: "T2 + T1", start: 0, span: 2, output: "Görsel yön dokümanı" },
+  { wbs: "1.3", label: "Oda akışı ve bölüm yapısı tasarımı", owner: "T1", start: 0, span: 2, output: "Level flow haritası" },
+  { wbs: "1.4", label: "Teknik iskelet ve proje mimarisi", owner: "Y1", start: 0, span: 2, output: "Unity proje iskeleti" },
+  { wbs: "1.5", label: "Etkileşim sistemi prensipleri prototipi", owner: "Y2", start: 1, span: 1, output: "Temel input test sahnesi" },
+  { wbs: "1.6", label: "UI mockup'ları ve çevre seti konseptleri", owner: "T2", start: 1, span: 1, output: "UI/UX wireframe seti" },
+];
+
+const totalWeeks = 12;
+const container = document.getElementById('chart1');
+const cols = '36px 1fr 90px 150px minmax(0, 500px)';
+
+const headerRow = document.createElement('div');
+headerRow.style.cssText = `display: grid; grid-template-columns: ${cols}; gap: 0; align-items: end; margin-bottom: 6px; padding-bottom: 6px; border-bottom: 0.5px solid #30363D;`;
+['WBS', 'Görev', 'Sorumlu', 'Beklenen Çıktı', ''].forEach((h, i) => {
+  const d = document.createElement('div');
+  d.style.cssText = 'font-size: 11px; color: #484F58; text-transform: uppercase; letter-spacing: 0.5px;' + (i === 0 ? 'padding-left: 2px;' : '') + (i === 2 ? 'text-align: center;' : '') + (i === 3 ? 'padding-left: 6px;' : '');
+  if (i === 4) {
+    d.style.display = 'grid';
+    d.style.gridTemplateColumns = `repeat(${totalWeeks}, 1fr)`;
+    for (let w = 1; w <= totalWeeks; w++) {
+      const ws = document.createElement('div');
+      ws.style.cssText = 'text-align: center; font-size: 11px; color: #484F58;';
+      ws.textContent = w;
+      d.appendChild(ws);
+    }
+  } else {
+    d.textContent = h;
+  }
+  headerRow.appendChild(d);
+});
+container.appendChild(headerRow);
+
+tasks.forEach(t => {
+  const row = document.createElement('div');
+  row.style.cssText = `display: grid; grid-template-columns: ${cols}; gap: 0; align-items: center; padding: 5px 0;`;
+
+  const wbs = document.createElement('div');
+  wbs.style.cssText = 'font-size: 12px; color: #8B949E; font-weight: 500; padding-left: 2px;';
+  wbs.textContent = t.wbs;
+
+  const lbl = document.createElement('div');
+  lbl.style.cssText = 'font-size: 13px; color: #E6EDF3; line-height: 1.3; padding-right: 8px;';
+  lbl.textContent = t.label;
+
+  const own = document.createElement('div');
+  own.style.cssText = 'font-size: 11px; color: #8B949E; text-align: center;';
+  own.textContent = t.owner;
+
+  const out = document.createElement('div');
+  out.style.cssText = 'font-size: 11px; color: #A99EF0; padding-left: 6px; line-height: 1.3;';
+  out.textContent = t.output;
+
+  const grid = document.createElement('div');
+  grid.style.cssText = `position: relative; height: 30px; display: grid; grid-template-columns: repeat(${totalWeeks}, 1fr);`;
+
+  for (let i = 0; i < totalWeeks; i++) {
+    const cell = document.createElement('div');
+    cell.style.cssText = 'border-left: 0.5px solid #30363D; height: 100%;' + (i >= 2 ? 'opacity: 0.3;' : '');
+    if (i === totalWeeks - 1) cell.style.borderRight = '0.5px solid #30363D';
+    grid.appendChild(cell);
+  }
+
+  const bar = document.createElement('div');
+  const l = (t.start / totalWeeks * 100);
+  const w = (t.span / totalWeeks * 100);
+  bar.style.cssText = `position: absolute; left: ${l}%; width: ${w}%; top: 4px; height: 22px; background: rgba(123, 111, 222, 0.15); border: 1px solid #7B6FDE; border-radius: 4px; z-index: 1;`;
+
+  const dot = document.createElement('div');
+  const dotPos = ((t.start + t.span) / totalWeeks * 100);
+  dot.style.cssText = `position: absolute; left: calc(${dotPos}% - 4px); top: 11px; width: 8px; height: 8px; border-radius: 50%; background: #7B6FDE; z-index: 2;`;
+
+  grid.appendChild(bar);
+  grid.appendChild(dot);
+
+  row.appendChild(wbs);
+  row.appendChild(lbl);
+  row.appendChild(own);
+  row.appendChild(out);
+  row.appendChild(grid);
+  container.appendChild(row);
+});
+</script>

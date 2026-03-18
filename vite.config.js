@@ -4,7 +4,7 @@ import { fileURLToPath, URL } from "node:url";
 
 function slashRedirectPlugin() {
   const redirect = (req, res, next) => {
-    if (req.url === "/easter-egg" || req.url === "/theunlitdoor") {
+    if (req.url === "/easter-egg" || req.url === "/theunlitdoor" || req.url === "/thefinalloop") {
       res.statusCode = 302;
       res.setHeader("Location", req.url + "/");
       res.end();
@@ -32,7 +32,8 @@ export default defineConfig({
       input: {
         main: fileURLToPath(new URL("./index.html", import.meta.url)),
         easterEgg: fileURLToPath(new URL("./easter-egg/index.html", import.meta.url)),
-        theUnlitDoor: fileURLToPath(new URL("./theunlitdoor/index.html", import.meta.url))
+        theUnlitDoor: fileURLToPath(new URL("./theunlitdoor/index.html", import.meta.url)),
+        theFinalLoop: fileURLToPath(new URL("./thefinalloop/index.html", import.meta.url))
       }
     }
   }
