@@ -294,13 +294,25 @@ const Portfolio = () => {
     {
       title: "The Final Loop",
       genre: "Psychological Puzzle / Pitch",
-      engine: "Static Web",
+      engine: "Unreal",
       status: "Pitch Available",
       desc: "A written pitch page for a psychological puzzle escape-room project, covering concept, atmosphere, systems, roadmap, and delivery plan.",
       technologies: ["HTML", "CSS", "JavaScript"],
       impact: "Turns the project into a shareable standalone presentation at the /thefinalloop/ route.",
       links: [
         { label: "Pitch", url: "/thefinalloop/", event: "project_internal_click", newTab: false }
+      ]
+    },
+    {
+      title: "The Unlit Door",
+      genre: "Psychological Puzzle / Pitch",
+      engine: "Unity",
+      status: "Pitch Available",
+      desc: "A written pitch page for a psychological narrative puzzle project, detailing concept, atmosphere, systems, and production plan.",
+      technologies: ["Unity", "C#", "Narrative Design"],
+      impact: "Makes the project accessible as a dedicated showcase at the /theunlitdoor/ route.",
+      links: [
+        { label: "Pitch", url: "/theunlitdoor/", event: "project_internal_click", newTab: false }
       ]
     },
     {
