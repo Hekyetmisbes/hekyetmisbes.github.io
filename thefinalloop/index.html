@@ -823,6 +823,80 @@
     border-radius: 999px;
   }
 
+  /* Embedded document */
+  .document-panel {
+    margin-top: 2rem;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    background:
+      linear-gradient(180deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0) 100%),
+      var(--bg-card);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.24);
+  }
+  .document-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--border);
+    background: rgba(6, 11, 20, 0.72);
+    flex-wrap: wrap;
+  }
+  .document-kicker {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--accent-cyan);
+    margin-bottom: 0.25rem;
+  }
+  .document-title {
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+  .document-subtitle {
+    color: var(--text-tertiary);
+    font-size: 0.8rem;
+    margin-top: 0.25rem;
+  }
+  .document-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+  .document-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    padding: 0.7rem 1rem;
+    border-radius: 6px;
+    border: 1px solid rgba(0, 212, 255, 0.22);
+    background: rgba(0, 212, 255, 0.08);
+    color: var(--accent-cyan);
+    text-decoration: none;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: border-color 0.25s, background 0.25s, transform 0.25s;
+  }
+  .document-button:hover {
+    border-color: rgba(0, 212, 255, 0.42);
+    background: rgba(0, 212, 255, 0.14);
+    transform: translateY(-1px);
+  }
+  .document-frame {
+    display: block;
+    width: 100%;
+    height: min(82vh, 960px);
+    border: 0;
+    background: #0a101c;
+  }
+
   /* Risk cards */
   .risk-grid {
     display: grid;
@@ -1036,6 +1110,7 @@
     .phase-grid-row {
       grid-template-columns: 38px minmax(0, 1.6fr) 74px minmax(92px, 1fr) minmax(0, 2.2fr);
     }
+    .document-frame { height: 70vh; }
   }
 </style>
 </head>
@@ -1079,6 +1154,7 @@
   <a href="#benzer">Benzer Oyunlar</a>
   <a href="#plan">Geliştirme Planı</a>
   <a href="#riskler">Riskler</a>
+  <a href="#pitch-pdf">PDF</a>
 </nav>
 
 <!-- 1. YÜKSEK KONSEPT -->
@@ -1709,6 +1785,36 @@
       <strong style="color: var(--accent-cyan);">"hatırlamak neden hayatta kalmaktan daha önemli hale gelir?"</strong><br>
       sorusunu oynanışa dönüştüren; küçük kapsamla büyük etki üretmeyi hedefleyen güçlü bir pitch projesidir.
     </p>
+  </div>
+</div>
+</section>
+
+<!-- 10. PDF -->
+<section class="section" id="pitch-pdf">
+<div class="container">
+  <div class="section-label">Ek Dokuman</div>
+  <h2>Written Pitch PDF</h2>
+
+  <p class="lead">
+    Pitch dokumanini sayfa icinde incelemek veya yeni sekmede acmak icin asagidaki alani kullanabilirsiniz.
+  </p>
+
+  <div class="document-panel">
+    <div class="document-toolbar">
+      <div>
+        <div class="document-kicker">Embedded Viewer</div>
+        <div class="document-title">Written Pitch Dokumani - Calisma Basligi (2)</div>
+        <div class="document-subtitle">Tarayiciniz yerlesik PDF goruntulemeyi destekliyorsa dokuman burada acilir.</div>
+      </div>
+      <div class="document-actions">
+        <a class="document-button" href="Written%20Pitch%20Dok%C3%BCman%C4%B1%20-%20%C3%87al%C4%B1%C5%9Fma%20Ba%C5%9Fl%C4%B1%C4%9F%C4%B1%20(2).pdf" target="_blank" rel="noreferrer">Open PDF</a>
+      </div>
+    </div>
+    <iframe
+      class="document-frame"
+      title="The Final Loop Written Pitch PDF"
+      src="Written%20Pitch%20Dok%C3%BCman%C4%B1%20-%20%C3%87al%C4%B1%C5%9Fma%20Ba%C5%9Fl%C4%B1%C4%9F%C4%B1%20(2).pdf"
+    ></iframe>
   </div>
 </div>
 </section>

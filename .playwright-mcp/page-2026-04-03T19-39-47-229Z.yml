@@ -1,0 +1,517 @@
+- generic [ref=e2]:
+  - region
+  - generic [ref=e3]:
+    - link "Skip to content" [ref=e4] [cursor=pointer]:
+      - /url: "#start-of-content"
+    - banner [ref=e6]:
+      - heading "Navigation Menu" [level=2] [ref=e7]
+      - generic [ref=e9]:
+        - button "Toggle navigation" [ref=e11] [cursor=pointer]
+        - link "Homepage" [ref=e17] [cursor=pointer]:
+          - /url: /
+          - img [ref=e18]
+        - generic [ref=e20]:
+          - link "Sign in" [ref=e21] [cursor=pointer]:
+            - /url: /login?return_to=https%3A%2F%2Fgithub.com%2FHekyetmisbes%2Fplatform
+          - button "Appearance settings" [ref=e24] [cursor=pointer]:
+            - img
+  - main [ref=e28]:
+    - generic [ref=e29]:
+      - generic [ref=e30]:
+        - generic [ref=e32]:
+          - img [ref=e33]
+          - link "Hekyetmisbes" [ref=e36] [cursor=pointer]:
+            - /url: /Hekyetmisbes
+          - generic [ref=e37]: /
+          - strong [ref=e38]:
+            - link "platform" [ref=e39] [cursor=pointer]:
+              - /url: /Hekyetmisbes/platform
+          - generic [ref=e40]: Public
+        - generic [ref=e41]:
+          - list:
+            - listitem [ref=e42]:
+              - link "You must be signed in to change notification settings" [ref=e43] [cursor=pointer]:
+                - /url: /login?return_to=%2FHekyetmisbes%2Fplatform
+                - img [ref=e44]
+                - text: Notifications
+            - listitem [ref=e46]:
+              - link "Fork 0" [ref=e47] [cursor=pointer]:
+                - /url: /login?return_to=%2FHekyetmisbes%2Fplatform
+                - img [ref=e48]
+                - text: Fork
+                - generic "0" [ref=e50]
+            - listitem [ref=e51]:
+              - link "You must be signed in to star a repository" [ref=e53] [cursor=pointer]:
+                - /url: /login?return_to=%2FHekyetmisbes%2Fplatform
+                - img [ref=e54]
+                - text: Star
+                - generic "0 users starred this repository" [ref=e56]: "0"
+      - navigation "Repository" [ref=e57]:
+        - list [ref=e58]:
+          - listitem [ref=e59]:
+            - link "Code" [ref=e60] [cursor=pointer]:
+              - /url: /Hekyetmisbes/platform
+              - img [ref=e61]
+              - generic [ref=e63]: Code
+          - listitem [ref=e64]:
+            - link "Issues" [ref=e65] [cursor=pointer]:
+              - /url: /Hekyetmisbes/platform/issues
+              - img [ref=e66]
+              - generic [ref=e69]: Issues
+          - listitem [ref=e70]:
+            - link "Pull requests" [ref=e71] [cursor=pointer]:
+              - /url: /Hekyetmisbes/platform/pulls
+              - img [ref=e72]
+              - generic [ref=e74]: Pull requests
+          - listitem [ref=e75]:
+            - link "Actions" [ref=e76] [cursor=pointer]:
+              - /url: /Hekyetmisbes/platform/actions
+              - img [ref=e77]
+              - generic [ref=e79]: Actions
+          - listitem [ref=e80]:
+            - link "Projects" [ref=e81] [cursor=pointer]:
+              - /url: /Hekyetmisbes/platform/projects
+              - img [ref=e82]
+              - generic [ref=e84]: Projects
+          - listitem [ref=e85]:
+            - link "Security and quality" [ref=e86] [cursor=pointer]:
+              - /url: /Hekyetmisbes/platform/security
+              - img [ref=e87]
+              - generic [ref=e89]: Security and quality
+          - listitem [ref=e90]:
+            - link "Insights" [ref=e91] [cursor=pointer]:
+              - /url: /Hekyetmisbes/platform/pulse
+              - img [ref=e92]
+              - generic [ref=e94]: Insights
+    - generic [ref=e107]:
+      - heading "Hekyetmisbes/platform" [level=1] [ref=e109]
+      - generic [ref=e110]:
+        - generic [ref=e113]:
+          - generic [ref=e114]:
+            - generic [ref=e115]:
+              - button "main branch" [ref=e117] [cursor=pointer]:
+                - generic [ref=e118]:
+                  - generic [ref=e120]:
+                    - img [ref=e122]
+                    - generic [ref=e125]: main
+                  - generic:
+                    - img
+              - generic [ref=e126]:
+                - link "Go to Branches page" [ref=e127] [cursor=pointer]:
+                  - /url: /Hekyetmisbes/platform/branches
+                  - img [ref=e128]
+                - link "Go to Tags page" [ref=e130] [cursor=pointer]:
+                  - /url: /Hekyetmisbes/platform/tags
+                  - img [ref=e131]
+            - generic [ref=e133]:
+              - button "Go to file" [ref=e136] [cursor=pointer]:
+                - generic [ref=e138]: Go to file
+              - button "Code" [ref=e139] [cursor=pointer]:
+                - generic [ref=e140]:
+                  - generic:
+                    - img
+                  - generic [ref=e141]: Code
+                  - generic:
+                    - img
+          - generic [ref=e142]:
+            - generic [ref=e143]:
+              - heading "Folders and files" [level=2] [ref=e144]
+              - table "Folders and files" [ref=e145]:
+                - rowgroup:
+                  - row "Name Last commit message Last commit date":
+                    - columnheader "Name"
+                    - columnheader "Last commit message":
+                      - generic "Last commit message"
+                    - columnheader "Last commit date":
+                      - generic "Last commit date"
+                - rowgroup [ref=e146]:
+                  - 'row "Latest commit Hekyetmisbes commits by Hekyetmisbes Merge pull request #2 from Hekyetmisbes/game-improvements Open commit details Commit 0b89432 · Jan 4, 20263 months ago History View commit history for this file." [ref=e147]':
+                    - 'cell "Latest commit Hekyetmisbes commits by Hekyetmisbes Merge pull request #2 from Hekyetmisbes/game-improvements Open commit details Commit 0b89432 · Jan 4, 20263 months ago History View commit history for this file." [ref=e148]':
+                      - generic [ref=e149]:
+                        - heading "Latest commit" [level=2] [ref=e150]
+                        - generic [ref=e151]:
+                          - generic [ref=e153]:
+                            - link "Hekyetmisbes" [ref=e154] [cursor=pointer]:
+                              - /url: /Hekyetmisbes
+                              - img "Hekyetmisbes" [ref=e155]
+                            - link "commits by Hekyetmisbes" [ref=e156] [cursor=pointer]:
+                              - /url: /Hekyetmisbes/platform/commits?author=Hekyetmisbes
+                              - text: Hekyetmisbes
+                          - generic [ref=e157]:
+                            - generic [ref=e159]:
+                              - link "Merge pull request" [ref=e160] [cursor=pointer]:
+                                - /url: /Hekyetmisbes/platform/commit/0b894324adb324ccb087a05427103e527a4e68bf
+                              - link "#2" [ref=e161] [cursor=pointer]:
+                                - /url: https://github.com/Hekyetmisbes/platform/pull/2
+                              - link "from Hekyetmisbes/game-improvements" [ref=e162] [cursor=pointer]:
+                                - /url: /Hekyetmisbes/platform/commit/0b894324adb324ccb087a05427103e527a4e68bf
+                            - button "Open commit details" [ref=e163] [cursor=pointer]:
+                              - img [ref=e164]
+                        - generic [ref=e166]:
+                          - generic [ref=e168]:
+                            - link "Commit 0b89432" [ref=e169] [cursor=pointer]:
+                              - /url: /Hekyetmisbes/platform/commit/0b894324adb324ccb087a05427103e527a4e68bf
+                              - text: 0b89432
+                            - text: ·
+                            - generic "Jan 4, 2026, 4:46 PM GMT+3" [ref=e170]: Jan 4, 20263 months ago
+                          - generic [ref=e171]:
+                            - heading "History" [level=2] [ref=e172]
+                            - link "View commit history for this file." [ref=e174] [cursor=pointer]:
+                              - /url: /Hekyetmisbes/platform/commits/main/
+                              - generic [ref=e175]:
+                                - generic:
+                                  - img
+                  - row ".vscode, (Directory) Update scenes, input, and project settings; add docs. Dec 23, 20254 months ago" [ref=e176]:
+                    - cell ".vscode, (Directory)" [ref=e177]:
+                      - generic [ref=e178]:
+                        - img [ref=e179]
+                        - link ".vscode, (Directory)" [ref=e184] [cursor=pointer]:
+                          - /url: /Hekyetmisbes/platform/tree/main/.vscode
+                          - text: .vscode
+                    - cell "Update scenes, input, and project settings; add docs." [ref=e185]:
+                      - link "Update scenes, input, and project settings; add docs." [ref=e188] [cursor=pointer]:
+                        - /url: /Hekyetmisbes/platform/commit/767dc419727f9817f8d006c8071501be6e867057
+                    - cell "Dec 23, 20254 months ago" [ref=e189]:
+                      - generic [ref=e190]: Dec 23, 20254 months ago
+                  - row "Assets, (Directory) Add Unity meta files for Phase 4 assets Jan 4, 20263 months ago" [ref=e191]:
+                    - cell "Assets, (Directory)" [ref=e192]:
+                      - generic [ref=e193]:
+                        - img [ref=e194]
+                        - link "Assets, (Directory)" [ref=e199] [cursor=pointer]:
+                          - /url: /Hekyetmisbes/platform/tree/main/Assets
+                          - text: Assets
+                    - cell "Add Unity meta files for Phase 4 assets" [ref=e200]:
+                      - link "Add Unity meta files for Phase 4 assets" [ref=e203] [cursor=pointer]:
+                        - /url: /Hekyetmisbes/platform/commit/cef0cebb3e6cc8244897195e151d421954d36e58
+                    - cell "Jan 4, 20263 months ago" [ref=e204]:
+                      - generic [ref=e205]: Jan 4, 20263 months ago
+                  - row "Packages, (Directory) Update scenes, input, and project settings; add docs. Dec 23, 20254 months ago" [ref=e206]:
+                    - cell "Packages, (Directory)" [ref=e207]:
+                      - generic [ref=e208]:
+                        - img [ref=e209]
+                        - link "Packages, (Directory)" [ref=e214] [cursor=pointer]:
+                          - /url: /Hekyetmisbes/platform/tree/main/Packages
+                          - text: Packages
+                    - cell "Update scenes, input, and project settings; add docs." [ref=e215]:
+                      - link "Update scenes, input, and project settings; add docs." [ref=e218] [cursor=pointer]:
+                        - /url: /Hekyetmisbes/platform/commit/767dc419727f9817f8d006c8071501be6e867057
+                    - cell "Dec 23, 20254 months ago" [ref=e219]:
+                      - generic [ref=e220]: Dec 23, 20254 months ago
+                  - row "ProjectSettings, (Directory) Update scenes, input, and project settings; add docs. Dec 23, 20254 months ago" [ref=e221]:
+                    - cell "ProjectSettings, (Directory)" [ref=e222]:
+                      - generic [ref=e223]:
+                        - img [ref=e224]
+                        - link "ProjectSettings, (Directory)" [ref=e229] [cursor=pointer]:
+                          - /url: /Hekyetmisbes/platform/tree/main/ProjectSettings
+                          - text: ProjectSettings
+                    - cell "Update scenes, input, and project settings; add docs." [ref=e230]:
+                      - link "Update scenes, input, and project settings; add docs." [ref=e233] [cursor=pointer]:
+                        - /url: /Hekyetmisbes/platform/commit/767dc419727f9817f8d006c8071501be6e867057
+                    - cell "Dec 23, 20254 months ago" [ref=e234]:
+                      - generic [ref=e235]: Dec 23, 20254 months ago
+                  - row ".gitignore, (File) Add virtual joystick UI prefab and input support Dec 23, 20254 months ago" [ref=e236]:
+                    - cell ".gitignore, (File)" [ref=e237]:
+                      - generic [ref=e238]:
+                        - img [ref=e239]
+                        - link ".gitignore, (File)" [ref=e244] [cursor=pointer]:
+                          - /url: /Hekyetmisbes/platform/blob/main/.gitignore
+                          - text: .gitignore
+                    - cell "Add virtual joystick UI prefab and input support" [ref=e245]:
+                      - link "Add virtual joystick UI prefab and input support" [ref=e248] [cursor=pointer]:
+                        - /url: /Hekyetmisbes/platform/commit/89ad13860f102b5c0c35cf6fcf00f05c0c8eaef3
+                    - cell "Dec 23, 20254 months ago" [ref=e249]:
+                      - generic [ref=e250]: Dec 23, 20254 months ago
+                  - row ".vsconfig, (File) Platform game was created. Oct 20, 20242 years ago" [ref=e251]:
+                    - cell ".vsconfig, (File)" [ref=e252]:
+                      - generic [ref=e253]:
+                        - img [ref=e254]
+                        - link ".vsconfig, (File)" [ref=e259] [cursor=pointer]:
+                          - /url: /Hekyetmisbes/platform/blob/main/.vsconfig
+                          - text: .vsconfig
+                    - cell "Platform game was created." [ref=e260]:
+                      - link "Platform game was created." [ref=e263] [cursor=pointer]:
+                        - /url: /Hekyetmisbes/platform/commit/a90c36de25971468ac9fe6333b765e3a8fe3089c
+                    - cell "Oct 20, 20242 years ago" [ref=e264]:
+                      - generic [ref=e265]: Oct 20, 20242 years ago
+                  - row "InputSystemUpdateLog.md, (File) Update scenes, input, and project settings; add docs. Dec 23, 20254 months ago" [ref=e266]:
+                    - cell "InputSystemUpdateLog.md, (File)" [ref=e267]:
+                      - generic [ref=e268]:
+                        - img [ref=e269]
+                        - link "InputSystemUpdateLog.md, (File)" [ref=e274] [cursor=pointer]:
+                          - /url: /Hekyetmisbes/platform/blob/main/InputSystemUpdateLog.md
+                          - text: InputSystemUpdateLog.md
+                    - cell "Update scenes, input, and project settings; add docs." [ref=e275]:
+                      - link "Update scenes, input, and project settings; add docs." [ref=e278] [cursor=pointer]:
+                        - /url: /Hekyetmisbes/platform/commit/767dc419727f9817f8d006c8071501be6e867057
+                    - cell "Dec 23, 20254 months ago" [ref=e279]:
+                      - generic [ref=e280]: Dec 23, 20254 months ago
+                  - row "README.md, (File) Update README.md Feb 9, 2025last year" [ref=e281]:
+                    - cell "README.md, (File)" [ref=e282]:
+                      - generic [ref=e283]:
+                        - img [ref=e284]
+                        - link "README.md, (File)" [ref=e289] [cursor=pointer]:
+                          - /url: /Hekyetmisbes/platform/blob/main/README.md
+                          - text: README.md
+                    - cell "Update README.md" [ref=e290]:
+                      - link "Update README.md" [ref=e293] [cursor=pointer]:
+                        - /url: /Hekyetmisbes/platform/commit/b134618403a337a8a9bf103bf91e29312e31de81
+                    - cell "Feb 9, 2025last year" [ref=e294]:
+                      - generic [ref=e295]: Feb 9, 2025last year
+                  - row "StarsDatabase.db, (File) Update scenes, input, and project settings; add docs. Dec 23, 20254 months ago" [ref=e296]:
+                    - cell "StarsDatabase.db, (File)" [ref=e297]:
+                      - generic [ref=e298]:
+                        - img [ref=e299]
+                        - link "StarsDatabase.db, (File)" [ref=e304] [cursor=pointer]:
+                          - /url: /Hekyetmisbes/platform/blob/main/StarsDatabase.db
+                          - text: StarsDatabase.db
+                    - cell "Update scenes, input, and project settings; add docs." [ref=e305]:
+                      - link "Update scenes, input, and project settings; add docs." [ref=e308] [cursor=pointer]:
+                        - /url: /Hekyetmisbes/platform/commit/767dc419727f9817f8d006c8071501be6e867057
+                    - cell "Dec 23, 20254 months ago" [ref=e309]:
+                      - generic [ref=e310]: Dec 23, 20254 months ago
+                  - row "StarsDatabase.db.meta, (File) Animations added Jan 19, 2025last year" [ref=e311]:
+                    - cell "StarsDatabase.db.meta, (File)" [ref=e312]:
+                      - generic [ref=e313]:
+                        - img [ref=e314]
+                        - link "StarsDatabase.db.meta, (File)" [ref=e319] [cursor=pointer]:
+                          - /url: /Hekyetmisbes/platform/blob/main/StarsDatabase.db.meta
+                          - text: StarsDatabase.db.meta
+                    - cell "Animations added" [ref=e320]:
+                      - link "Animations added" [ref=e323] [cursor=pointer]:
+                        - /url: /Hekyetmisbes/platform/commit/590bf606b15e36796825cf87cb429f014610c00d
+                    - cell "Jan 19, 2025last year" [ref=e324]:
+                      - generic [ref=e325]: Jan 19, 2025last year
+                  - row "UpgradeLog.htm, (File) Animations added Jan 19, 2025last year" [ref=e326]:
+                    - cell "UpgradeLog.htm, (File)" [ref=e327]:
+                      - generic [ref=e328]:
+                        - img [ref=e329]
+                        - link "UpgradeLog.htm, (File)" [ref=e334] [cursor=pointer]:
+                          - /url: /Hekyetmisbes/platform/blob/main/UpgradeLog.htm
+                          - text: UpgradeLog.htm
+                    - cell "Animations added" [ref=e335]:
+                      - link "Animations added" [ref=e338] [cursor=pointer]:
+                        - /url: /Hekyetmisbes/platform/commit/590bf606b15e36796825cf87cb429f014610c00d
+                    - cell "Jan 19, 2025last year" [ref=e339]:
+                      - generic [ref=e340]: Jan 19, 2025last year
+            - generic [ref=e342]:
+              - generic [ref=e343]:
+                - heading "Repository files navigation" [level=2] [ref=e344]
+                - navigation "Repository files" [ref=e345]:
+                  - list [ref=e346]:
+                    - listitem [ref=e347]:
+                      - link "README" [ref=e348] [cursor=pointer]:
+                        - /url: "#"
+                        - img [ref=e350]
+                        - generic [ref=e352]: README
+                - button "Outline" [ref=e353] [cursor=pointer]:
+                  - img [ref=e354]
+              - article [ref=e357]:
+                - generic [ref=e358]:
+                  - heading "🎮 Unity Tabanlı 2D Platform Oyunu" [level=1] [ref=e359]
+                  - 'link "Permalink: 🎮 Unity Tabanlı 2D Platform Oyunu" [ref=e360] [cursor=pointer]':
+                    - /url: "#-unity-tabanlı-2d-platform-oyunu"
+                    - img [ref=e361]
+                - generic [ref=e363]:
+                  - heading "📌 Proje Açıklaması" [level=2] [ref=e364]
+                  - 'link "Permalink: 📌 Proje Açıklaması" [ref=e365] [cursor=pointer]':
+                    - /url: "#-proje-açıklaması"
+                    - img [ref=e366]
+                - paragraph [ref=e368]:
+                  - text: Bu proje,
+                  - strong [ref=e369]: Unity oyun motoru
+                  - text: kullanılarak geliştirilmiş
+                  - strong [ref=e370]: 2D bir platform oyunudur
+                  - text: . Oyuncular, bölümleri en kısa sürede tamamlayarak
+                  - strong [ref=e371]: 30 yıldız toplamak
+                  - text: için mücadele eder. Basit mekanikleri ve
+                  - strong [ref=e372]: Cyberpunk teması
+                  - text: ile her yaştan oyuncuya hitap eden eğlenceli ve rekabetçi bir deneyim sunar.
+                - generic [ref=e373]:
+                  - heading "🚀 Özellikler" [level=2] [ref=e374]
+                  - 'link "Permalink: 🚀 Özellikler" [ref=e375] [cursor=pointer]':
+                    - /url: "#-özellikler"
+                    - img [ref=e376]
+                - list [ref=e378]:
+                  - listitem [ref=e379]:
+                    - text: 🎮
+                    - strong [ref=e380]: Dinamik Oynanış
+                    - text: ": Oyuncu ileri, geri ve yukarı hareket ederek platformları aşar."
+                  - listitem [ref=e381]:
+                    - text: 🌆
+                    - strong [ref=e382]: Cyberpunk Atmosferi
+                    - text: ": Şehir manzaraları ve futuristik tasarımlar içerir."
+                  - listitem [ref=e383]:
+                    - text: ⭐
+                    - strong [ref=e384]: Rekabetçi Yıldız Sistemi
+                    - text: ": Her seviyede tamamlanma süresine göre yıldız kazanılır."
+                  - listitem [ref=e385]:
+                    - text: 🎨
+                    - strong [ref=e386]: Kolay Öğrenilen Mekanikler
+                    - text: ": Basit kontrollerle her yaştan oyuncuya hitap eder."
+                  - listitem [ref=e387]:
+                    - text: 🕹️
+                    - strong [ref=e388]: Farklı Seviyeler
+                    - text: ": Hareket eden platformlardan düşen engellere kadar çeşitlilikle doludur."
+                - generic [ref=e389]:
+                  - heading "📷 Ekran Görüntüleri" [level=2] [ref=e390]
+                  - 'link "Permalink: 📷 Ekran Görüntüleri" [ref=e391] [cursor=pointer]':
+                    - /url: "#-ekran-görüntüleri"
+                    - img [ref=e392]
+                - paragraph [ref=e394]:
+                  - emphasis [ref=e395]: Aşağıya oyundan bazı ekran görüntüleri ekleyebilirsiniz.
+                  - link "Game Screenshot" [ref=e396] [cursor=pointer]:
+                    - /url: /Hekyetmisbes/platform/blob/main/Assets/0AII5Y.png
+                    - img "Game Screenshot" [ref=e397]
+                  - link "Game Screenshot" [ref=e398] [cursor=pointer]:
+                    - /url: /Hekyetmisbes/platform/blob/main/Assets/nEjpXi.png
+                    - img "Game Screenshot" [ref=e399]
+                - generic [ref=e400]:
+                  - heading "🛠 Kullanılan Teknolojiler" [level=2] [ref=e401]
+                  - 'link "Permalink: 🛠 Kullanılan Teknolojiler" [ref=e402] [cursor=pointer]':
+                    - /url: "#-kullanılan-teknolojiler"
+                    - img [ref=e403]
+                - list [ref=e405]:
+                  - listitem [ref=e406]:
+                    - strong [ref=e407]: Geliştirme Aracı
+                    - text: ": Unity Engine"
+                  - listitem [ref=e408]:
+                    - strong [ref=e409]: Programlama Dili
+                    - text: ": C#"
+                  - listitem [ref=e410]:
+                    - strong [ref=e411]: Versiyon Kontrolü
+                    - text: ": Git & GitHub"
+        - generic [ref=e415]:
+          - generic [ref=e418]:
+            - heading "About" [level=2] [ref=e419]
+            - paragraph [ref=e420]: It's a 2D platform game.
+            - heading "Resources" [level=3] [ref=e421]
+            - link "Readme" [ref=e423] [cursor=pointer]:
+              - /url: "#readme-ov-file"
+              - img [ref=e424]
+              - text: Readme
+            - link "Activity" [ref=e427] [cursor=pointer]:
+              - /url: /Hekyetmisbes/platform/activity
+              - img [ref=e428]
+              - text: Activity
+            - heading "Stars" [level=3] [ref=e430]
+            - link "0 stars" [ref=e432] [cursor=pointer]:
+              - /url: /Hekyetmisbes/platform/stargazers
+              - img [ref=e433]
+              - strong [ref=e435]: "0"
+              - text: stars
+            - heading "Watchers" [level=3] [ref=e436]
+            - link "1 watching" [ref=e438] [cursor=pointer]:
+              - /url: /Hekyetmisbes/platform/watchers
+              - img [ref=e439]
+              - strong [ref=e441]: "1"
+              - text: watching
+            - heading "Forks" [level=3] [ref=e442]
+            - link "0 forks" [ref=e444] [cursor=pointer]:
+              - /url: /Hekyetmisbes/platform/forks
+              - img [ref=e445]
+              - strong [ref=e447]: "0"
+              - text: forks
+            - link "Report repository" [ref=e449] [cursor=pointer]:
+              - /url: /contact/report-content?content_url=https%3A%2F%2Fgithub.com%2FHekyetmisbes%2Fplatform&report=Hekyetmisbes+%28user%29
+          - generic [ref=e451]:
+            - heading "Releases" [level=2] [ref=e452]:
+              - link "Releases" [ref=e453] [cursor=pointer]:
+                - /url: /Hekyetmisbes/platform/releases
+            - generic [ref=e454]: No releases published
+          - generic [ref=e456]:
+            - heading "Packages" [level=2] [ref=e457]:
+              - link "Packages" [ref=e458] [cursor=pointer]:
+                - /url: /users/Hekyetmisbes/packages?repo_name=platform
+            - generic [ref=e459]: No packages published
+          - generic [ref=e461]:
+            - heading "Contributors 2" [level=2] [ref=e462]:
+              - link "Contributors 2" [ref=e463] [cursor=pointer]:
+                - /url: /Hekyetmisbes/platform/graphs/contributors
+                - text: Contributors
+                - generic "2" [ref=e464]
+            - list [ref=e465]:
+              - listitem [ref=e466]:
+                - link "@Hekyetmisbes" [ref=e467] [cursor=pointer]:
+                  - /url: https://github.com/Hekyetmisbes
+                  - img "@Hekyetmisbes" [ref=e468]
+                - link "Hekyetmisbes Harun Emrecan Karabağ" [ref=e470] [cursor=pointer]:
+                  - /url: https://github.com/Hekyetmisbes
+                  - strong [ref=e471]: Hekyetmisbes
+                  - text: Harun Emrecan Karabağ
+              - listitem [ref=e472]:
+                - link "@claude" [ref=e473] [cursor=pointer]:
+                  - /url: https://github.com/claude
+                  - img "@claude" [ref=e474]
+                - link "claude Claude" [ref=e476] [cursor=pointer]:
+                  - /url: https://github.com/claude
+                  - strong [ref=e477]: claude
+                  - text: Claude
+          - generic [ref=e479]:
+            - heading "Languages" [level=2] [ref=e480]
+            - list [ref=e488]:
+              - listitem [ref=e489]:
+                - link "C# 40.3%" [ref=e490] [cursor=pointer]:
+                  - /url: /Hekyetmisbes/platform/search?l=c%23
+                  - img [ref=e491]
+                  - generic [ref=e493]: C#
+                  - generic [ref=e494]: 40.3%
+              - listitem [ref=e495]:
+                - link "ShaderLab 39.6%" [ref=e496] [cursor=pointer]:
+                  - /url: /Hekyetmisbes/platform/search?l=shaderlab
+                  - img [ref=e497]
+                  - generic [ref=e499]: ShaderLab
+                  - generic [ref=e500]: 39.6%
+              - listitem [ref=e501]:
+                - link "HLSL 8.2%" [ref=e502] [cursor=pointer]:
+                  - /url: /Hekyetmisbes/platform/search?l=hlsl
+                  - img [ref=e503]
+                  - generic [ref=e505]: HLSL
+                  - generic [ref=e506]: 8.2%
+              - listitem [ref=e507]:
+                - link "HTML 6.4%" [ref=e508] [cursor=pointer]:
+                  - /url: /Hekyetmisbes/platform/search?l=html
+                  - img [ref=e509]
+                  - generic [ref=e511]: HTML
+                  - generic [ref=e512]: 6.4%
+              - listitem [ref=e513]:
+                - link "TeX 5.5%" [ref=e514] [cursor=pointer]:
+                  - /url: /Hekyetmisbes/platform/search?l=tex
+                  - img [ref=e515]
+                  - generic [ref=e517]: TeX
+                  - generic [ref=e518]: 5.5%
+  - contentinfo [ref=e520]:
+    - heading "Footer" [level=2] [ref=e521]
+    - generic [ref=e522]:
+      - generic [ref=e523]:
+        - link "GitHub Homepage" [ref=e524] [cursor=pointer]:
+          - /url: https://github.com
+          - img [ref=e525]
+        - generic [ref=e527]: © 2026 GitHub, Inc.
+      - navigation "Footer" [ref=e528]:
+        - heading "Footer navigation" [level=3] [ref=e529]
+        - list "Footer navigation" [ref=e530]:
+          - listitem [ref=e531]:
+            - link "Terms" [ref=e532] [cursor=pointer]:
+              - /url: https://docs.github.com/site-policy/github-terms/github-terms-of-service
+          - listitem [ref=e533]:
+            - link "Privacy" [ref=e534] [cursor=pointer]:
+              - /url: https://docs.github.com/site-policy/privacy-policies/github-privacy-statement
+          - listitem [ref=e535]:
+            - link "Security" [ref=e536] [cursor=pointer]:
+              - /url: https://github.com/security
+          - listitem [ref=e537]:
+            - link "Status" [ref=e538] [cursor=pointer]:
+              - /url: https://www.githubstatus.com/
+          - listitem [ref=e539]:
+            - link "Community" [ref=e540] [cursor=pointer]:
+              - /url: https://github.community/
+          - listitem [ref=e541]:
+            - link "Docs" [ref=e542] [cursor=pointer]:
+              - /url: https://docs.github.com/
+          - listitem [ref=e543]:
+            - link "Contact" [ref=e544] [cursor=pointer]:
+              - /url: https://support.github.com?tags=dotcom-footer
+          - listitem [ref=e545]:
+            - button "Manage cookies" [ref=e547] [cursor=pointer]
+          - listitem [ref=e548]:
+            - button "Do not share my personal information" [ref=e550] [cursor=pointer]
