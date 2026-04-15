@@ -325,7 +325,8 @@ const Portfolio = () => {
       impact: "Reduced new route integration time with a modular mission flow.",
       links: [
         { label: "Repo", url: "https://github.com/Hekyetmisbes/Delivery-Driver", event: "github_click" },
-        { label: "Demo", url: "https://github.com/Hekyetmisbes?tab=repositories&q=delivery+driver+demo&type=&language=&sort=", event: "project_demo_click" }
+        { label: "Demo", url: "https://github.com/Hekyetmisbes?tab=repositories&q=delivery+driver+demo&type=&language=&sort=", event: "project_demo_click" },
+        { label: "Itch", url: "https://hekyetmisbes.itch.io/delivery-driver", event: "project_demo_click" }
       ]
     },
     {
