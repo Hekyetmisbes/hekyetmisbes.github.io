@@ -159,14 +159,17 @@ const Portfolio = () => {
   const cvUrl = "assets/Harun-Emrecan-Karabag-CV.pdf";
   const updates = [
     {
-      title: "Delivery Driver got a new update",
-      details: "Added phone-based delivery acceptance so players can accept deliveries directly from the in-game phone."
+      title: "Delivery Driver demo is now live on itch.io",
+      details: "The current demo build is playable on itch.io, so visitors can jump into the delivery loop directly from the portfolio.",
+      ctaLabel: "Play Demo",
+      ctaUrl: "https://hekyetmisbes.itch.io/delivery-driver"
     },
     {
       title: "Delivery Driver got a new update",
-      details: "Added new city routes, improved delivery flow, and tuned checkpoint balance."
+      details: "Added phone-based delivery acceptance, improved delivery flow, and tuned checkpoint balance."
     }
   ];
+  const latestUpdate = updates[0];
 
   // Typing effect for Hero
   useEffect(() => {
@@ -213,6 +216,10 @@ const Portfolio = () => {
     event.preventDefault();
     openProjectFromCard(project);
   };
+  const getProjectLinkClasses = (kind = "secondary") =>
+    kind === "primary"
+      ? "inline-flex items-center gap-2 rounded-full border border-cyan-400/40 bg-cyan-400/10 px-3 py-2 text-sm font-bold text-cyan-200 transition-all hover:border-cyan-300 hover:bg-cyan-400/15 hover:text-white"
+      : "inline-flex items-center gap-2 rounded-full border border-slate-700 bg-slate-900 px-3 py-2 text-sm font-bold text-slate-300 transition-all hover:border-slate-500 hover:text-white";
 
   // --- DATA FROM CV ---
   const experiences = [
@@ -257,15 +264,18 @@ const Portfolio = () => {
       engine: "Unity",
       status: "In Development",
       desc: "A Unity 3D game where you play as a courier delivering orders to different locations across the city.",
-      links: [{ label: "GitHub", url: "https://github.com/Hekyetmisbes/Delivery-Driver" }]
+      links: [
+        { label: "Play on itch.io", url: "https://hekyetmisbes.itch.io/delivery-driver", kind: "primary" },
+        { label: "View Source", url: "https://github.com/Hekyetmisbes/Delivery-Driver" }
+      ]
     },
     {
       title: "Movidle Game",
       genre: "Web Game / Puzzle",
-      engine: "React / JS",
+      engine: "Unity",
       status: "Released",
       desc: "A movie guessing game featuring random titles from the IMDb Top 250, with color-coded feedback.",
-      links: [{ label: "GitHub", url: "https://github.com/Hekyetmisbes/Movidle-Game" }]
+      links: [{ label: "View Source", url: "https://github.com/Hekyetmisbes/Movidle-Game" }]
     },
     {
       title: "Flag Quiz",
@@ -281,7 +291,7 @@ const Portfolio = () => {
       engine: "Unity",
       status: "Demo Available",
       desc: "A 10-level Unity-based 2D platformer. Overcome obstacles and collect 30 stars.",
-      links: [{ label: "GitHub", url: "https://github.com/Hekyetmisbes/platform" }]
+      links: [{ label: "View Source", url: "https://github.com/Hekyetmisbes/platform" }]
     }
   ];
 
@@ -352,6 +362,16 @@ const Portfolio = () => {
                       <div key={index} className="border border-slate-800 rounded-md p-3 bg-slate-950/80">
                         <p className="text-slate-100 text-xs font-bold">{update.title}</p>
                         <p className="text-slate-400 text-xs mt-1">{update.details}</p>
+                        {update.ctaUrl && update.ctaLabel && (
+                          <a
+                            href={update.ctaUrl}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="mt-3 inline-flex items-center gap-2 rounded-full border border-cyan-400/30 bg-cyan-400/10 px-3 py-1.5 text-[11px] font-bold uppercase tracking-wide text-cyan-200 transition-colors hover:border-cyan-300 hover:text-white"
+                          >
+                            {update.ctaLabel} <ExternalLink size={12} />
+                          </a>
+                        )}
                       </div>
                     ))}
                   </div>
@@ -590,9 +610,15 @@ const Portfolio = () => {
                       {project.status}
                     </span>
                     
-                    <div className="flex gap-3">
+                    <div className="flex flex-wrap justify-end gap-2">
                       {project.links.map((link, i) => (
-                        <a key={i} href={link.url} target="_blank" rel="noreferrer" className="text-slate-400 hover:text-white transition-colors flex items-center gap-1 text-sm font-bold">
+                        <a
+                          key={i}
+                          href={link.url}
+                          target={link.newTab === false ? undefined : "_blank"}
+                          rel={link.newTab === false ? undefined : "noreferrer"}
+                          className={getProjectLinkClasses(link.kind)}
+                        >
                           {link.label} <ExternalLink size={14} />
                         </a>
                       ))}
@@ -675,18 +701,38 @@ const Portfolio = () => {
       </section>
 
       {/* --- FLOATING UPDATE BADGE --- */}
-      {showLatestUpdate && (
+      {showLatestUpdate && latestUpdate && (
       <div className="fixed bottom-6 right-6 z-30 hidden lg:block">
-        <button
-          onClick={() => setShowLatestUpdate(false)}
-          className="text-left bg-slate-900/90 backdrop-blur border border-cyan-500/30 p-4 rounded-lg shadow-2xl max-w-xs transform transition-transform hover:scale-105"
-        >
-           <div className="flex items-center gap-2 mb-2 text-cyan-400 font-bold text-sm uppercase">
-             <Trophy size={14} /> Latest Update
-           </div>
-           <p className="text-slate-200 text-sm font-bold">Delivery Driver got a new update</p>
-           <p className="text-xs text-slate-400 mt-1">Phone-based delivery acceptance was added so deliveries can now be accepted directly on the in-game phone.</p>
-        </button>
+        <div className="max-w-sm rounded-xl border border-cyan-500/30 bg-slate-900/90 p-4 shadow-2xl backdrop-blur">
+          <div className="mb-3 flex items-start justify-between gap-3">
+            <div>
+              <div className="mb-2 flex items-center gap-2 text-sm font-bold uppercase text-cyan-400">
+                <Trophy size={14} /> Latest Update
+              </div>
+              <p className="text-sm font-bold text-slate-100">{latestUpdate.title}</p>
+              <p className="mt-1 text-xs leading-relaxed text-slate-400">{latestUpdate.details}</p>
+            </div>
+            <button
+              type="button"
+              onClick={() => setShowLatestUpdate(false)}
+              className="rounded-full border border-slate-700 px-2 py-1 text-xs font-bold text-slate-400 transition-colors hover:border-slate-500 hover:text-white"
+              aria-label="Dismiss latest update"
+            >
+              X
+            </button>
+          </div>
+
+          {latestUpdate.ctaUrl && latestUpdate.ctaLabel && (
+            <a
+              href={latestUpdate.ctaUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 rounded-full border border-cyan-400/40 bg-cyan-400/10 px-3 py-2 text-sm font-bold text-cyan-200 transition-all hover:border-cyan-300 hover:bg-cyan-400/15 hover:text-white"
+            >
+              {latestUpdate.ctaLabel} <ExternalLink size={14} />
+            </a>
+          )}
+        </div>
       </div>
       )}
 
